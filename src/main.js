@@ -5,6 +5,7 @@ import App from './AppVuetify.vue'
 
 import Home from './pages/Home.vue'
 import Dashboard from './pages/Dashboard.vue'
+import Messages from './pages/Messages.vue'
 import Acts from './pages/Acts.vue'
 
 Vue.config.productionTip = false
@@ -14,6 +15,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/dashboard', component: Dashboard },
   { path: '/acts', component: Acts },
+  { path: '/messages', component: Messages },
 ]
 
 const router = new VueRouter({

@@ -44,7 +44,7 @@ export default {
         {
           title: 'Messages',
           icon: 'all_inbox',
-          link: '/acts',
+          link: '/messages',
         },
         {
           title: 'Mon compte',
