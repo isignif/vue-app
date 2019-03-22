@@ -1,5 +1,17 @@
 <template>
-  <v-data-table :headers="headers" :items="acts" class="elevation-1">
+  <v-card>
+    <v-card-title>
+      Liste des actes
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+  <v-data-table :headers="headers" :items="acts" class="elevation-1" :search="search">
     <template v-slot:items="props">
       <td>{{ props.item.reference }}</td>
       <td>{{ props.item.act_type }}</td>
@@ -9,6 +21,7 @@
       <td>{{ props.item.step }}</td>
     </template>
   </v-data-table>
+</v-card>
 </template>
 
 <script>
@@ -17,6 +30,7 @@ export default {
   props: {},
   data() {
     return {
+      search: '',
       headers: [{
           text: "Référence de l'acte",
           value: 'reference'

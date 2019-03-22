@@ -1,25 +1,25 @@
 <template>
-  <v-app>
-    <NavBar/>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>iSignif</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
+<v-app>
+  <NavBar />
+  <v-toolbar app>
+    <v-toolbar-title class="headline text-uppercase">
+      <span>iSignif</span>
+      <span class="font-weight-light">MATERIAL DESIGN</span>
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn flat to="/acts/new">
+      <span class="mr-2">Demander une signification d'acte</span>
+    </v-btn>
+  </v-toolbar>
 
-    <v-content>
-      <router-view></router-view>
-    </v-content>
-  </v-app>
+  <v-content>
+    <router-view></router-view>
+  </v-content>
+  <v-footer class="pa-3">
+    <v-spacer></v-spacer>
+    <div>iSignif &copy; {{ new Date().getFullYear() }}</div>
+  </v-footer>
+</v-app>
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
   components: {
     NavBar
   },
-  data () {
+  data() {
     return {
       //
     }

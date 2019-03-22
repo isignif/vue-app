@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard.vue'
 import Help from './pages/Help.vue'
 import Messages from './pages/Messages.vue'
 import Acts from './pages/Acts.vue'
+import ActNew from './pages/ActNew.vue'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -16,6 +17,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/dashboard', component: Dashboard },
   { path: '/acts', component: Acts },
+  { path: '/acts/new', component: ActNew },
   { path: '/messages', component: Messages },
   { path: '/help', component: Help },
 ]

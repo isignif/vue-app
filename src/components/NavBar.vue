@@ -9,7 +9,7 @@
           <span v-else>iSignif</span>
 
         </v-list-tile-title>
-        <v-list-tile-action>
+        <v-list-tile-action v-if="!mini">
             <v-btn
               icon
               @click.stop="mini = !mini"
