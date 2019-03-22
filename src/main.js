@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import './plugins/vuetify'
-import VueRouter from 'vue-router'
 import App from './App.vue'
+// vue plugin
+import VueRouter from 'vue-router'
+
 
 import Home from './pages/Home.vue'
 import Dashboard from './pages/Dashboard.vue'
