@@ -1,42 +1,57 @@
 <template>
-  <div class="navbar navbar-expand-md navbar-light bg-light header">
-    <div class="container">
-      <router-link to="/">
-        <img src="./../assets/logo.svg" alt="" height="38" width="130" />
-      </router-link>
-      <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarCollapse" data-toggle="collapse" type="button">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse justify-content-between" id="navbarCollapse">
-        <!--/ ITEMS LEFT ALIGNED -->
-        <ul class="navbar-nav mr-auto">
-          <!-- <% if current_user %> -->
-          <li class="nav-item">
-            <router-link to="/dashboard" class="nav-link">Dashboard</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/acts" class="nav-link">Mes actes</router-link>
-          </li>
-          <li class="nav-item"><a href="/messages/" class="nav-link">Mes messages</a></li>
-          <!-- <% end %> -->
-        </ul>
-        <!--/ ITEMS RIGHT ALIGNED -->
-        <ul class="navbar-nav">
-          <!-- <% if current_user %> -->
+<v-navigation-drawer app>
+  <v-toolbar flat>
+    <v-list>
+      <v-list-tile>
+        <v-list-tile-title class="title">
+          iSignif
+        </v-list-tile-title>
+      </v-list-tile>
+    </v-list>
+  </v-toolbar>
 
-          <!-- <% else %> -->
-          <li class="nav-item"><a href="/signup" class="nav-link">Se connecter</a></li>
-          <li class="nav-item"><a href="/signin" class="nav-link">S'inscrire</a></li>
-          <li class="nav-item"><a href="/acts/new" class="nav-link">Déposer un acte</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <!-- <v-divider></v-divider> -->
+
+  <v-list dense class="pt-0">
+    <v-list-tile v-for="item in items" :key="item.title" @click="">
+      <v-list-tile-action>
+        <v-icon>{{ item.icon }}</v-icon>
+      </v-list-tile-action>
+
+      <v-list-tile-content>
+        <router-link :to="item.link">
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </router-link>
+      </v-list-tile-content>
+    </v-list-tile>
+  </v-list>
+</v-navigation-drawer>
 </template>
 
 <script>
 export default {
   name: 'NavBar',
-  props: {}
+  data() {
+    return {
+      items: [
+        {
+          title: 'Home',
+          icon: 'dashboard',
+          link: '/',
+        },
+        {
+          title: 'Dashboard',
+          icon: 'dashboard',
+          link: '/dashboard',
+        },
+        {
+          title: 'Mes actes',
+          icon: 'question_answer',
+          link: '/acts',
+        }
+      ],
+      right: null
+    }
+  }
 }
 </script>
