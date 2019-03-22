@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import './plugins/vuetify'
 import VueRouter from 'vue-router'
-import App from './AppVuetify.vue'
+import App from './App.vue'
 
 import Home from './pages/Home.vue'
 import Dashboard from './pages/Dashboard.vue'

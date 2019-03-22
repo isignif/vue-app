@@ -1,21 +1,39 @@
 <template>
-  <div id="app">
-
+  <v-app>
     <NavBar/>
-    <div class="container">
-      <router-view></router-view>
-    </div>
+    <v-toolbar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>Vuetify</span>
+        <span class="font-weight-light">MATERIAL DESIGN</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+        flat
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+      >
+        <span class="mr-2">Latest Release</span>
+      </v-btn>
+    </v-toolbar>
 
-  </div>
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import NavBar from './components/NavBar.vue'
+import NavBar from './components/NavBar'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     NavBar
+  },
+  data () {
+    return {
+      //
+    }
   }
 }
 </script>
