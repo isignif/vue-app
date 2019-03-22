@@ -3,20 +3,17 @@
   <v-toolbar flat>
     <v-list>
       <v-list-tile>
-        <v-list-tile-title class="title">
+        <v-list-tile-title class="title" align-center="true">
 
           <img v-if="mini" src="../assets/favicon.svg" height="100%">
           <span v-else>iSignif</span>
 
         </v-list-tile-title>
         <v-list-tile-action v-if="!mini">
-            <v-btn
-              icon
-              @click.stop="mini = !mini"
-            >
-              <v-icon>chevron_left</v-icon>
-            </v-btn>
-          </v-list-tile-action>
+          <v-btn icon @click.stop="mini = !mini">
+            <v-icon>chevron_left</v-icon>
+          </v-btn>
+        </v-list-tile-action>
       </v-list-tile>
     </v-list>
   </v-toolbar>
@@ -24,15 +21,57 @@
   <!-- <v-divider></v-divider> -->
 
   <v-list class="pt-0">
-    <v-list-tile v-for="item in items" :key="item.title" :to=" item.link">
+
+
+    <!-- Page principale -->
+    <v-list-tile to="/">
       <v-list-tile-action>
-        <v-icon>{{ item.icon }}</v-icon>
+        <v-icon>home</v-icon>
       </v-list-tile-action>
 
       <v-list-tile-content>
-        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        <v-list-tile-title>Page principale</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
+
+    <!-- Dashboard -->
+    <v-list-tile to="/dashboard">
+      <v-list-tile-action>
+        <v-icon>dashboard</v-icon>
+      </v-list-tile-action>
+
+      <v-list-tile-content>
+        <v-list-tile-title>Dashboard</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+
+
+    <!-- actes -->
+    <v-list-group prepend-icon="assignment" no-action>
+      <template v-slot:activator>
+        <v-list-tile to="/acts">
+          <v-list-tile-title>Actes</v-list-tile-title>
+        </v-list-tile>
+      </template>
+
+      <!-- Mes actes -->
+      <v-list-tile to="/acts" sub-item>
+        <v-list-tile-action>
+          <v-icon>assignment</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-title>Mes demandes</v-list-tile-title>
+      </v-list-tile>
+
+      <!-- Demander une signification -->
+      <v-list-tile to="/acts/new">
+        <v-list-tile-action>
+          <v-icon>create_new_folder</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-title>Demander une signification</v-list-tile-title>
+      </v-list-tile>
+    </v-list-group>
+
+
   </v-list>
 </v-navigation-drawer>
 </template>
@@ -64,6 +103,11 @@ export default {
           title: 'Messages',
           icon: 'all_inbox',
           link: '/messages',
+        },
+        {
+          title: "Demander une signification",
+          icon: 'create_new_folder',
+          link: '/acts/new'
         },
         {
           title: 'Mon compte',

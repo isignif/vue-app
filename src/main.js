@@ -14,12 +14,12 @@ Vue.config.productionTip = false
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/dashboard', component: Dashboard },
-  { path: '/acts', component: Acts },
-  { path: '/acts/new', component: ActNew },
-  { path: '/messages', component: Messages },
-  { path: '/help', component: Help },
+  { path: '/', component: Home, name: "Page principale" },
+  { path: '/dashboard', component: Dashboard, name: "Dashboard" },
+  { path: '/acts', component: Acts, name: "Mes actes" },
+  { path: '/acts/new', component: ActNew, name: "Demander une signification d'acte" },
+  { path: '/messages', component: Messages, name: "Messagerie" },
+  { path: '/help', component: Help, name: "FAQ" },
 ]
 
 const router = new VueRouter({

@@ -3,17 +3,19 @@
   <NavBar />
   <v-toolbar app>
     <v-toolbar-title class="headline text-uppercase">
-      <span>iSignif</span>
-      <span class="font-weight-light">MATERIAL DESIGN</span>
+      <span>{{$route.name}}</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn flat to="/acts/new">
+    <v-btn to="/acts/new">
       <span class="mr-2">Demander une signification d'acte</span>
     </v-btn>
   </v-toolbar>
 
-  <v-content>
-    <router-view></router-view>
+  <v-content >
+    <v-container>
+      <h1>{{$route.name}}</h1>
+      <router-view></router-view>
+    </v-container>
   </v-content>
   <v-footer class="pa-3">
     <v-spacer></v-spacer>
