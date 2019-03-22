@@ -12,16 +12,14 @@
 
   <!-- <v-divider></v-divider> -->
 
-  <v-list dense class="pt-0">
-    <v-list-tile v-for="item in items" :key="item.title" @click="">
+  <v-list class="pt-0">
+    <v-list-tile v-for="item in items" :key="item.title" :to=" item.link">
       <v-list-tile-action>
         <v-icon>{{ item.icon }}</v-icon>
       </v-list-tile-action>
 
       <v-list-tile-content>
-        <router-link :to="item.link">
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </router-link>
+        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
   </v-list>
@@ -33,22 +31,26 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      items: [
-        {
-          title: 'Home',
-          icon: 'dashboard',
-          link: '/',
-        },
-        {
+      items: [{
           title: 'Dashboard',
           icon: 'dashboard',
           link: '/dashboard',
         },
         {
           title: 'Mes actes',
-          icon: 'question_answer',
+          icon: 'assignment',
           link: '/acts',
-        }
+        },
+        {
+          title: 'Messages',
+          icon: 'all_inbox',
+          link: '/acts',
+        },
+        {
+          title: 'Mon compte',
+          icon: 'face',
+          link: '/',
+        },
       ],
       right: null
     }
