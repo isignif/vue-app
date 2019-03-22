@@ -1,12 +1,12 @@
 <template>
-  <v-data-table :headers="headers" :items="desserts" class="elevation-1">
+  <v-data-table :headers="headers" :items="acts" class="elevation-1">
     <template v-slot:items="props">
-      <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.calories }}</td>
-      <td class="text-xs-right">{{ props.item.fat }}</td>
-      <td class="text-xs-right">{{ props.item.carbs }}</td>
-      <td class="text-xs-right">{{ props.item.protein }}</td>
-      <td class="text-xs-right">{{ props.item.iron }}</td>
+      <td>{{ props.item.reference }}</td>
+      <td>{{ props.item.act_type }}</td>
+      <td>{{ props.item.significations }}</td>
+      <td>{{ props.item.advocate }}</td>
+      <td>{{ props.item.bailiffs }}</td>
+      <td>{{ props.item.step }}</td>
     </template>
   </v-data-table>
 </template>
@@ -18,112 +18,62 @@ export default {
   data() {
     return {
       headers: [{
-          text: 'Dessert (100g serving)',
-          align: 'left',
-          sortable: false,
-          value: 'name'
+          text: "Référence de l'acte",
+          value: 'reference'
         },
         {
-          text: 'Calories',
-          value: 'calories'
+          text: "Dénomination de l'acte",
+          value: 'act_type'
         },
         {
-          text: 'Fat (g)',
-          value: 'fat'
+          text: 'Destinataires',
+          value: 'significations'
         },
         {
-          text: 'Carbs (g)',
-          value: 'carbs'
+          text: 'Correspondant',
+          value: 'advocate'
         },
         {
-          text: 'Protein (g)',
-          value: 'protein'
+          text: 'Huissier de justice ',
+          value: 'bailiffs'
         },
         {
-          text: 'Iron (%)',
-          value: 'iron'
+          text: 'Etape',
+          value: 'step'
+        },
+        {
+          text: 'Date de création',
+          value: 'creation_date'
         }
       ],
-      desserts: [{
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: '1%'
+      acts: [
+        {
+          "reference": "123456789",
+          "act_type": "Acte de saisie-attribution",
+          "significations" : "COINCE STEPHANE, 28480, Thiron gardais",
+          "advocate": "ROUGIER Lorenzo",
+          "bailiffs": "LAVAL Fabienne",
+          "step": "AR",
+          "creation_date": " 22/03/2019",
         },
         {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: '1%'
+          "reference": "azertyuiop",
+          "act_type": "Commandement de payer précédant la saisie-vente",
+          "significations" : "EYGRETEAU Patricia née LALET , 33500, Libourne ",
+          "advocate": "Nicolas Romain",
+          "bailiffs": "CHAPOULIE Jean-Luc",
+          "step": "AR",
+          "creation_date": " 20/03/2019",
         },
         {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: '7%'
+          "reference": "qsdfghjklm",
+          "act_type": "Dénonce à caution du commandement de payer les loyers et sommations de payer",
+          "significations" : "Madame Corinne LENOIR , 91240, St michel sur orge ",
+          "advocate": "Balducci Thomas",
+          "bailiffs": "MARCIREAU Melik",
+          "step": "AR",
+          "creation_date": " 19/03/2019",
         },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: '8%'
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: '16%'
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: '0%'
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: '2%'
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: '45%'
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: '22%'
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: '6%'
-        }
       ]
     }
   }
