@@ -1,11 +1,19 @@
 <template>
-<v-navigation-drawer app>
+<v-navigation-drawer app v-model="drawer" :mini-variant.sync="mini" hide-overlay stateless>
   <v-toolbar flat>
     <v-list>
       <v-list-tile>
         <v-list-tile-title class="title">
           iSignif
         </v-list-tile-title>
+        <v-list-tile-action>
+            <v-btn
+              icon
+              @click.stop="mini = !mini"
+            >
+              <v-icon>chevron_left</v-icon>
+            </v-btn>
+          </v-list-tile-action>
       </v-list-tile>
     </v-list>
   </v-toolbar>
@@ -31,14 +39,22 @@ export default {
   name: 'NavBar',
   data() {
     return {
+      drawer: true,
+      mini: true,
+      right: null,
       items: [{
           title: 'Dashboard',
           icon: 'dashboard',
           link: '/dashboard',
         },
         {
-          title: 'Mes actes',
+          title: 'Mes demandes',
           icon: 'assignment',
+          link: '/acts',
+        },
+        {
+          title: 'Mes actes',
+          icon: 'assignment_return',
           link: '/acts',
         },
         {
@@ -57,7 +73,6 @@ export default {
           link: '/help',
         },
       ],
-      right: null
     }
   }
 }
