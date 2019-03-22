@@ -5,6 +5,7 @@ import App from './App.vue'
 
 import Home from './pages/Home.vue'
 import Dashboard from './pages/Dashboard.vue'
+import Help from './pages/Help.vue'
 import Messages from './pages/Messages.vue'
 import Acts from './pages/Acts.vue'
 
@@ -16,6 +17,7 @@ const routes = [
   { path: '/dashboard', component: Dashboard },
   { path: '/acts', component: Acts },
   { path: '/messages', component: Messages },
+  { path: '/help', component: Help },
 ]
 
 const router = new VueRouter({

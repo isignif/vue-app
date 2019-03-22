@@ -51,6 +51,11 @@ export default {
           icon: 'face',
           link: '/',
         },
+        {
+          title: 'Aide',
+          icon: 'help',
+          link: '/help',
+        },
       ],
       right: null
     }
