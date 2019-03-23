@@ -71,6 +71,28 @@
       </v-list-tile>
     </v-list-group>
 
+    <!-- Aide -->
+    <v-list-tile to="/messages">
+      <v-list-tile-action>
+        <v-icon>all_inbox</v-icon>
+      </v-list-tile-action>
+
+      <v-list-tile-content>
+        <v-list-tile-title>Messageries</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+
+    <!-- Aide -->
+    <v-list-tile to="/help">
+      <v-list-tile-action>
+        <v-icon>help</v-icon>
+      </v-list-tile-action>
+
+      <v-list-tile-content>
+        <v-list-tile-title>Aide</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+
 
   </v-list>
 </v-navigation-drawer>

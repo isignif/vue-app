@@ -1,12 +1,12 @@
 <template>
 <v-app>
   <NavBar />
-  <v-toolbar app>
+  <v-toolbar app class="secondary">
     <v-toolbar-title class="headline text-uppercase">
       <span>{{$route.name}}</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn to="/acts/new">
+    <v-btn to="/acts/new" class="primary">
       <span class="mr-2">Demander une signification d'acte</span>
     </v-btn>
   </v-toolbar>
