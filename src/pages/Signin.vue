@@ -22,7 +22,7 @@
     </v-container>
   </v-form>
   <v-snackbar v-model="snackbar" bottom color="success">
-    Vous êtes maintenant connecté.
+    {{ snackbar_message }}
     <v-btn  flat @click="snackbar = false">
       Close
     </v-btn>
@@ -38,6 +38,7 @@ export default {
     snackbar: false,
     valid: false,
     show_password: false,
+    snackbar_message: '',
     email: '',
     password: '',
     emailRules: [
@@ -52,8 +53,16 @@ export default {
           password: this.password,
         })
         .then(response => {
+          let user_data = response.data.data
+          let attributes = user_data.attributes
+          let user_name = `${attributes.firstname} ${attributes.lastname}`
+          this.snackbar_message = `Bonjour ${user_name}`
+          // save data into localStorage
+          window.localStorage.setItem('isignif_user_data', JSON.stringify(response.data.data))
+          window.localStorage.setItem('isignif_user_name', user_name)
+          window.localStorage.setItem('isignif_user_id', user_data.id)
+          window.localStorage.setItem('isignif_persistence_token', attributes.persistence_token)
           this.snackbar = true
-          window.localStorage.setItem('isignif_persistence_token', response.data.persistence_token)
         })
         .catch(function(error) {
           console.error(error)
