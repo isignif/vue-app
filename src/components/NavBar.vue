@@ -34,6 +34,17 @@
       </v-list-tile-content>
     </v-list-tile>
 
+    <!-- Signin -->
+    <v-list-tile to="/signin">
+      <v-list-tile-action>
+        <v-icon>account_circle</v-icon>
+      </v-list-tile-action>
+
+      <v-list-tile-content>
+        <v-list-tile-title>Se connecter</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+
     <!-- Dashboard -->
     <v-list-tile to="/dashboard">
       <v-list-tile-action>
