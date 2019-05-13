@@ -21,7 +21,7 @@
       </v-layout>
     </v-container>
   </v-form>
-  <v-snackbar v-model="snackbar" bottom timeout=1000 color="success">
+  <v-snackbar v-model="snackbar" bottom color="success">
     Vous êtes maintenant connecté.
     <v-btn  flat @click="snackbar = false">
       Close
@@ -30,7 +30,8 @@
 </v-card>
 </template>
 <script>
-const axios = require('axios');
+const axios = require('axios')
+const api_url = require('../config').api_url
 
 export default {
   data: () => ({
@@ -46,16 +47,16 @@ export default {
   methods: {
     submit() {
 
-      axios.post('http://localhost:3000/api/v1/user_sessions', {
+      axios.post(`${api_url}/user_sessions`, {
           email: this.email,
           password: this.password,
         })
         .then(response => {
           this.snackbar = true
-          window.localStorage.setItem('isignif_persistence_token', response.data.persistence_token);
+          window.localStorage.setItem('isignif_persistence_token', response.data.persistence_token)
         })
         .catch(function(error) {
-          console.error(error);
+          console.error(error)
         });
 
     }
