@@ -88,35 +88,7 @@ export default {
           value: 'creation_date'
         }
       ],
-      acts: [
-        {
-          "reference": "123456789",
-          "act_type": "Acte de saisie-attribution",
-          "significations" : "COINCE STEPHANE, 28480, Thiron gardais",
-          "advocate": "ROUGIER Lorenzo",
-          "bailiffs": "LAVAL Fabienne",
-          "step": "AR",
-          "creation_date": " 22/03/2019",
-        },
-        {
-          "reference": "azertyuiop",
-          "act_type": "Commandement de payer précédant la saisie-vente",
-          "significations" : "EYGRETEAU Patricia née LALET , 33500, Libourne ",
-          "advocate": "Nicolas Romain",
-          "bailiffs": "CHAPOULIE Jean-Luc",
-          "step": "AR",
-          "creation_date": " 20/03/2019",
-        },
-        {
-          "reference": "qsdfghjklm",
-          "act_type": "Dénonce à caution du commandement de payer les loyers et sommations de payer",
-          "significations" : "Madame Corinne LENOIR , 91240, St michel sur orge ",
-          "advocate": "Balducci Thomas",
-          "bailiffs": "MARCIREAU Melik",
-          "step": "AR",
-          "creation_date": " 19/03/2019",
-        },
-      ]
+      acts: []
     }
   }
 }
