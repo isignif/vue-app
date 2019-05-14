@@ -1,5 +1,5 @@
 <template>
-  <pre>TODO</pre>
+  <pre>TODO: finish dashoard</pre>
 </template>
 
 <script>

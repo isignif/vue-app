@@ -54,6 +54,16 @@
       </v-list-tile-content>
     </v-list-tile>
 
+    <v-list-tile :to="{ name: 'advocate', params: { id: current_user_id }}" v-if="current_user_id">
+      <v-list-tile-action>
+        <v-icon>person</v-icon>
+      </v-list-tile-action>
+
+      <v-list-tile-content>
+        <v-list-tile-title>{{ current_user_complete_name }}</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+
 
     <!-- actes -->
     <v-list-group prepend-icon="assignment" no-action v-if="current_user_id">
@@ -109,14 +119,15 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'NavBar',
   computed: {
-    ...mapState({
-      current_user_id: state => state.logged_user.id,
-    })
+    ...mapState('logged_user', {
+      current_user_id: state => state.id,
+      current_user_complete_name: state => {return `${state.firstname} ${state.lastname}`}
+    }),
   },
   // TODO computed here for logged user
   data() {

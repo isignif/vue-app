@@ -12,6 +12,7 @@ import Signin from './pages/Signin.vue'
 import Dashboard from './pages/Dashboard.vue'
 import Help from './pages/Help.vue'
 import Messages from './pages/Messages.vue'
+import Advocate from './pages/Advocate.vue'
 import Acts from './pages/Acts.vue'
 import ActNew from './pages/ActNew.vue'
 
@@ -25,6 +26,7 @@ const routes = [
   { path: '/', component: Home, name: "Page principale" },
   { path: '/dashboard', component: Dashboard, name: "Dashboard" },
   { path: '/signin', component: Signin, name: "Connexion" },
+  { path: '/advocate/:id', component: Advocate, name: "advocate" },
   { path: '/acts', component: Acts, name: "Mes actes" },
   { path: '/acts/new', component: ActNew, name: "Demander une signification d'acte" },
   { path: '/messages', component: Messages, name: "Messagerie" },
