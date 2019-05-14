@@ -1,6 +1,6 @@
 <template>
 <v-navigation-drawer app v-model="drawer" :mini-variant.sync="mini" hide-overlay stateless>
-  <v-toolbar flat>
+  <v-toolbar flat dark>
     <v-list>
       <v-list-tile>
         <v-list-tile-title class="title" style="display: flex; justify-content: center">
@@ -32,16 +32,7 @@
       </v-list-tile-content>
     </v-list-tile>
 
-    <!-- Signin -->
-    <v-list-tile to="/signin" v-if="!current_user_id">
-      <v-list-tile-action>
-        <v-icon>account_circle</v-icon>
-      </v-list-tile-action>
-
-      <v-list-tile-content>
-        <v-list-tile-title>Se connecter</v-list-tile-title>
-      </v-list-tile-content>
-    </v-list-tile>
+    <v-divider />
 
     <!-- Dashboard -->
     <v-list-tile to="/dashboard" v-if="current_user_id">
@@ -51,16 +42,6 @@
 
       <v-list-tile-content>
         <v-list-tile-title>Dashboard</v-list-tile-title>
-      </v-list-tile-content>
-    </v-list-tile>
-
-    <v-list-tile :to="{ name: 'advocate', params: { id: current_user_id }}" v-if="current_user_id">
-      <v-list-tile-action>
-        <v-icon>person</v-icon>
-      </v-list-tile-action>
-
-      <v-list-tile-content>
-        <v-list-tile-title>{{ current_user_complete_name }}</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
 
@@ -90,7 +71,7 @@
       </v-list-tile>
     </v-list-group>
 
-    <!-- Aide -->
+    <!-- Messages -->
     <v-list-tile to="/messages" v-if="current_user_id">
       <v-list-tile-action>
         <v-icon>all_inbox</v-icon>
@@ -100,6 +81,36 @@
         <v-list-tile-title>Messageries</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
+
+
+
+    <v-divider />
+
+
+    <v-list-tile :to="{ name: 'advocate', params: { id: current_user_id }}" v-if="current_user_id">
+      <v-list-tile-action>
+        <v-icon>person</v-icon>
+      </v-list-tile-action>
+
+      <v-list-tile-content>
+        <v-list-tile-title>{{ current_user_complete_name }}</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+
+
+    <!-- Signin -->
+    <v-list-tile to="/signin" v-if="!current_user_id">
+      <v-list-tile-action>
+        <v-icon>account_circle</v-icon>
+      </v-list-tile-action>
+
+      <v-list-tile-content>
+        <v-list-tile-title>Se connecter</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+
+
+    <v-divider />
 
     <!-- Aide -->
     <v-list-tile to="/help">
@@ -118,15 +129,19 @@
 </template>
 
 <script>
-
-import { mapState, mapActions } from 'vuex'
+import {
+  mapState,
+  mapActions
+} from 'vuex'
 
 export default {
   name: 'NavBar',
   computed: {
     ...mapState('logged_user', {
       current_user_id: state => state.id,
-      current_user_complete_name: state => {return `${state.firstname} ${state.lastname}`}
+      current_user_complete_name: state => {
+        return `${state.firstname} ${state.lastname}`
+      }
     }),
   },
   // TODO computed here for logged user
