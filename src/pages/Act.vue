@@ -1,5 +1,12 @@
 <template>
 <div>
+  <template>
+    <div>
+      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
+      <v-breadcrumbs :items="items" divider="-"></v-breadcrumbs>
+    </div>
+  </template>
+
   <Loader v-if="loading" />
 
   <v-container v-else>
@@ -98,6 +105,29 @@
           </v-list>
         </v-card>
       </v-expansion-panel-content>
+      <!-- Timeline -->
+      <v-expansion-panel-content>
+        <template v-slot:header>
+          <div>Timeline</div>
+        </template>
+        <v-card pa-5>
+          <v-container pa-5>
+          <v-timeline>
+            <v-timeline-item v-for="n in 4" :key="n" color="primary" >
+              <template v-slot:opposite>
+                <span>Tus eu perfecto</span>
+              </template>
+              <v-card class="elevation-2">
+                <v-card-title class="headline">Lorem ipsum</v-card-title>
+                <v-card-text>
+                  Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.
+                </v-card-text>
+              </v-card>
+            </v-timeline-item>
+          </v-timeline>
+          </v-container>
+        </v-card>
+      </v-expansion-panel-content>
       <!-- Informations -->
       <v-expansion-panel-content>
         <template v-slot:header>
@@ -112,10 +142,39 @@
 
     <h2>Informations</h2>
 
-    <v-card>
+    <v-layout>
+      <v-flex xs12 sm6 offset-sm1>
+        <v-card>
+          <v-card-title>
+            <div>
+              <span class="grey--text">Number 10</span><br>
+              <span>Whitehaven Beach</span><br>
+              <span>Whitsunday Island, Whitsunday Islands</span>
+            </div>
+          </v-card-title>
+          <v-card-actions>
+            <v-btn flat color="orange">Share</v-btn>
+            <v-btn flat color="orange">Explore</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
 
-
-    </v-card>
+      <v-flex xs12 sm6 offset-sm1>
+        <v-card>
+          <v-card-title>
+            <div>
+              <span class="grey--text">Number 10</span><br>
+              <span>Whitehaven Beach</span><br>
+              <span>Whitsunday Island, Whitsunday Islands</span>
+            </div>
+          </v-card-title>
+          <v-card-actions>
+            <v-btn flat color="orange">Share</v-btn>
+            <v-btn flat color="orange">Explore</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+    </v-layout>
 
   </v-container>
 
