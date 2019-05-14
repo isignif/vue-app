@@ -3,8 +3,7 @@
   <v-toolbar flat>
     <v-list>
       <v-list-tile>
-        <v-list-tile-title class="title" align-center="true">
-
+        <v-list-tile-title class="title" style="display: flex; justify-content: center">
           <img v-if="mini" src="../assets/favicon.svg" height="100%">
           <span v-else>iSignif</span>
 
