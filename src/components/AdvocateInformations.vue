@@ -1,14 +1,7 @@
 <template>
 
-
-
   <v-card>
-    <v-progress-circular
-        :size="100"
-        color="primary"
-        indeterminate
-        v-if="loading"
-    ></v-progress-circular>
+    <Loader v-if="loading" />
 
     <div v-else>
       <h2>{{ firstname }} {{ lastname }}</h2>
@@ -21,13 +14,17 @@
   </v-card>
 </template>
 <script>
+import Loader from './Loader'
+
 const axios = require('axios')
 const api_url = require('../config').api_url
 
 export default {
   name: 'AdvocateInformations',
   props: ['id'],
-
+  components: {
+    Loader
+  },
   methods:{
     fetch(){
       axios.get(`${api_url}/advocates/${this.id}`, { headers: { Authorization: this.$store.state.logged_user.persistence_token } })
