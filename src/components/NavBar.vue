@@ -6,7 +6,6 @@
         <v-list-tile-title class="title" style="display: flex; justify-content: center">
           <img v-if="mini" src="../assets/favicon.svg" height="100%">
           <span v-else>iSignif</span>
-
         </v-list-tile-title>
         <v-list-tile-action v-if="!mini">
           <v-btn icon @click.stop="mini = !mini">
@@ -34,7 +33,7 @@
     </v-list-tile>
 
     <!-- Signin -->
-    <v-list-tile to="/signin">
+    <v-list-tile to="/signin" v-if="!current_user_id">
       <v-list-tile-action>
         <v-icon>account_circle</v-icon>
       </v-list-tile-action>
@@ -45,7 +44,7 @@
     </v-list-tile>
 
     <!-- Dashboard -->
-    <v-list-tile to="/dashboard">
+    <v-list-tile to="/dashboard" v-if="current_user_id">
       <v-list-tile-action>
         <v-icon>dashboard</v-icon>
       </v-list-tile-action>
@@ -57,7 +56,7 @@
 
 
     <!-- actes -->
-    <v-list-group prepend-icon="assignment" no-action>
+    <v-list-group prepend-icon="assignment" no-action v-if="current_user_id">
       <template v-slot:activator>
         <v-list-tile to="/acts">
           <v-list-tile-title>Actes</v-list-tile-title>
@@ -82,7 +81,7 @@
     </v-list-group>
 
     <!-- Aide -->
-    <v-list-tile to="/messages">
+    <v-list-tile to="/messages" v-if="current_user_id">
       <v-list-tile-action>
         <v-icon>all_inbox</v-icon>
       </v-list-tile-action>
@@ -109,49 +108,22 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
   name: 'NavBar',
+  computed: {
+    ...mapState({
+      current_user_id: state => state.logged_user.id,
+    })
+  },
+  // TODO computed here for logged user
   data() {
     return {
       drawer: true,
       mini: true,
       right: null,
-      items: [{
-          title: 'Dashboard',
-          icon: 'dashboard',
-          link: '/dashboard',
-        },
-        {
-          title: 'Mes demandes',
-          icon: 'assignment',
-          link: '/acts',
-        },
-        {
-          title: 'Mes actes',
-          icon: 'assignment_return',
-          link: '/acts',
-        },
-        {
-          title: 'Messages',
-          icon: 'all_inbox',
-          link: '/messages',
-        },
-        {
-          title: "Demander une signification",
-          icon: 'create_new_folder',
-          link: '/acts/new'
-        },
-        {
-          title: 'Mon compte',
-          icon: 'face',
-          link: '/',
-        },
-        {
-          title: 'Aide',
-          icon: 'help',
-          link: '/help',
-        },
-      ],
     }
   }
 }
