@@ -13,7 +13,6 @@
 
   <v-content >
     <v-container>
-      <h1>{{$route.name}}</h1>
       <router-view></router-view>
     </v-container>
   </v-content>
