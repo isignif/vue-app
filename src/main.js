@@ -4,6 +4,8 @@ import App from './App.vue'
 // vue plugin
 import VueRouter from 'vue-router'
 
+import './plugins/vuetify'
+import store from './store'
 
 import Home from './pages/Home.vue'
 import Signin from './pages/Signin.vue'
@@ -13,8 +15,11 @@ import Messages from './pages/Messages.vue'
 import Acts from './pages/Acts.vue'
 import ActNew from './pages/ActNew.vue'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = process.env.NODE_ENV !== 'production'
+
 Vue.use(VueRouter)
+
+
 
 const routes = [
   { path: '/', component: Home, name: "Page principale" },
@@ -31,6 +36,7 @@ const router = new VueRouter({
 })
 
 new Vue({
+  store,
   router,
   render: h => h(App),
 }).$mount('#app')

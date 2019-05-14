@@ -33,6 +33,8 @@
 const axios = require('axios')
 const api_url = require('../config').api_url
 
+import { mapState, mapActions } from 'vuex'
+
 export default {
   data: () => ({
     snackbar: false,
@@ -54,17 +56,11 @@ export default {
         })
         .then(response => {
           let user_data = response.data.data
-          let attributes = user_data.attributes
-          let user_name = `${attributes.firstname} ${attributes.lastname}`
-          this.snackbar_message = `Bonjour ${user_name}`
-          // save data into localStorage
-          window.localStorage.setItem('isignif_user_data', JSON.stringify(response.data.data))
-          window.localStorage.setItem('isignif_user_name', user_name)
-          window.localStorage.setItem('isignif_user_id', user_data.id)
-          window.localStorage.setItem('isignif_persistence_token', attributes.persistence_token)
+          this.$store.dispatch('logged_user/signin', user_data)
           this.snackbar = true
         })
-        .catch(function(error) {
+        .catch(error => {
+          this.$store.dispatch('logged_user/signin', 'failed')
           console.error(error)
         });
 
