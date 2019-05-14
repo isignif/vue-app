@@ -65,7 +65,7 @@ export default {
           this.snackbar = true
         })
         .catch(error => {
-          this.$store.dispatch('logged_user/signin', )
+          // TODO display snackbar error here
           console.error(error)
         });
 

@@ -14,6 +14,7 @@
         ></v-text-field>
       </v-card-title>
       <v-data-table :headers="headers" :items="acts" class="elevation-1" :search="search">
+        <v-progress-linear v-slot:progress color="primary" indeterminate></v-progress-linear>
         <template v-slot:items="props">
           <td>{{ props.item.attributes.reference }}</td>
           <td>{{ props.item.act_type }}</td>
@@ -21,6 +22,12 @@
           <td>{{ props.item.advocate }}</td>
           <td>{{ props.item.bailiffs }}</td>
           <td>{{ props.item.step }}</td>
+          <td>
+            <v-btn flat small :to="{ name: 'act', params: { id: props.item.id }}">
+              Afficher
+              <v-icon>chevron_right</v-icon>
+            </v-btn>
+          </td>
         </template>
       </v-data-table>
     </div>

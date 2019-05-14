@@ -14,6 +14,7 @@ import Help from './pages/Help.vue'
 import Messages from './pages/Messages.vue'
 import Advocate from './pages/Advocate.vue'
 import Acts from './pages/Acts.vue'
+import Act from './pages/Act.vue'
 import ActNew from './pages/ActNew.vue'
 
 Vue.config.productionTip = process.env.NODE_ENV !== 'production'
@@ -27,6 +28,7 @@ const routes = [
   { path: '/dashboard', component: Dashboard, name: "Dashboard" },
   { path: '/signin', component: Signin, name: "Connexion" },
   { path: '/advocate/:id', component: Advocate, name: "advocate" },
+  { path: '/acts/:id', component: Act, name: "act" },
   { path: '/acts', component: Acts, name: "Mes actes" },
   { path: '/acts/new', component: ActNew, name: "Demander une signification d'acte" },
   { path: '/messages', component: Messages, name: "Messagerie" },
