@@ -27,3 +27,8 @@ yarn run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+## Ideas
+
+- https://www.mikestreety.co.uk/blog/vue-js-using-localstorage-with-the-vuex-store

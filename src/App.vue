@@ -1,7 +1,7 @@
 <template>
 <v-app>
   <NavBar />
-  <v-toolbar app class="secondary">
+  <v-toolbar app dark>
     <v-toolbar-title class="headline text-uppercase">
       <span>{{$route.name}}</span>
     </v-toolbar-title>
