@@ -29,11 +29,11 @@
   </v-snackbar>
 </v-card>
 </template>
-<script>
+<script >
 const axios = require('axios')
 const api_url = require('../config').api_url
 
-import { mapState, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -50,6 +50,7 @@ export default {
   methods: {
     submit() {
 
+
       axios.post(`${api_url}/user_sessions`, {
           email: this.email,
           password: this.password,
@@ -57,10 +58,14 @@ export default {
         .then(response => {
           let user_data = response.data.data
           this.$store.dispatch('logged_user/signin', user_data)
+
+          let userName = this.$store.getters['logged_user/completeName']
+
+          this.snackbar_message = `Bonjour ${userName}`
           this.snackbar = true
         })
         .catch(error => {
-          this.$store.dispatch('logged_user/signin', 'failed')
+          this.$store.dispatch('logged_user/signin', )
           console.error(error)
         });
 

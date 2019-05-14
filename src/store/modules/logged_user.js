@@ -9,36 +9,44 @@ const state = {
 }
 
 // getters
-const getters = {}
+const getters = {
+  id: state => {
+    return state.id
+  },
+  completeName: (state, getters) => {
+    if (getters.isLogged == false) {
+      return '';
+    }
+
+    return `${state.firstname} ${state.lastname}`
+  },
+  isLogged: state => {
+    return state.id !== null
+  }
+}
 
 // actions
 const actions = {
   signin({ commit, state }, user) {
-    commit('setUser', user)
+    if (typeof user.attributes !== 'undefined') {
+      commit('SET_USER', user)
+    } else {
+      console.error('Bad data passed into signin')
+    }
   }
-  // getAllProducts ({ commit }) {
-  //   shop.getProducts(products => {
-  //     commit('setProducts', products)
-  //   })
-  // }
 }
 
 // mutations
 const mutations = {
-  setUser (state, user) {
-    console.log('setUser')
-    console.log(user)
-
-    if (typeof user.attributes !== 'undefined') {
+  // TODO set mutliples mutators
+  SET_USER (state, user) {
       let attributes = user.attributes
 
       state.id = user.id
       state.email = attributes.email
       state.firstname = attributes.firstname
       state.lastname = attributes.lastname
-
       state.persistence_token = attributes.persistence_token
-    }
   },
 }
 
