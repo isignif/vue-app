@@ -1,5 +1,18 @@
 <template>
-  <AdvocateInformations :id="$route.params.id"  />
+  <v-container>
+    <AdvocateInformations :id="$route.params.id" />
+
+
+    <div v-if="$route.params.id == $store.state.logged_user.id">
+
+      <v-btn flat color="warning" @click="signout">
+        <span>Se déconnecter</span>
+        <v-icon>exit_to_app</v-icon>
+      </v-btn>
+
+    </div>
+
+  </v-container>
 </template>
 
 <script>
@@ -11,5 +24,10 @@ export default {
   components: {
     AdvocateInformations
   },
+  methods: {
+    signout() {
+      this.$store.dispatch('logged_user/signout')
+    }
+  }
 }
 </script>

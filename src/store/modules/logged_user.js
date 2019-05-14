@@ -33,6 +33,9 @@ const actions = {
     } else {
       console.error('Bad data passed into signin')
     }
+  },
+  signout({ commit, state }) {
+    commit('REMOVE_USER')
   }
 }
 
@@ -48,6 +51,13 @@ const mutations = {
       state.lastname = attributes.lastname
       state.persistence_token = attributes.persistence_token
   },
+  REMOVE_USER (state) {
+    state.id = null
+    state.email = null
+    state.firstname = null
+    state.lastname = null
+    state.persistence_token = null
+  }
 }
 
 export default {
