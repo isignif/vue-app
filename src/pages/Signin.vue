@@ -21,26 +21,17 @@
       </v-layout>
     </v-container>
   </v-form>
-  <v-snackbar v-model="snackbar" bottom color="success">
-    {{ snackbar_message }}
-    <v-btn  flat @click="snackbar = false">
-      Close
-    </v-btn>
-  </v-snackbar>
+
 </v-card>
 </template>
 <script >
 const axios = require('axios')
 const api_url = require('../config').api_url
 
-import { mapGetters } from 'vuex'
-
 export default {
   data: () => ({
-    snackbar: false,
     valid: false,
     show_password: false,
-    snackbar_message: '',
     email: '',
     password: '',
     emailRules: [
@@ -50,7 +41,6 @@ export default {
   methods: {
     submit() {
 
-
       axios.post(`${api_url}/user_sessions`, {
           email: this.email,
           password: this.password,
@@ -58,17 +48,22 @@ export default {
         .then(response => {
           let user_data = response.data.data
           this.$store.dispatch('logged_user/signin', user_data)
-
           let userName = this.$store.getters['logged_user/completeName']
 
-          this.snackbar_message = `Bonjour ${userName}`
-          this.snackbar = true
+
+          this.$store.dispatch('snackbar/display', {
+            color: 'success',
+            message: `Bonjour ${userName}`
+          })
+
+          this.$router.push({ name: 'advocate', params: { id: user_data.id } });
         })
         .catch(error => {
-          // TODO display snackbar error here
-          console.error(error)
+          this.$store.dispatch('snackbar/display', {
+            color: 'red',
+            message: "Le couple iddentifiant / mot de passe n'est pas valide"
+          })
         });
-
     }
   }
 }

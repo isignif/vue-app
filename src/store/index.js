@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import logged_user from './modules/logged_user'
+import snackbar from './modules/snackbar'
 // import products from './modules/products'
 // import createLogger from '../../../src/plugins/logger'
 
@@ -12,7 +13,8 @@ const ISIGNIF_LOCAL_STORAGE_KEY = 'isignif_vuex_database'
 
 const store = new Vuex.Store({
   modules: {
-    logged_user
+    logged_user,
+    snackbar
   },
   mutations: {
     // Initialize saved state from local localStorage
