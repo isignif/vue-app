@@ -22,17 +22,16 @@ Vue.config.productionTip = process.env.NODE_ENV !== 'production'
 Vue.use(VueRouter)
 
 
-
 const routes = [
-  { path: '/', component: Home, name: "Page principale" },
-  { path: '/dashboard', component: Dashboard, name: "Dashboard" },
-  { path: '/signin', component: Signin, name: "Connexion" },
+  { path: '/', component: Home, name: 'home', title: "Page principale" },
+  { path: '/dashboard', component: Dashboard, name: "dashboard" },
+  { path: '/signin', component: Signin, name: "signin" },
   { path: '/advocate/:id', component: Advocate, name: "advocate" },
   { path: '/acts/:id', component: Act, name: "act" },
-  { path: '/acts', component: Acts, name: "Mes actes" },
-  { path: '/acts/new', component: ActNew, name: "Demander une signification d'acte" },
-  { path: '/messages', component: Messages, name: "Messagerie" },
-  { path: '/help', component: Help, name: "FAQ" },
+  { path: '/acts', component: Acts, name: "acts" },
+  { path: '/acts/new', component: ActNew, name: "new_act" },
+  { path: '/messages', component: Messages, name: "messages" },
+  { path: '/help', component: Help, name: "help" },
 ]
 
 const router = new VueRouter({

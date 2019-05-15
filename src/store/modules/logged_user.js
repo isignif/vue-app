@@ -27,14 +27,14 @@ const getters = {
 
 // actions
 const actions = {
-  signin({ commit, state }, user) {
+  signin({commit}, user) {
     if (typeof user.attributes !== 'undefined') {
       commit('SET_USER', user)
     } else {
-      console.error('Bad data passed into signin')
+      // console.error('Bad data passed into signin')
     }
   },
-  signout({ commit, state }) {
+  signout({commit}) {
     commit('REMOVE_USER')
   }
 }

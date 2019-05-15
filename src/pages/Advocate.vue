@@ -27,6 +27,7 @@ export default {
   methods: {
     signout() {
       this.$store.dispatch('logged_user/signout')
+      this.$router.push({ name: 'home'})
     }
   }
 }
