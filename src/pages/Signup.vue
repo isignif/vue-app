@@ -47,6 +47,15 @@
           <v-text-field v-model="zip_code" label="Code postal" prepend-icon="-" required></v-text-field>
         </v-flex>
 
+        <v-flex xs12 d-flex v-if="type == 'bailiff'">
+          <v-select
+            :items="cometence_areas"
+            label="Zone de compétence"
+            prepend-icon="gavel"
+            required
+          ></v-select>
+        </v-flex>
+
 
         <v-flex :class="company_name ? 'xs12 md6' : 'xs12'">
           <v-text-field v-model="company_name" label="Raison sociale" prepend-icon="store_mall_directory" required></v-text-field>
@@ -105,6 +114,7 @@ export default {
     password_confirmation: '',
     siret: '',
     company_name: '',
+    cometence_areas: [],
     phone: '',
     emailRules: [
       v => /.+@.+/.test(v) || "Le courriel n'est pas valide"
@@ -115,29 +125,41 @@ export default {
 
       // TODO
 
-      // axios.post(`${api_url}/user_sessions`, {
-      //     email: this.email,
-      //     password: this.password,
-      //   })
-      //   .then(response => {
-      //     let user_data = response.data.data
-      //     this.$store.dispatch('logged_user/signin', user_data)
-      //     let userName = this.$store.getters['logged_user/completeName']
-      //
-      //
-      //     this.$store.dispatch('snackbar/display', {
-      //       color: 'success',
-      //       message: `Bonjour ${userName}`
-      //     })
-      //
-      //     this.$router.push({ name: 'advocate', params: { id: user_data.id } });
-      //   })
-      //   .catch(error => {
-      //     this.$store.dispatch('snackbar/display', {
-      //       color: 'red',
-      //       message: "Le couple iddentifiant / mot de passe n'est pas valide"
-      //     })
-      //   });
+      let apiController = this.type == 'advocate' ? 'advocates' : 'bailiffs'
+
+      axios.post(`${api_url}/${apiController}`, {
+          advocate : {
+            email: this.email,
+            password: this.password,
+            firstname: this.firstname,
+            lastname: this.lastname,
+            address_1: this.address_1,
+            address_2: this.address_2,
+            zip_code: this.zip_code,
+            town: this.town,
+            siret: this.siret,
+            company_name: this.company_name,
+          }
+        })
+        .then(response => {
+          // let user_data = response.data.data
+          // this.$store.dispatch('logged_user/signin', user_data)
+          // let userName = this.$store.getters['logged_user/completeName']
+
+
+          this.$store.dispatch('snackbar/display', {
+            color: 'success',
+            message: `La demande a été transmise`
+          })
+
+          // this.$router.push({ name: 'advocate', params: { id: user_data.id } });
+        })
+        .catch(error => {
+          this.$store.dispatch('snackbar/display', {
+            color: 'red',
+            message: "Une erreur est survenue."
+          })
+        });
     }
   }
 }
