@@ -34,6 +34,7 @@ const PAGES_TITLE = {
   home: 'Accueil',
   dashboard: 'Dashboard',
   signin: 'Connexion',
+  signup: 'Se créer un compte',
   advocate: 'Avocat',
   act: 'Acte',
   acts: 'Mes actes',

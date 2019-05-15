@@ -13,12 +13,25 @@
         </v-flex>
 
         <v-flex xs12 md6>
-          <v-btn :disabled="!valid" @click="submit">
-            Validate
-          </v-btn>
+
         </v-flex>
 
       </v-layout>
+
+      <v-btn :disabled="!valid" @click="submit" large color="primary">
+        Se connecter
+      </v-btn>
+
+
+      <v-btn flat small secondary :to="{ name: 'signup'}">
+        Créer un compte
+      </v-btn>
+
+      <v-btn flat small secondary @click="">
+        Mot de passe oublié
+      </v-btn>
+
+
     </v-container>
   </v-form>
 
