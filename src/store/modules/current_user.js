@@ -1,3 +1,5 @@
+import jwt_decode from 'jwt-decode';
+
 
 // initial state
 const state = {
@@ -5,19 +7,18 @@ const state = {
   email: null,
   firstname: null,
   lastname: null,
-  persistence_token: null,
+  token: null,
 }
 
 // getters
 const getters = {
-  id: state => {
-    return state.id
-  },
+  id: state => state.id,
+  token: state => state.token,
   completeName: (state, getters) => {
     if (getters.isLogged == false) {
       return '';
     }
-
+    
     return `${state.firstname} ${state.lastname}`
   },
   isLogged: state => {
@@ -27,12 +28,8 @@ const getters = {
 
 // actions
 const actions = {
-  signin({commit}, user) {
-    if (typeof user.attributes !== 'undefined') {
-      commit('SET_USER', user)
-    } else {
-      // console.error('Bad data passed into signin')
-    }
+  setToken({commit}, token) {
+    commit('SET_TOKEN', token)
   },
   signout({commit}) {
     commit('REMOVE_USER')
@@ -41,22 +38,20 @@ const actions = {
 
 // mutations
 const mutations = {
-  // TODO set mutliples mutators
-  SET_USER (state, user) {
-      let attributes = user.attributes
+  SET_TOKEN (state, token) {
+    state.token = token
 
-      state.id = user.id
-      state.email = attributes.email
-      state.firstname = attributes.firstname
-      state.lastname = attributes.lastname
-      state.persistence_token = attributes.persistence_token
+    const userData = jwt_decode(token)
+    state.id = userData.user_id
+    state.email = userData.email
+    state.firstname = userData.firstname
+    state.lastname = userData.lastname
   },
   REMOVE_USER (state) {
     state.id = null
     state.email = null
     state.firstname = null
     state.lastname = null
-    state.persistence_token = null
   }
 }
 

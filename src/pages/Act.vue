@@ -195,7 +195,7 @@ export default {
     fetch() {
       axios.get(`${api_url}/acts/${this.$route.params.id}`, {
           headers: {
-            Authorization: this.$store.state.logged_user.persistence_token
+            Authorization: this.$store.state.current_user.token
           }
         })
         .then(response => {

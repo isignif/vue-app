@@ -137,7 +137,7 @@ import {
 export default {
   name: 'NavBar',
   computed: {
-    ...mapState('logged_user', {
+    ...mapState('current_user', {
       current_user_id: state => state.id,
       current_user_complete_name: state => {
         return `${state.firstname} ${state.lastname}`

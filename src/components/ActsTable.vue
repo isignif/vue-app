@@ -48,13 +48,13 @@ export default {
   },
   methods:{
     fetch(){
-      axios.get(`${api_url}/acts`, { headers: { Authorization: this.$store.state.logged_user.persistence_token } })
+      axios.get(`${api_url}/acts`, { headers: { Authorization: this.$store.state.current_user.token } })
         .then(response => {
           this.acts = response.data.data
 
           this.loading = false
         })
-        .catch(error => {
+        .catch(_error => {
           // console.error(error)
         })
     }

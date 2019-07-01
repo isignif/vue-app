@@ -69,7 +69,7 @@ export default {
   },
   methods:{
     fetch(){
-      axios.get(`${api_url}/advocates/${this.id}`, { headers: { Authorization: this.$store.state.logged_user.persistence_token } })
+      axios.get(`${api_url}/advocates/${this.id}`, { headers: { Authorization: this.$store.state.current_user.token } })
         .then(response => {
           let attributes = response.data.data.attributes
 

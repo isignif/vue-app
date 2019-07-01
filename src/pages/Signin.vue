@@ -38,7 +38,6 @@
 </v-card>
 </template>
 <script >
-const axios = require('axios')
 const api_url = require('../config').api_url
 
 export default {
@@ -53,25 +52,27 @@ export default {
   }),
   methods: {
     submit() {
+      const params = {
+        "user[email]": this.email,
+        "user[password]": this.password,
+      }
 
-      axios.post(`${api_url}/user_sessions`, {
-          email: this.email,
-          password: this.password,
-        })
+      this.$http.post(`${api_url}/tokens`, params, {emulateJSON: true})
         .then(response => {
-          let user_data = response.data.data
-          this.$store.dispatch('logged_user/signin', user_data)
-          let userName = this.$store.getters['logged_user/completeName']
+          this.$store.dispatch('current_user/setToken', response.data.token)
 
+          let userName = this.$store.getters['current_user/completeName']
+          let userId = this.$store.getters['current_user/id']
 
           this.$store.dispatch('snackbar/display', {
             color: 'success',
             message: `Bonjour ${userName}`
           })
 
-          this.$router.push({ name: 'advocate', params: { id: user_data.id } });
+          this.$router.push({ name: 'advocate', params: { id: userId } });
         })
         .catch(error => {
+          console.error(error)
           this.$store.dispatch('snackbar/display', {
             color: 'red',
             message: "Le couple iddentifiant / mot de passe n'est pas valide"

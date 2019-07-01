@@ -3,6 +3,7 @@ import './plugins/vuetify'
 import App from './App.vue'
 // vue plugin
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 
 import './plugins/vuetify'
 import store from './store'
@@ -21,6 +22,7 @@ import ActNew from './pages/ActNew.vue'
 Vue.config.productionTip = process.env.NODE_ENV !== 'production'
 
 Vue.use(VueRouter)
+Vue.use(VueResource)
 
 
 const routes = [

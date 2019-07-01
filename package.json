@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "jwt-decode": "^2.2.0",
     "vue": "^2.6.6",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.2",
     "vue-select": "^2.6.0",
     "vuetify": "^1.5.5",
@@ -37,7 +39,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

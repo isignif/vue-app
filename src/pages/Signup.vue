@@ -141,10 +141,12 @@ export default {
             company_name: this.company_name,
           }
         })
-        .then(response => {
+        .then(_response => {
           // let user_data = response.data.data
-          // this.$store.dispatch('logged_user/signin', user_data)
-          // let userName = this.$store.getters['logged_user/completeName']
+          // this.$store.dispatch('current_user/signin', user_data)
+          // let userName = this.$store.getters['current_user/completeName']
+
+          // TODO
 
 
           this.$store.dispatch('snackbar/display', {
@@ -154,7 +156,7 @@ export default {
 
           // this.$router.push({ name: 'advocate', params: { id: user_data.id } });
         })
-        .catch(error => {
+        .catch(_error => {
           this.$store.dispatch('snackbar/display', {
             color: 'red',
             message: "Une erreur est survenue."

@@ -3,7 +3,7 @@
     <AdvocateInformations :id="$route.params.id" />
 
 
-    <div v-if="$route.params.id == $store.state.logged_user.id">
+    <div v-if="$route.params.id == $store.state.current_user.id">
 
       <v-btn flat color="warning" @click="signout">
         <span>Se déconnecter</span>
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     signout() {
-      this.$store.dispatch('logged_user/signout')
+      this.$store.dispatch('current_user/signout')
       this.$router.push({ name: 'home'})
     }
   }
