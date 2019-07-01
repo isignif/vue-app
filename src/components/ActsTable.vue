@@ -18,12 +18,13 @@
         <template v-slot:items="props">
           <td>
             {{ props.item.attributes.reference }}
-            <span v-if="props.item.attributes.reference == null" class="red--text">Référence est vide</span>
+            
           </td>
           <td>{{ getActTypeName(props.item.attributes.act_type_id) }}</td>
           <td>{{ props.item.significations }}</td>
-          <td>{{ props.item.advocate }}</td>
-          <td>{{ props.item.bailiffs }}</td>
+          <td>{{ getuserName(props.item.attributes.advocate_id) }}</td>
+          <td>
+          </td>
           <td>{{ props.item.step }}</td>
           <td>
             <v-btn flat small :to="{ name: 'act', params: { id: props.item.id }}">
@@ -52,16 +53,25 @@ export default {
         .then(response => {
           this.acts = response.data.data
           this.actTypes = response.data.included.filter((included) => included.type == 'act_type')
+          this.users = response.data.included.filter((included) => included.type == 'advocate' || included.type == 'bailiff')
+          this.actHistories = response.data.included.filter((included) => included.type == 'act_histories')
+          this.significations = response.data.included.filter((included) => included.type == 'act_histories')
           this.loading = false
         })
         .catch(error => console.error(error))
     },
     getActTypeName(actTypeId) {
-
       const actType = this.actTypes.find( actType => actType.id == actTypeId )
 
       if (actType) {
         return actType.attributes.name
+      }
+    },
+    getuserName(userId) {
+      const user = this.users.find( user => user.id == userId )
+
+      if (user) {
+        return `${user.attributes.firstname} ${user.attributes.lastname}` 
       }
     }
   },
@@ -73,6 +83,10 @@ export default {
       loading: true,
       search: '',
       actTypes: [],
+      advocates: [],
+      significations: [],
+      actHistories: [],
+      bailiffs: [],
       headers: [{
           text: "Référence de l'acte",
           value: 'reference'
