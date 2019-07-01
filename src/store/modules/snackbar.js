@@ -12,7 +12,6 @@ const getters = { }
 // actions
 const actions = {
   display({commit}, playload) {
-    console.log(playload)
     playload.display = true
 
     commit('CHANGE_DISPLAY', playload)

@@ -23,7 +23,7 @@
           <v-list two-line>
 
             <!-- person -->
-            <v-list-tile @click="">
+            <v-list-tile>
 
               <v-list-tile-action>
                 <v-icon color="primary">update</v-icon>
@@ -49,7 +49,7 @@
           <v-list two-line>
 
             <!-- person -->
-            <v-list-tile @click="">
+            <v-list-tile>
 
               <v-list-tile-action>
                 <v-icon color="primary">person</v-icon>
@@ -63,7 +63,7 @@
             </v-list-tile>
 
             <!-- place -->
-            <v-list-tile @click="">
+            <v-list-tile>
 
               <v-list-tile-action>
                 <v-icon color="primary">place</v-icon>
@@ -77,7 +77,7 @@
             </v-list-tile>
 
             <!-- email -->
-            <v-list-tile @click="">
+            <v-list-tile>
 
               <v-list-tile-action>
                 <v-icon color="primary">email</v-icon>
@@ -89,7 +89,7 @@
 
             </v-list-tile>
 
-            <v-list-tile @click="" v-if="bill_phone">
+            <v-list-tile v-if="bill_phone">
 
               <v-list-tile-action>
                 <v-icon color="primary">phone</v-icon>

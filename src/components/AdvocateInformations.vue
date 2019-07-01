@@ -9,7 +9,7 @@
 
       <v-card>
         <v-list two-line>
-            <v-list-tile @click="">
+            <v-list-tile>
               <v-list-tile-action>
                 <v-icon color="primary">phone</v-icon>
               </v-list-tile-action>
@@ -24,7 +24,7 @@
 
             <v-divider inset></v-divider>
 
-            <v-list-tile @click="">
+            <v-list-tile>
               <v-list-tile-action>
                 <v-icon color="primary">mail</v-icon>
               </v-list-tile-action>
@@ -37,7 +37,7 @@
 
             <v-divider inset></v-divider>
 
-            <v-list-tile @click="">
+            <v-list-tile>
               <v-list-tile-action>
                 <v-icon color="primary">location_on</v-icon>
               </v-list-tile-action>

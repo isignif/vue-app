@@ -24,7 +24,7 @@
         </v-flex>
 
         <v-flex :class="password ? 'xs12 md6' : 'xs12'" >
-          <v-text-field v-model="password" label="Mot de passe" :type="show_password ? 'text' : 'password'" @click:append="show_password = !show_password" :append-icon="show_password ? 'visibility' : 'visibility_off'" required required prepend-icon="lock"></v-text-field>
+          <v-text-field v-model="password" label="Mot de passe" :type="show_password ? 'text' : 'password'" @click:append="show_password = !show_password" :append-icon="show_password ? 'visibility' : 'visibility_off'" required prepend-icon="lock"></v-text-field>
         </v-flex>
 
         <v-flex xs12 md6>
@@ -84,7 +84,7 @@
         J'ai déjà un compte
       </v-btn>
 
-      <v-btn flat small secondary @click="">
+      <v-btn flat small secondary>
         Mot de passe oublié
       </v-btn>
 

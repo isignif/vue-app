@@ -27,7 +27,7 @@
         Créer un compte
       </v-btn>
 
-      <v-btn flat small secondary @click="">
+      <v-btn flat small secondary>
         Mot de passe oublié
       </v-btn>
 
