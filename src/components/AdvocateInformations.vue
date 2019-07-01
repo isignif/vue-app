@@ -58,9 +58,6 @@
 <script>
 import Loader from './Loader'
 
-const axios = require('axios')
-const api_url = require('../config').api_url
-
 export default {
   name: 'AdvocateInformations',
   props: ['id'],
@@ -69,7 +66,7 @@ export default {
   },
   methods:{
     fetch(){
-      axios.get(`${api_url}/advocates/${this.id}`, { headers: { Authorization: this.$store.state.current_user.token } })
+      this.$http.get(`advocates/${this.id}`, { headers: { Authorization: this.$store.state.current_user.token } })
         .then(response => {
           let attributes = response.data.data.attributes
 
@@ -85,9 +82,7 @@ export default {
 
           this.loading = false
         })
-        .catch(error => {
-          console.error(error)
-        })
+        .catch(error =>  console.error(error))
     }
   },
   mounted(){

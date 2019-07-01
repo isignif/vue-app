@@ -183,8 +183,6 @@
 <script>
 import Loader from '../components/Loader'
 
-const axios = require('axios')
-const api_url = require('../config').api_url
 
 export default {
   name: 'ActInformations',
@@ -193,7 +191,7 @@ export default {
   },
   methods: {
     fetch() {
-      axios.get(`${api_url}/acts/${this.$route.params.id}`, {
+      this.$http.get(`acts/${this.$route.params.id}`, {
           headers: {
             Authorization: this.$store.state.current_user.token
           }
@@ -226,9 +224,7 @@ export default {
 
           this.loading = false
         })
-        .catch(error => {
-          console.error(error)
-        })
+        .catch(error => console.error(error) )
     }
   },
   mounted() {

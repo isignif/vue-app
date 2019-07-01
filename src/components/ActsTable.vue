@@ -37,9 +37,6 @@
 <script>
 import Loader from './Loader'
 
-const axios = require('axios')
-const api_url = require('../config').api_url
-
 export default {
   name: 'ActsTable',
   props: {},
@@ -48,15 +45,12 @@ export default {
   },
   methods:{
     fetch(){
-      axios.get(`${api_url}/acts`, { headers: { Authorization: this.$store.state.current_user.token } })
+      this.$http.get(`acts`, { headers: { Authorization: this.$store.state.current_user.token } })
         .then(response => {
           this.acts = response.data.data
-
           this.loading = false
         })
-        .catch(_error => {
-          // console.error(error)
-        })
+        .catch(error => console.error(error))
     }
   },
   mounted(){

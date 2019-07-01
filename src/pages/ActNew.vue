@@ -29,10 +29,10 @@
             <v-text-field v-model="reference" label="Référence de l'acte" required></v-text-field>
           </v-card-title>
           <v-card-title>
-            <v-chip close v-for="town in towns">{{ town.text }}</v-chip>
+            <v-chip close :key="town.id" v-for="town in towns">{{ town.text }}</v-chip>
           </v-card-title>
 
-            <v-select v-model="actType" :options="actTypesOptions" label="name"></v-select>
+          <v-select v-model="actType" :options="actTypesOptions" label="name"></v-select>
 
           <v-card-actions>
             <v-btn color="primary" large>Créez votre acte - <small>prix estimé: 30€</small> </v-btn>
@@ -46,9 +46,8 @@
 </template>
 
 <script>
-const axios = require('axios')
-
 import vSelect from 'vue-select'
+
 export default {
   name: 'ActNew',
   components: {

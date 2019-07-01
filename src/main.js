@@ -19,11 +19,12 @@ import Acts from './pages/Acts.vue'
 import Act from './pages/Act.vue'
 import ActNew from './pages/ActNew.vue'
 
-Vue.config.productionTip = process.env.NODE_ENV !== 'production'
-
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
+Vue.config.productionTip = process.env.NODE_ENV !== 'production'
+Vue.http.options.root = require('./config').api_url
+Vue.http.options.emulateJSON = true
 
 const routes = [
   { path: '/', component: Home, name: 'home'},

@@ -38,7 +38,7 @@
 </v-card>
 </template>
 <script >
-const api_url = require('../config').api_url
+
 
 export default {
   data: () => ({
@@ -57,7 +57,7 @@ export default {
         "user[password]": this.password,
       }
 
-      this.$http.post(`${api_url}/tokens`, params, {emulateJSON: true})
+      this.$http.post(`tokens`, params)
         .then(response => {
           this.$store.dispatch('current_user/setToken', response.data.token)
 

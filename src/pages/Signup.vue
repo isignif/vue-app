@@ -95,9 +95,6 @@
 </v-card>
 </template>
 <script >
-const axios = require('axios')
-const api_url = require('../config').api_url
-
 export default {
   data: () => ({
     valid: false,
@@ -127,7 +124,7 @@ export default {
 
       let apiController = this.type == 'advocate' ? 'advocates' : 'bailiffs'
 
-      axios.post(`${api_url}/${apiController}`, {
+      this.$http.post(`${api_url}/${apiController}`, {
           advocate : {
             email: this.email,
             password: this.password,
