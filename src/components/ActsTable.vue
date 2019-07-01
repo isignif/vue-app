@@ -16,8 +16,11 @@
       <v-data-table :headers="headers" :items="acts" class="elevation-1" :search="search">
         <v-progress-linear v-slot:progress color="primary" indeterminate></v-progress-linear>
         <template v-slot:items="props">
-          <td>{{ props.item.attributes.reference }}</td>
-          <td>{{ props.item.act_type }}</td>
+          <td>
+            {{ props.item.attributes.reference }}
+            <span v-if="props.item.attributes.reference == null" class="red--text">Référence est vide</span>
+          </td>
+          <td>{{ getActTypeName(props.item.attributes.act_type_id) }}</td>
           <td>{{ props.item.significations }}</td>
           <td>{{ props.item.advocate }}</td>
           <td>{{ props.item.bailiffs }}</td>
@@ -48,9 +51,18 @@ export default {
       this.$http.get(`acts`, { headers: { Authorization: this.$store.state.current_user.token } })
         .then(response => {
           this.acts = response.data.data
+          this.actTypes = response.data.included.filter((included) => included.type == 'act_type')
           this.loading = false
         })
         .catch(error => console.error(error))
+    },
+    getActTypeName(actTypeId) {
+
+      const actType = this.actTypes.find( actType => actType.id == actTypeId )
+
+      if (actType) {
+        return actType.attributes.name
+      }
     }
   },
   mounted(){
@@ -60,6 +72,7 @@ export default {
     return {
       loading: true,
       search: '',
+      actTypes: [],
       headers: [{
           text: "Référence de l'acte",
           value: 'reference'
