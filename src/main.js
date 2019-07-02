@@ -34,7 +34,7 @@ const routes = [
   { path: '/advocate/:id', component: Advocate, name: 'advocate' },
   { path: '/acts/:id', component: Act, name: 'act' },
   { path: '/acts', component: Acts, name: 'acts' },
-  { path: '/acts/new', component: ActNew, name: 'new_act' },
+  { path: '/acts_new', component: ActNew, name: 'new_act' },
   { path: '/messages', component: Messages, name: 'messages' },
   { path: '/help', component: Help, name: 'help' },
 ]

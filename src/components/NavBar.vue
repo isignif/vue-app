@@ -63,7 +63,7 @@
       </v-list-tile>
 
       <!-- Demander une signification -->
-      <v-list-tile to="/acts/new">
+      <v-list-tile :to="{ name: 'new_act' }">
         <v-list-tile-action>
           <v-icon>create_new_folder</v-icon>
         </v-list-tile-action>

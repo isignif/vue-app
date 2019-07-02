@@ -1,48 +1,84 @@
 <template>
-<v-card>
-  <v-container>
+  <v-card>
+    <v-form v-model="valid">
+      <v-container>
+        <v-layout row wrap>
 
-    <v-form>
+          <v-flex xs12>
+            <h2>Informations principales</h2>
+          </v-flex>
+
+          <v-flex xs12>
+            <label>Quel acte souhaitez-vous signifier?</label>
+            <v-select v-model="actType" :options="actTypesOptions" label="name"></v-select>
+          </v-flex>
+        </v-layout>
+
+        <v-layout row wrap v-if="actType">
+
+          <v-flex xs12>
+            <h2>Significations</h2>
+          </v-flex>
+
+          <v-flex xs12>
+            <v-select :options="townsOptions" label="text" @search="onSearchTown" v-model="town"></v-select>
+            <p class="text-xs-right">
+              <v-btn @click.prevent="addSignification(town)" flat class="ma-0" v-if="town">
+                <v-icon>add_circle_outline</v-icon>
+                ajouter la signification
+              </v-btn>
+            </p>
+          </v-flex>
+        
+        </v-layout>
 
 
-      <label>Dans quelle commune devons-nous signifier votre acte?</label>
-      <v-select :options="townsOptions" label="text" @search="onSearchTown" v-model="town"></v-select>
+        <v-layout row wrap v-if="actType && significations.length > 0">
+          <v-flex xs12>
+            <v-data-table :headers="headers" :items="significations" :hide-actions="true" class="elevation-1">
+              <template v-slot:items="props">
+                <td><v-text-field v-model="name" label="Destinataire" prepend-icon="place"></v-text-field></td>
+                <td>{{ props.item.town }}</td>
+                <td>
+                  <v-icon small @click="deleteSignification(props.item.timestamp)">
+                    delete
+                  </v-icon>
+                </td>
+              </template>
+              <template v-slot:no-data>
+                <v-alert :value="true" color="error" icon="warning" outline>
+                  Ajoutez une ville (autant de fois qu'il y a de destinaires)
+                </v-alert>
+              </template>
+            </v-data-table>
+          </v-flex>
+
+          <v-flex xs12>
+            <h2>Informations secondaires</h2>
+          </v-flex>
+
+          <v-flex xs12>
+            <v-text-field v-model="reference" label="Référence de l'acte" required prepend-icon="label"></v-text-field>
+            <v-text-field v-model="reference" label="Date limite souhaité" required prepend-icon="label"></v-text-field>
+            <v-text-field v-model="reference" label="Acte urgent" required prepend-icon="label"></v-text-field>
+          </v-flex>
+
+          <v-flex xs12 class="text-xs-right">
+            <v-btn large color="primary">
+              <v-icon>add</v-icon>
+              Créer la signification
+            </v-btn>
+          </v-flex>
+
+        </v-layout>
+
+
+      </v-container>
     </v-form>
 
-    <v-btn @click.prevent="addTown(town)" flat   color="info">Sélectionner la ville</v-btn>
-    <small class="text-muted">(autant de fois qu'il y a de destinataires y résidant)</small>
-
-
-    <v-layout>
-
-    </v-layout>
-
-
-    <v-layout v-if="towns.length > 0">
-      <v-flex xs12 sm6 offset-sm3>
-        <v-card>
-
-          <v-card-title primary-title>
-              <h3 class="headline mb-0">Votre acte</h3>
-          </v-card-title>
-          <v-card-title>
-            <v-text-field v-model="reference" label="Référence de l'acte" required></v-text-field>
-          </v-card-title>
-          <v-card-title>
-            <v-chip close :key="town.id" v-for="town in towns">{{ town.text }}</v-chip>
-          </v-card-title>
-
-          <v-select v-model="actType" :options="actTypesOptions" label="name"></v-select>
-
-          <v-card-actions>
-            <v-btn color="primary" large>Créez votre acte - <small>prix estimé: 30€</small> </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-
-  </v-container>
-</v-card>
+    
+    
+  </v-card>
 </template>
 
 <script>
@@ -55,14 +91,18 @@ export default {
   },
   created: function() {
     this.onSearchTown('', null)
+    this.onSearchActType('', null)
   },
   methods: {
-    addTown: function(town) {
-      this.towns.push({
-        text: town.text,
+    addSignification: function(town) {
+      this.significations.push({
+        town: town.text,
         id: town.id,
         timestamp: new Date().valueOf(),
       })
+    },
+    deleteSignification: function(timestamp) {
+      this.significations = this.significations.filter(signification => signification.timestamp != timestamp)
     },
     reloadEstimation: function() {
       vue.actPrice = null;
@@ -94,11 +134,11 @@ export default {
       //   },
       // });
     },
-    /**
-     * Make an AJAX search & fill results
-     * @param  string search
-     * @param  callable loading method to hide/display loader
-     */
+    onSearchActType: function(search, loading) {
+      this.$http.get('act_types', { headers: { Authorization: this.$store.state.current_user.token } })
+                .then( response => this.extractActTypeOptionsFromResponse(response.data) )
+                .catch(error => console.error(error))
+    },
     onSearchTown: function(search, loading) {
       if (loading) {
         loading(true);
@@ -326,17 +366,41 @@ export default {
       //   })
 
 
+    },
+    extractActTypeOptionsFromResponse: function(responseData) {
+      this.actTypesOptions = responseData.data.map(actType => { 
+        return {
+          id: actType.id,
+          name: actType.attributes.name,
+        }
+      })
     }
   },
-  data() {
+  data: function () {
     return {
+      headers: [
+        {
+          text: 'Destinataire',
+          align: 'left',
+          sortable: false,
+          value: 'zip_code',
+        },
+        {
+          text: 'Ville',
+          align: 'left',
+          sortable: false,
+          value: 'town'
+        },
+      ],
+      significations: [ ],
+      valid: false,
       town: null,
-      towns: [],
+      // towns: [],
       townsOptions: [],
       actTypesOptions: [
-        {
-          name: "Acte de saisie conservatoire sur les biens meubles corporels"
-        }
+        { name: "Acte de saisie conservatoire sur les biens meubles corporels" },
+        { name: "Acte de saisie conservatoire sur les biens meubles corporels" }
+
       ],
       reference: null,
       actType: null,
