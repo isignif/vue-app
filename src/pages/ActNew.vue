@@ -11,28 +11,16 @@
           <v-flex xs12>
             <h2 v-if="significations.length == 1">Signification</h2>
             <h2 v-if="significations.length > 1">Significations</h2>
-            <SignificationEdit :key="signification.timestamp" v-for="signification in significations" />
+            <SignificationEdit :key="signification.timestamp" v-for="signification in significations" @delete="deleteSignification(signification.timestamp)" />
           </v-flex>
 
-          <v-btn
-              absolute
-              dark
-              fab
-              bottom
-              right
-              color="pink"
-              @click.prevent="addSignification()"
-            >
-              <v-icon>add</v-icon>
-            </v-btn>
+          <v-btn absolute dark fab bottom right color="pink" @click.prevent="addSignification()">
+            <v-icon>add</v-icon>
+          </v-btn>
 
         </v-layout>
 
-       
-
-
         <v-layout row wrap v-if="actType && significations.length > 0">
-         
 
           <v-flex xs12>
             <h2>Informations secondaires</h2>
@@ -53,12 +41,9 @@
 
         </v-layout>
 
-
       </v-container>
     </v-form>
 
-    
-    
   </v-card>
 </template>
 
@@ -114,7 +99,6 @@ export default {
       // });
     },
     
-    
   },
   data: function () {
     return {
@@ -134,14 +118,6 @@ export default {
       ],
       significations: [ ],
       valid: false,
-      town: null,
-      // towns: [],
-      townsOptions: [],
-      actTypesOptions: [
-        { name: "Acte de saisie conservatoire sur les biens meubles corporels" },
-        { name: "Acte de saisie conservatoire sur les biens meubles corporels" }
-
-      ],
       reference: null,
       actType: null,
       actPrice: null,

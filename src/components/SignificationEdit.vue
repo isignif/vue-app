@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     deleteSignification: function() {
-      // todo
+      this.$emit('delete')
     }
   },
   data: function () {
