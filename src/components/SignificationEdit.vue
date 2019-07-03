@@ -4,7 +4,7 @@
         <v-text-field v-model="name" label="Destinataire" prepend-icon="place"></v-text-field>
       </v-flex>
       <v-flex xs6 fill-height class="px-2">
-        <TownSelect />
+        <TownSelect v-model="townId" />
       </v-flex>
       <v-flex xs1 class="text-xs-right px-2" fill-height>
         <v-btn flat icon small color="red" @click="deleteSignification">
@@ -30,7 +30,8 @@ export default {
   },
   data: function () {
       return {
-        name: null
+        name: null,
+        townId: null,
       }
   }
 }

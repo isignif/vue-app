@@ -25,7 +25,6 @@ export default {
         this.$http.post('towns/search', { term: search })
           .then( response => this.options = response.data )
           .catch(error => {
-            console.error(error)
             this.$store.dispatch('snackbar/display', {
               color: 'red',
               message: "Une erreur est survenue durant la recherche de la ville"
@@ -35,6 +34,9 @@ export default {
       },
     },
     watch: {
+      select: function(value) {
+        this.$emit('input', value)
+      },
       search: function(value) {
         value && value !== this.select && this.onSearch(value)
       }
