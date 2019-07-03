@@ -2,6 +2,7 @@
     <v-autocomplete
       :items="options"
       label="Type d'acte à signifier"
+      item-value="id"
       v-model="select"></v-autocomplete>
 </template>
 <script>
@@ -30,6 +31,11 @@ export default {
         options: [],
         select: null,
         loading: false,
+      }
+    },
+    watch: {
+      select: function(value) {
+        this.$emit('input', parseInt(value))
       }
     }
 }

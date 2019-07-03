@@ -5,7 +5,7 @@
         <v-layout row wrap>
 
           <v-flex xs12>
-            <ActTypeSelect />
+            <ActTypeSelect v-model="actTypeId" />
           </v-flex>
 
           <v-flex xs12>
@@ -129,7 +129,7 @@ export default {
       significations: [ ],
       valid: false,
       reference: null,
-      actType: null,
+      actTypeId: null,
       actPrice: null,
     }
   }
