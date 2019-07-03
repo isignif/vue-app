@@ -11,7 +11,13 @@
           <v-flex xs12>
             <h2 v-if="significations.length == 1">Signification</h2>
             <h2 v-if="significations.length > 1">Significations</h2>
-            <SignificationEdit :key="signification.timestamp" v-for="signification in significations" @delete="deleteSignification(signification.timestamp)" />
+            <SignificationEdit
+              :key="signification.timestamp"
+              v-for="signification in significations"
+              :timestamp="signification.timestamp"
+              @delete="deleteSignification(signification.timestamp)"
+              @change="updateSignification"
+            />
           </v-flex>
 
           <v-btn absolute dark fab bottom right color="pink" @click.prevent="addSignification()">
@@ -64,6 +70,10 @@ export default {
         id: null,
         timestamp: new Date().valueOf(),
       })
+    },
+    updateSignification: function(significationData){
+      const significationIndex = this.significations.findIndex(signification => signification.timestamp == significationData.timestamp)
+      this.significations[significationIndex] = significationData
     },
     deleteSignification: function(timestamp) {
       this.significations = this.significations.filter(signification => signification.timestamp != timestamp)

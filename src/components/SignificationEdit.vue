@@ -23,9 +23,19 @@ export default {
   components: {
     TownSelect
   },
+  props: [
+    'timestamp'
+  ],
   methods: {
     deleteSignification: function() {
       this.$emit('delete')
+    },
+    dispatchChange: function() {
+      this.$emit('change', {
+        name: this.name,
+        townId: this.townId,
+        timestamp: this.timestamp,
+      })
     }
   },
   data: function () {
@@ -33,6 +43,14 @@ export default {
         name: null,
         townId: null,
       }
+  },
+  watch: {
+    name: function() {
+      this.dispatchChange()
+    },
+    townId: function() {
+      this.dispatchChange()
+    }
   }
 }
 </script>
