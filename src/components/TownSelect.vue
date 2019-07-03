@@ -1,14 +1,12 @@
 <template>
-    <v-select :options="options" label="text" @search="onSearch" v-model="select" box></v-select>
+    <v-autocomplete
+      :items="options"
+      label="Ville"
+      v-model="select"></v-autocomplete>
 </template>
 <script>
-import vSelect from 'vue-select'
-
 export default {
     name: 'TownSelect',
-    components: {
-        vSelect
-    },
     created: function() {
       this.onSearch('', null)
     },

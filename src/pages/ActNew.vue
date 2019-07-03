@@ -5,15 +5,12 @@
         <v-layout row wrap>
 
           <v-flex xs12>
-            <h2>Informations principales</h2>
-          </v-flex>
-
-          <v-flex xs12>
-            <label>Quel acte souhaitez-vous signifier?</label>
             <ActTypeSelect />
           </v-flex>
 
           <v-flex xs12>
+            <h2 v-if="significations.length == 1">Signification</h2>
+            <h2 v-if="significations.length > 1">Significations</h2>
             <SignificationEdit :key="signification.timestamp" v-for="signification in significations" />
           </v-flex>
 
@@ -66,14 +63,12 @@
 </template>
 
 <script>
-import vSelect from 'vue-select'
 import ActTypeSelect from '../components/ActTypeSelect'
 import SignificationEdit from '../components/SignificationEdit'
 
 export default {
   name: 'ActNew',
   components: {
-    vSelect,
     SignificationEdit,
     ActTypeSelect
   },
