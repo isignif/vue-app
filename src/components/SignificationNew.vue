@@ -1,5 +1,5 @@
 <template>
-    <v-layout row class="elevation-3 pa-2 my-4" align-center>
+    <v-layout row class="elevation-3 pa-2 my-4 mx-2" align-center>
       <v-flex xs5 class="px-2">
         <v-text-field v-model="name" label="Destinataire" prepend-icon="place"></v-text-field>
       </v-flex>

@@ -10,10 +10,7 @@
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <v-flex
-            class="mb-5"
-            height="200px"
-          >
+          <v-flex>
             <ActTypeSelect v-model="actTypeId" />
             <h2 v-if="significations.length == 1">Signification</h2>
             <h2 v-if="significations.length > 1">Significations</h2>
@@ -25,25 +22,32 @@
               @change="updateSignification"
             />
             <p class="text-xs-right">
-              <v-btn dark bottom right  @click.prevent="addSignification()">
+              <v-btn dark bottom right color="secondary" @click.prevent="addSignification()">
                 <v-icon>add</v-icon>
                 ajouter une signification
               </v-btn>
             </p>
+            <p class="text-xs-right">
+              <v-btn color="primary" @click="currentStep = 2" :disabled="!isFirstStepValid">Etape suivante</v-btn>
+            </p>
           </v-flex>
 
-          <v-btn color="primary" @click="currentStep = 2" v-if="isFirstStepValid">Etape suivante</v-btn>
+          
         </v-stepper-content>
 
         <v-stepper-content step="2">
-          <v-card
-            class="mb-5"
-            color="grey lighten-1"
-            height="200px"
-          ></v-card>
+          <v-layout row wrap>
+            <SignificationAddActFile
+              :key="'SignificationAddActFile' + signification.timestamp"
+              v-for="signification in significations"
+              :name="signification.name"
+            />
+            <p class="text-xs-right">
+              <v-btn color="primary" @click="currentStep = 3">Continue</v-btn>
+              <v-btn flat @click="currentStep = 1">précédent</v-btn>
+            </p>
+          </v-layout>
 
-          <v-btn color="primary" @click="currentStep = 3">Continue</v-btn>
-          <v-btn flat @click="currentStep = 1">précédent</v-btn>
         </v-stepper-content>
 
         <v-stepper-content step="3">
@@ -51,9 +55,11 @@
             <v-text-field v-model="reference" label="Référence de l'acte" required prepend-icon="label"></v-text-field>
             <v-text-field v-model="reference" label="Date limite souhaité" required prepend-icon="label"></v-text-field>
             <v-text-field v-model="reference" label="Acte urgent" required prepend-icon="label"></v-text-field>
+            <p class="text-xs-right">
+              <v-btn color="primary" @click="currentStep = 1">Continue</v-btn>
+            </p>
           </v-flex>
 
-          <v-btn color="primary" @click="currentStep = 1">Continue</v-btn>
         <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
     </v-stepper-items>
@@ -63,15 +69,16 @@
 <script>
 import ActTypeSelect from '../components/ActTypeSelect'
 import SignificationNew from '../components/SignificationNew'
+import SignificationAddActFile from '../components/SignificationAddActFile'
 
 export default {
   name: 'ActNew',
   components: {
     SignificationNew,
-    ActTypeSelect
+    ActTypeSelect,
+    SignificationAddActFile
   },
   methods: {
-    
     addSignification() {
       this.significations.push({
         name: null,
@@ -154,12 +161,25 @@ export default {
           value: 'town'
         },
       ],
-      significations: [ ],
+      significations: [
+        // {
+        //   name: 'toto',
+        //   town: 1,
+        //   id: 1,
+        //   timestamp: 123,
+        // },
+        // {
+        //   name: 'tata',
+        //   town: 1,
+        //   id: 1,
+        //   timestamp: 124,
+        // }
+      ],
       valid: false,
       reference: null,
       actTypeId: null,
       actPrice: null,
-      currentStep: 2,
+      currentStep: 1,
       isFirstStepValid: false,
     }
   }
