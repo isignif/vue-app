@@ -1,14 +1,20 @@
 <template>
-  <v-card>
-    <v-form v-model="valid">
-      <v-container>
-        <v-layout row wrap>
+    <v-stepper v-model="currentStep">
+      <v-stepper-header>
+        <v-stepper-step :complete="currentStep > 1" step="1">Création des significations</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step :complete="currentStep > 2" step="2">Ajout des fichiers</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step step="3">Confirmation</v-stepper-step>
+      </v-stepper-header>
 
-          <v-flex xs12>
+      <v-stepper-items>
+        <v-stepper-content step="1">
+          <v-flex
+            class="mb-5"
+            height="200px"
+          >
             <ActTypeSelect v-model="actTypeId" />
-          </v-flex>
-
-          <v-flex xs12>
             <h2 v-if="significations.length == 1">Signification</h2>
             <h2 v-if="significations.length > 1">Significations</h2>
             <SignificationEdit
@@ -18,39 +24,40 @@
               @delete="deleteSignification(signification.timestamp)"
               @change="updateSignification"
             />
+            <p class="text-xs-right">
+              <v-btn dark bottom right  @click.prevent="addSignification()">
+                <v-icon>add</v-icon>
+                ajouter une signification
+              </v-btn>
+            </p>
           </v-flex>
 
-          <v-btn absolute dark fab bottom right color="pink" @click.prevent="addSignification()">
-            <v-icon>add</v-icon>
-          </v-btn>
+          <v-btn color="primary" @click="currentStep = 2" v-if="isFirstStepValid">Etape suivante</v-btn>
+        </v-stepper-content>
 
-        </v-layout>
+        <v-stepper-content step="2">
+          <v-card
+            class="mb-5"
+            color="grey lighten-1"
+            height="200px"
+          ></v-card>
 
-        <v-layout row wrap v-if="actType && significations.length > 0">
+          <v-btn color="primary" @click="currentStep = 3">Continue</v-btn>
+          <v-btn flat @click="currentStep = 1">précédent</v-btn>
+        </v-stepper-content>
 
-          <v-flex xs12>
-            <h2>Informations secondaires</h2>
-          </v-flex>
-
-          <v-flex xs12>
+        <v-stepper-content step="3">
+          <v-flex class="mb-5" >
             <v-text-field v-model="reference" label="Référence de l'acte" required prepend-icon="label"></v-text-field>
             <v-text-field v-model="reference" label="Date limite souhaité" required prepend-icon="label"></v-text-field>
             <v-text-field v-model="reference" label="Acte urgent" required prepend-icon="label"></v-text-field>
           </v-flex>
 
-          <v-flex xs12 class="text-xs-right">
-            <v-btn large color="primary">
-              <v-icon>add</v-icon>
-              Créer la signification
-            </v-btn>
-          </v-flex>
-
-        </v-layout>
-
-      </v-container>
-    </v-form>
-
-  </v-card>
+          <v-btn color="primary" @click="currentStep = 1">Continue</v-btn>
+        <v-btn flat>Cancel</v-btn>
+      </v-stepper-content>
+    </v-stepper-items>
+  </v-stepper>
 </template>
 
 <script>
@@ -64,24 +71,30 @@ export default {
     ActTypeSelect
   },
   methods: {
-    addSignification: function() {
+    
+    addSignification() {
       this.significations.push({
+        name: null,
         town: null,
         id: null,
         timestamp: new Date().valueOf(),
       })
     },
-    updateSignification: function(significationData){
+    updateSignification(significationData) {
       const significationIndex = this.significations.findIndex(signification => signification.timestamp == significationData.timestamp)
       this.significations[significationIndex] = significationData
+      this.checkValidityFirstStep()
+    },
+    checkValidityFirstStep() {
+      this.isFirstStepValid = this.significations.filter(signification => !signification.isValid).length === 0
     },
     deleteSignification: function(timestamp) {
       this.significations = this.significations.filter(signification => signification.timestamp != timestamp)
     },
-    reloadEstimation: function() {
+    reloadEstimation() {
       vue.actPrice = null;
 
-      if (this.actType === null) {
+      if (this.actTypeId === null) {
         return;
       }
 
@@ -108,9 +121,24 @@ export default {
       //   },
       // });
     },
-    
+    checkValidityStep() {
+      if (this.significations.length === 0) {
+        return false 
+      }
+
+      const unvalidSignifications = this.significations.filter(signification => {
+        return !signification.town || !signification.name
+      })
+
+      return unvalidSignifications.length === 0
+    }
   },
-  data: function () {
+  watch: {
+    significations() {
+      this.checkValidityFirstStep()
+    }
+  },
+  data() {
     return {
       headers: [
         {
@@ -131,6 +159,8 @@ export default {
       reference: null,
       actTypeId: null,
       actPrice: null,
+      currentStep: 1,
+      isFirstStepValid: false,
     }
   }
 }

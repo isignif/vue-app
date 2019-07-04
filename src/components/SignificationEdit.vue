@@ -35,14 +35,20 @@ export default {
         name: this.name,
         townId: this.townId,
         timestamp: this.timestamp,
+        isValid: this.isValid,
       })
     }
   },
   data: function () {
-      return {
-        name: null,
-        townId: null,
-      }
+    return {
+      name: null,
+      townId: null,
+    }
+  },
+  computed: {
+    isValid: function() {
+      return this.name && this.townId
+    }
   },
   watch: {
     name: function() {
