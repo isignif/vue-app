@@ -17,7 +17,7 @@
             <ActTypeSelect v-model="actTypeId" />
             <h2 v-if="significations.length == 1">Signification</h2>
             <h2 v-if="significations.length > 1">Significations</h2>
-            <SignificationEdit
+            <SignificationNew
               :key="signification.timestamp"
               v-for="signification in significations"
               :timestamp="signification.timestamp"
@@ -62,12 +62,12 @@
 
 <script>
 import ActTypeSelect from '../components/ActTypeSelect'
-import SignificationEdit from '../components/SignificationEdit'
+import SignificationNew from '../components/SignificationNew'
 
 export default {
   name: 'ActNew',
   components: {
-    SignificationEdit,
+    SignificationNew,
     ActTypeSelect
   },
   methods: {
@@ -159,7 +159,7 @@ export default {
       reference: null,
       actTypeId: null,
       actPrice: null,
-      currentStep: 1,
+      currentStep: 2,
       isFirstStepValid: false,
     }
   }

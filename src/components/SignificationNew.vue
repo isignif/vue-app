@@ -19,7 +19,7 @@
 import TownSelect from './TownSelect'
 
 export default {
-  name: 'SignificationEdit',
+  name: 'SignificationNew',
   components: {
     TownSelect
   },
