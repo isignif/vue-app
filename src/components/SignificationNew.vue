@@ -1,62 +1,58 @@
 <template>
-    <v-layout row class="elevation-3 pa-2 my-4 mx-2" align-center>
-      <v-flex xs5 class="px-2">
-        <v-text-field v-model="name" label="Destinataire" prepend-icon="place"></v-text-field>
-      </v-flex>
-      <v-flex xs6 fill-height class="px-2">
-        <TownSelect v-model="townId" />
-      </v-flex>
-      <v-flex xs1 class="text-xs-right px-2" fill-height>
-        <v-btn flat icon small color="red" @click="deleteSignification">
-          <v-icon>
-            delete
-          </v-icon>
-        </v-btn>
-      </v-flex>
-    </v-layout>
+  <v-layout row class="elevation-3 pa-2 my-4 mx-2" align-center>
+    <v-flex xs5 class="px-2">
+      <v-text-field v-model="name" label="Destinataire" prepend-icon="place"></v-text-field>
+    </v-flex>
+    <v-flex xs6 fill-height class="px-2">
+      <TownSelect v-model="townId" />
+    </v-flex>
+    <v-flex xs1 class="text-xs-right px-2" fill-height>
+      <v-btn flat icon small color="red" @click="deleteSignification">
+        <v-icon>delete</v-icon>
+      </v-btn>
+    </v-flex>
+  </v-layout>
 </template>
 <script>
-import TownSelect from './TownSelect'
+import TownSelect from "./TownSelect";
 
 export default {
-  name: 'SignificationNew',
+  name: "SignificationNew",
   components: {
     TownSelect
   },
-  props: [
-    'timestamp'
-  ],
+  props: ["timestamp"],
   methods: {
     deleteSignification: function() {
-      this.$emit('delete')
+      this.$emit("delete");
     },
     dispatchChange: function() {
-      this.$emit('change', {
+      this.$emit("change", {
         name: this.name,
         townId: this.townId,
         timestamp: this.timestamp,
-        isValid: this.isValid,
-      })
+        isValid: this.isValid
+      });
     }
   },
-  data: function () {
+  data: function() {
     return {
       name: null,
-      townId: null,
-    }
+      townId: null
+    };
   },
   computed: {
     isValid: function() {
-      return this.name && this.townId
+      return this.name && this.townId;
     }
   },
   watch: {
     name: function() {
-      this.dispatchChange()
+      this.dispatchChange();
     },
     townId: function() {
-      this.dispatchChange()
+      this.dispatchChange();
     }
   }
-}
+};
 </script>

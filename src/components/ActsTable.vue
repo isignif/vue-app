@@ -5,13 +5,7 @@
       <v-card-title>
         Liste des actes
         <v-spacer></v-spacer>
-        <v-text-field
-        v-model="search"
-        append-icon="search"
-        label="Search"
-        single-line
-        hide-details
-        ></v-text-field>
+        <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
       </v-card-title>
       <v-data-table :headers="headers" :items="acts" class="elevation-1" :search="search">
         <v-progress-linear v-slot:progress color="primary" indeterminate></v-progress-linear>
@@ -20,7 +14,10 @@
             <!-- Référence de l'acte -->
             <td>
               {{ props.item.attributes.reference }}
-              <span class="red--text" v-if="props.item.attributes.reference == null">Référence vide</span>
+              <span
+                class="red--text"
+                v-if="props.item.attributes.reference == null"
+              >Référence vide</span>
             </td>
             <!-- Dénomination de l'acte -->
             <td>{{ getActTypeName(props.item.attributes.act_type_id) }}</td>
@@ -31,10 +28,10 @@
               <ul>
                 <li :key="bailiffName" v-for="bailiffName in getBailiffsNames(props.item.id)">{{ bailiffName }}</li>
               </ul>
-            </td> -->
+            </td>-->
             <!-- Etape -->
             <td>
-              <ActHistoryStep :step="props.item.attributes.current_step"/>
+              <ActHistoryStep :step="props.item.attributes.current_step" />
             </td>
             <!-- Date de création -->
             <!-- <td>{{ props.item.attributes.created_at }}</td> -->
@@ -51,9 +48,7 @@
           <v-card flat>
             <v-list>
               <template v-for="item in getBailiffsNames(props.item.id)">
-                <v-subheader v-if="item.header" :key="item.header" >
-                  {{ item.header }}
-                </v-subheader>
+                <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
                 <v-list-tile :key="item" avatar>
                   <v-list-tile-content>
                     <v-list-tile-title v-html="item"></v-list-tile-title>
@@ -66,103 +61,116 @@
         </template>
       </v-data-table>
     </div>
-</v-card>
+  </v-card>
 </template>
 
 <script>
-import Loader from './Loader'
-import ActHistoryStep from './ActHistoryStep'
+import Loader from "./Loader";
+import ActHistoryStep from "./ActHistoryStep";
 
 export default {
-  name: 'ActsTable',
+  name: "ActsTable",
   props: {},
   components: {
     Loader,
     ActHistoryStep
   },
-  methods:{
-    fetch(){
-      this.$http.get(`acts`, { headers: { Authorization: this.$store.state.current_user.token } })
-        .then(response => {
-          this.acts = response.data.data
-          this.actTypes = response.data.included.filter((included) => included.type == 'act_type')
-          this.users = response.data.included.filter((included) => included.type == 'advocate' || included.type == 'bailiff')
-          // this.actHistories = response.data.included.filter((included) => included.type == 'act_histories')
-          this.significations = response.data.included.filter((included) => included.type == 'signification')
-          this.loading = false
+  methods: {
+    fetch() {
+      this.$http
+        .get(`acts`, {
+          headers: { Authorization: this.$store.state.current_user.token }
         })
-        .catch(error => console.error(error))
+        .then(response => {
+          this.acts = response.data.data;
+          this.actTypes = response.data.included.filter(
+            included => included.type == "act_type"
+          );
+          this.users = response.data.included.filter(
+            included =>
+              included.type == "advocate" || included.type == "bailiff"
+          );
+          // this.actHistories = response.data.included.filter((included) => included.type == 'act_histories')
+          this.significations = response.data.included.filter(
+            included => included.type == "signification"
+          );
+          this.loading = false;
+        })
+        .catch(error => console.error(error));
     },
     getActTypeName(actTypeId) {
-      const actType = this.actTypes.find( actType => actType.id == actTypeId )
+      const actType = this.actTypes.find(actType => actType.id == actTypeId);
 
       if (actType) {
-        return actType.attributes.name
+        return actType.attributes.name;
       }
 
-      return '?'
+      return "?";
     },
     getuserName(userId) {
-      const userIdString = userId.toString()
-      const user = this.users.find( user => user.id === userIdString )
+      const userIdString = userId.toString();
+      const user = this.users.find(user => user.id === userIdString);
 
       if (user) {
-        return `${user.attributes.firstname} ${user.attributes.lastname}` 
+        return `${user.attributes.firstname} ${user.attributes.lastname}`;
       }
 
-      return '?'
+      return "?";
     },
     getBailiffsNames(actId) {
-      const actIdInt = parseInt(actId)
+      const actIdInt = parseInt(actId);
 
       const actBailiffIds = this.significations
-                                .filter( signification => signification.attributes.act_id === actIdInt )
-                                .map( signification => parseInt(signification.id) )
+        .filter(signification => signification.attributes.act_id === actIdInt)
+        .map(signification => parseInt(signification.id));
       return this.users
-                 .filter( bailiff => actBailiffIds.indexOf(bailiff.id) )
-                 .map( bailiff => `${bailiff.attributes.firstname} ${bailiff.attributes.lastname}` )
+        .filter(bailiff => actBailiffIds.indexOf(bailiff.id))
+        .map(
+          bailiff =>
+            `${bailiff.attributes.firstname} ${bailiff.attributes.lastname}`
+        );
     }
-
   },
-  mounted(){
-    this.fetch()
+  mounted() {
+    this.fetch();
   },
   data() {
     return {
       loading: true,
-      search: '',
+      search: "",
       actTypes: [],
       advocates: [],
       significations: [],
       actHistories: [],
       bailiffs: [],
-      headers: [{
+      headers: [
+        {
           text: "Référence de l'acte",
-          value: 'reference'
+          value: "reference"
         },
         {
           text: "Dénomination de l'acte",
-          value: 'act_type'
+          value: "act_type"
         },
         {
-          text: 'Correspondant',
-          value: 'advocate'
+          text: "Correspondant",
+          value: "advocate"
         },
         {
-          text: 'Huissier de justice',
-          value: 'bailiffs'
+          text: "Huissier de justice",
+          value: "bailiffs"
         },
         {
-          text: 'Etape',
-          value: 'step'
-        },
+          text: "Etape",
+          value: "step"
+        }
         // {
         //   text: 'Date de création',
         //   value: 'creation_date'
         // }
       ],
       acts: []
-    }
+    };
   }
-}
+};
 </script>

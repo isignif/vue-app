@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import ActsTable   from '../components/ActsTable'
+import ActsTable from "../components/ActsTable";
 
 export default {
-  name: 'Acts',
+  name: "Acts",
   components: {
     ActsTable
-  },
-}
+  }
+};
 </script>

@@ -21,11 +21,10 @@
           </template>
         </v-list>
       </v-card-text>
-      <v-card-actions >
+      <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn  bottom right small color="secondary">
-          <v-icon>add</v-icon>
-          ajouter un fichier
+        <v-btn bottom right small color="secondary">
+          <v-icon>add</v-icon>ajouter un fichier
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -33,23 +32,23 @@
 </template>
 <script>
 export default {
-  name: 'SignificationAddActFile',
+  name: "SignificationAddActFile",
   props: {
-    name: String,
+    name: String
   },
   data() {
     return {
       files: [
         {
           timestamp: 123456,
-          name: 'toto.png'
+          name: "toto.png"
         },
         {
           timestamp: 123457,
-          name: 'tota.png'
+          name: "tota.png"
         }
       ]
-    }
+    };
   }
-}
+};
 </script>
