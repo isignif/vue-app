@@ -5,10 +5,10 @@
 export default {
   name: "ActTypeSelect",
   created: function() {
-    this.onSearch("", null);
+    this.load();
   },
   methods: {
-    onSearch: function(search, loading) {
+    load: function() {
       this.$http
         .get("act_types", {
           headers: { Authorization: this.$store.state.current_user.token }

@@ -115,17 +115,14 @@ export default {
       );
     },
     reloadEstimation() {
-      vue.actPrice = null;
-
-      if (this.actTypeId === null) {
-        return;
-      }
-
-      let json = {
-        price: 121.23
-      };
-      vue.actPrice = json.price;
-
+      // vue.actPrice = null;
+      // if (this.actTypeId === null) {
+      //   return;
+      // }
+      // let json = {
+      //   price: 121.23
+      // };
+      // vue.actPrice = json.price;
       // $.ajax({
       //   url: '<%= Rails.application.routes.url_helpers.estimate_act_path %>',
       //   type: 'POST',

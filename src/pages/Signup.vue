@@ -138,44 +138,41 @@ export default {
   methods: {
     submit() {
       // TODO
-
-      let apiController = this.type == "advocate" ? "advocates" : "bailiffs";
-
-      this.$http
-        .post(`${api_url}/${apiController}`, {
-          advocate: {
-            email: this.email,
-            password: this.password,
-            firstname: this.firstname,
-            lastname: this.lastname,
-            address_1: this.address_1,
-            address_2: this.address_2,
-            zip_code: this.zip_code,
-            town: this.town,
-            siret: this.siret,
-            company_name: this.company_name
-          }
-        })
-        .then(_response => {
-          // let user_data = response.data.data
-          // this.$store.dispatch('current_user/signin', user_data)
-          // let userName = this.$store.getters['current_user/completeName']
-
-          // TODO
-
-          this.$store.dispatch("snackbar/display", {
-            color: "success",
-            message: `La demande a été transmise`
-          });
-
-          // this.$router.push({ name: 'advocate', params: { id: user_data.id } });
-        })
-        .catch(_error => {
-          this.$store.dispatch("snackbar/display", {
-            color: "red",
-            message: "Une erreur est survenue."
-          });
-        });
+      // let apiController = this.type == "advocate" ? "advocates" : "bailiffs";
+      // this.$http
+      //   .post(`${api_url}/${apiController}`, {
+      //     advocate: {
+      //       email: this.email,
+      //       password: this.password,
+      //       firstname: this.firstname,
+      //       lastname: this.lastname,
+      //       address_1: this.address_1,
+      //       address_2: this.address_2,
+      //       zip_code: this.zip_code,
+      //       town: this.town,
+      //       siret: this.siret,
+      //       company_name: this.company_name
+      //     }
+      //   })
+      //   .then(response => {
+      //     // let user_data = response.data.data
+      //     // this.$store.dispatch('current_user/signin', user_data)
+      //     // let userName = this.$store.getters['current_user/completeName']
+      //     // TODO
+      //     console.log(response);
+      //     this.$store.dispatch("snackbar/display", {
+      //       color: "success",
+      //       message: `La demande a été transmise`
+      //     });
+      //     // this.$router.push({ name: 'advocate', params: { id: user_data.id } });
+      //   })
+      //   .catch(error => {
+      //     console.error(error);
+      //     this.$store.dispatch("snackbar/display", {
+      //       color: "red",
+      //       message: "Une erreur est survenue."
+      //     });
+      //   });
     }
   }
 };
