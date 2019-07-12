@@ -1,12 +1,12 @@
 <template>
   <v-chip outline :color="getActHistoryStepColor(step)">{{ translateActHistoryStep(step) }}</v-chip>
 </template>
-<script>
+<script lang="ts">
 export default {
   name: "ActHistoryStep",
   props: ["step"],
   methods: {
-    translateActHistoryStep: step => {
+    translateActHistoryStep: (step: String): String => {
       switch (step) {
         case "created":
           return "En attente de confirmation";
@@ -23,8 +23,10 @@ export default {
         case "archive":
           return "Archivé";
       }
+
+      return "";
     },
-    getActHistoryStepColor: step => {
+    getActHistoryStepColor: (step: String): String => {
       switch (step) {
         case "created":
           return "red";
@@ -43,6 +45,8 @@ export default {
         case "archive":
           return "grey";
       }
+
+      return "";
     }
   }
 };
