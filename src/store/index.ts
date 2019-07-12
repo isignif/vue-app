@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import current_user from './modules/current_user'
-import snackbar from './modules/snackbar'
+import Vue from "vue";
+import Vuex from "vuex";
+import current_user from "./modules/current_user";
+import snackbar from "./modules/snackbar";
 // import products from './modules/products'
 // import createLogger from '../../../src/plugins/logger'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== 'production'
+const debug = process.env.NODE_ENV !== "production";
 
-const ISIGNIF_LOCAL_STORAGE_KEY = 'isignif_vuex_database'
+const ISIGNIF_LOCAL_STORAGE_KEY: string = "isignif_vuex_database";
 
 const store = new Vuex.Store({
   modules: {
@@ -19,23 +19,29 @@ const store = new Vuex.Store({
   mutations: {
     // Initialize saved state from local localStorage
     // https://www.mikestreety.co.uk/blog/vue-js-using-localstorage-with-the-vuex-store
-		initialiseStore(state) {
-			if(localStorage.getItem(ISIGNIF_LOCAL_STORAGE_KEY)) {
-				// Replace the state object with the stored item
-				this.replaceState(
-					Object.assign(state, JSON.parse(localStorage.getItem(ISIGNIF_LOCAL_STORAGE_KEY)))
-				);
-			}
-		}
-	},
-  strict: debug,
-  // plugins: debug ? [createLogger()] : []
-})
+    initialiseStore(state) {
+      if (localStorage.getItem(ISIGNIF_LOCAL_STORAGE_KEY)) {
+        // Replace the state object with the stored item
+        const localStorageString: string | null = localStorage.getItem(
+          ISIGNIF_LOCAL_STORAGE_KEY
+        );
 
-store.subscribe((mutation, state) => {
-	// Store the state object as a JSON string
-  // https://www.mikestreety.co.uk/blog/vue-js-using-localstorage-with-the-vuex-store
-	localStorage.setItem(ISIGNIF_LOCAL_STORAGE_KEY, JSON.stringify(state));
+        if (localStorageString) {
+          this.replaceState(
+            Object.assign(state, JSON.parse(localStorageString))
+          );
+        }
+      }
+    }
+  },
+  strict: debug
+  // plugins: debug ? [createLogger()] : []
 });
 
-export default store
+store.subscribe((mutation, state) => {
+  // Store the state object as a JSON string
+  // https://www.mikestreety.co.uk/blog/vue-js-using-localstorage-with-the-vuex-store
+  localStorage.setItem(ISIGNIF_LOCAL_STORAGE_KEY, JSON.stringify(state));
+});
+
+export default store;

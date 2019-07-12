@@ -16,12 +16,12 @@ const getters = {};
 
 // actions
 const actions = {
-  display({ commit }, payload: SnackBarState) {
+  display({ commit }: { commit: any }, payload: SnackBarState) {
     payload.display = true;
 
     commit("CHANGE_DISPLAY", payload);
   },
-  close({ commit }) {
+  close({ commit }: { commit: any }) {
     commit("CHANGE_DISPLAY", {
       display: false,
       color: undefined,

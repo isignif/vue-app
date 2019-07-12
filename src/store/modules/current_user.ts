@@ -1,4 +1,6 @@
-import jwt_decode from "jwt-decode";
+// declare module "jwt-decode";
+// import jwt_decode from "jwt-decode";
+const jwt_decode = require("jwt-decode");
 
 interface CurrentUserState {
   id?: Number;
@@ -35,10 +37,10 @@ const getters = {
 
 // actions
 const actions = {
-  setToken({ commit }, token: string) {
+  setToken({ commit }: { commit: any }, token: string) {
     commit("SET_TOKEN", token);
   },
-  signout({ commit }) {
+  signout({ commit }: { commit: any }) {
     commit("REMOVE_USER");
   }
 };

@@ -26,7 +26,7 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
 import NavBar from "./components/NavBar";
 import Snackbar from "./components/Snackbar";
 
