@@ -29,7 +29,7 @@
           <p class="text-xs-right">
             <v-btn
               color="primary"
-              @click="currentStep = 2"
+              @click="finishStep1"
               :disabled="!isFirstStepValid"
             >Etape suivante</v-btn>
           </p>
@@ -114,6 +114,35 @@ export default {
         signification => signification.timestamp != timestamp
       );
     },
+    finishStep1: function() {
+      // this.currentStep = 2
+
+      const significations = this.significations.map(signification => {
+        return {
+          town_id: signification.townId,
+          name: signification.name,
+        }
+      })
+
+      const parameters = {
+        'act[act_type_id]': this.actTypeId,
+        'act[reference]': this.reference,
+        'act[significations]': significations,
+      }
+
+      // console.log(parameters)
+
+      this.$http.post('acts', parameters, { headers: { Authorization: this.$store.state.current_user.token } })
+        .then((response) => console.log(response))
+        .catch((error) => console.error(error))
+
+      // this.$http.post('acts', {
+      //     headers: { Authorization: this.$store.state.current_user.token },
+      //     params: parameters
+      //   })
+      //   .then((response) => console.log(response))
+      //   .catch((error) => console.error(error))
+    },
     reloadEstimation() {
       // vue.actPrice = null;
       // if (this.actTypeId === null) {
@@ -162,20 +191,6 @@ export default {
   },
   data() {
     return {
-      headers: [
-        {
-          text: "Destinataire",
-          align: "left",
-          sortable: false,
-          value: "zip_code"
-        },
-        {
-          text: "Ville",
-          align: "left",
-          sortable: false,
-          value: "town"
-        }
-      ],
       significations: [
         // {
         //   name: 'toto',
