@@ -23,8 +23,8 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 
 Vue.config.productionTip = process.env.NODE_ENV !== "production";
-Vue.http.options.root = require("./config").api_url;
-Vue.http.options.emulateJSON = true;
+(Vue as any).http.options.root = require("./config").api_url;
+(Vue as any).http.options.emulateJSON = true;
 
 const routes = [
   { path: "/", component: Home, name: "home" },
