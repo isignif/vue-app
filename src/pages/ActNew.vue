@@ -35,9 +35,10 @@
       <v-stepper-content step="2">
         <v-layout row wrap>
           <SignificationAddActFile
-            :key="'SignificationAddActFile' + signification.timestamp"
-            v-for="signification in significations"
-            :name="signification.name"
+            :key="'SignificationAddActFile' + signification.id"
+            v-for="signification in createdSignifications"
+            :id="signification.id"
+            :name="signification.attributes.name"
           />
           <p class="text-xs-right">
             <v-btn color="primary" @click="currentStep = 3">Continue</v-btn>
@@ -129,7 +130,11 @@ export default {
           headers: { Authorization: this.$store.state.current_user.token }
         })
         .then(response => {
-          this.actId = response.data.data.id;
+          const responseData = response.data;
+          this.actId = responseData.data.id;
+          this.createdSignifications = responseData.included.filter(
+            inc => inc.type == "signification"
+          );
           this.currentStep = 2;
         })
         .catch(error => console.error(error));
@@ -193,6 +198,7 @@ export default {
   },
   data() {
     return {
+      createdSignifications: [],
       significations: [
         // {
         //   name: 'toto',

@@ -23,31 +23,26 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn bottom right small color="secondary">
-          <v-icon>add</v-icon>ajouter un fichier
-        </v-btn>
+        <ActFileNew :signification_id="id" />
       </v-card-actions>
     </v-card>
   </v-flex>
 </template>
 <script>
+import ActFileNew from "./ActFileNew";
+
 export default {
   name: "SignificationAddActFile",
+  components: {
+    ActFileNew
+  },
   props: {
+    id: String,
     name: String
   },
   data() {
     return {
-      files: [
-        {
-          timestamp: 123456,
-          name: "toto.png"
-        },
-        {
-          timestamp: 123457,
-          name: "tota.png"
-        }
-      ]
+      files: []
     };
   }
 };
