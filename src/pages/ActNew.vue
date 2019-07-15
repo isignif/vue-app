@@ -34,8 +34,8 @@
 
       <v-stepper-content step="2">
         <v-layout row wrap>
-          <SignificationAddActFile
-            :key="'SignificationAddActFile' + signification.id"
+          <SignificationEdit
+            :key="'SignificationEdit' + signification.id"
             v-for="signification in createdSignifications"
             :id="signification.id"
             :name="signification.attributes.name"
@@ -76,14 +76,14 @@
 <script>
 import ActTypeSelect from "../components/ActTypeSelect";
 import SignificationNew from "../components/SignificationNew";
-import SignificationAddActFile from "../components/SignificationAddActFile";
+import SignificationEdit from "../components/SignificationEdit";
 
 export default {
   name: "ActNew",
   components: {
     SignificationNew,
     ActTypeSelect,
-    SignificationAddActFile
+    SignificationEdit
   },
   methods: {
     addSignification() {

@@ -32,7 +32,7 @@
 import ActFileNew from "./ActFileNew";
 
 export default {
-  name: "SignificationAddActFile",
+  name: "SignificationEdit",
   components: {
     ActFileNew
   },
