@@ -41,7 +41,7 @@
           />
           <p class="text-xs-right">
             <v-btn color="primary" @click="currentStep = 3">Continue</v-btn>
-            <v-btn flat @click="currentStep = 1">précédent</v-btn>
+            <v-btn flat @click="removeAct">précédent</v-btn>
           </p>
         </v-layout>
       </v-stepper-content>
@@ -129,8 +129,19 @@ export default {
           headers: { Authorization: this.$store.state.current_user.token }
         })
         .then(response => {
-          this.actId = response.data.id;
+          this.actId = response.data.data.id;
           this.currentStep = 2;
+        })
+        .catch(error => console.error(error));
+    },
+    removeAct: function() {
+      const url = "acts/" + this.actId;
+      this.$http
+        .delete(url, {
+          headers: { Authorization: this.$store.state.current_user.token }
+        })
+        .then(() => {
+          this.currentStep = 1;
         })
         .catch(error => console.error(error));
     },
@@ -196,7 +207,7 @@ export default {
         //   timestamp: 124,
         // }
       ],
-      actId: undefined,
+      actId: null,
       valid: false,
       reference: null,
       actTypeId: null,
