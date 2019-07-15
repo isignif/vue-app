@@ -27,11 +27,7 @@
             </v-btn>
           </p>
           <p class="text-xs-right">
-            <v-btn
-              color="primary"
-              @click="finishStep1"
-              :disabled="!isFirstStepValid"
-            >Etape suivante</v-btn>
+            <v-btn color="primary" @click="finishStep1" :disabled="!isFirstStepValid">Etape suivante</v-btn>
           </p>
         </v-flex>
       </v-stepper-content>
@@ -115,33 +111,28 @@ export default {
       );
     },
     finishStep1: function() {
-      // this.currentStep = 2
-
       const significations = this.significations.map(signification => {
         return {
           town_id: signification.townId,
-          name: signification.name,
-        }
-      })
+          name: signification.name
+        };
+      });
 
       const parameters = {
-        'act[act_type_id]': this.actTypeId,
-        'act[reference]': this.reference,
-        'act[significations]': significations,
-      }
+        "act[act_type_id]": this.actTypeId,
+        "act[reference]": this.reference,
+        "act[significations]": significations
+      };
 
-      // console.log(parameters)
-
-      this.$http.post('acts', parameters, { headers: { Authorization: this.$store.state.current_user.token } })
-        .then((response) => console.log(response))
-        .catch((error) => console.error(error))
-
-      // this.$http.post('acts', {
-      //     headers: { Authorization: this.$store.state.current_user.token },
-      //     params: parameters
-      //   })
-      //   .then((response) => console.log(response))
-      //   .catch((error) => console.error(error))
+      this.$http
+        .post("acts", parameters, {
+          headers: { Authorization: this.$store.state.current_user.token }
+        })
+        .then(response => {
+          this.actId = response.data.id;
+          this.currentStep = 2;
+        })
+        .catch(error => console.error(error));
     },
     reloadEstimation() {
       // vue.actPrice = null;
@@ -205,6 +196,7 @@ export default {
         //   timestamp: 124,
         // }
       ],
+      actId: undefined,
       valid: false,
       reference: null,
       actTypeId: null,
