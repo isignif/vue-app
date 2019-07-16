@@ -1,15 +1,19 @@
 <template>
   <v-layout align-center row fill-height>
     <v-flex>
-      <v-text-field v-model="name" label="Name" required></v-text-field>
+      <v-text-field v-model="name" label="Name" placeholder="ajouter un document" required></v-text-field>
     </v-flex>
     <v-flex>
       <input v-show="false" type="file" ref="inputUpload" @change="onFileChange" />
-      <v-btn color="secondary" @click="$refs.inputUpload.click()">
+      <v-btn @click="files = null" v-if="files">
+        {{ files.name }}
+        <v-icon>attachment</v-icon>
+      </v-btn>
+      <v-btn color="secondary" @click="$refs.inputUpload.click()" v-else>
         <v-icon>add</v-icon>Charger le fichier
       </v-btn>
-      <v-btn color="primary" @click="onSubmit">
-        <v-icon>add</v-icon>Ajouter
+      <v-btn color="primary" @click="onSubmit" :disabled="!name || !files">
+        <v-icon>send</v-icon>Envoyer
       </v-btn>
     </v-flex>
   </v-layout>
@@ -24,7 +28,7 @@ export default {
   data() {
     return {
       name: "",
-      files: ""
+      files: null
     };
   },
   methods: {
