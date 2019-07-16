@@ -6,10 +6,10 @@
       </v-card-title>
       <v-card-text>
         <v-list>
-          <template v-for="file in files">
-            <div :key="file.timestamp">
+          <template v-for="actFile in actFiles">
+            <div :key="'actfile' + actFile.id">
               <v-list-tile>
-                <v-list-tile-content>{{ file.name }}</v-list-tile-content>
+                <v-list-tile-content>{{ actFile.attributes.name }}</v-list-tile-content>
                 <v-list-tile-action>
                   <v-btn icon ripple>
                     <v-icon color="grey lighten-1">delete</v-icon>
@@ -23,7 +23,11 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <ActFileNew :signification_id="signification_id" :act_id="act_id" />
+        <ActFileNew
+          :signification_id="signification_id"
+          :act_id="act_id"
+          @created="onActFileCreated"
+        />
       </v-card-actions>
     </v-card>
   </v-flex>
@@ -43,8 +47,14 @@ export default {
   },
   data() {
     return {
-      files: []
+      files: [],
+      actFiles: []
     };
+  },
+  methods: {
+    onActFileCreated(actFile) {
+      this.actFiles.push(actFile);
+    }
   }
 };
 </script>

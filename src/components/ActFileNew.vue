@@ -49,7 +49,11 @@ export default {
 
       this.$http
         .post(url, formData, headers)
-        .then(response => console.log(response))
+        .then(response => {
+          this.$emit("created", response.data.data);
+          this.files = null;
+          this.name = null;
+        })
         .catch(error => console.error(error));
     }
   }
