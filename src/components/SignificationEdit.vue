@@ -11,7 +11,7 @@
               <v-list-tile>
                 <v-list-tile-content>{{ actFile.attributes.name }}</v-list-tile-content>
                 <v-list-tile-action>
-                  <v-btn icon ripple>
+                  <v-btn icon ripple @click="deleteActFile(actFile.id)">
                     <v-icon color="grey lighten-1">delete</v-icon>
                   </v-btn>
                 </v-list-tile-action>
@@ -54,6 +54,22 @@ export default {
   methods: {
     onActFileCreated(actFile) {
       this.actFiles.push(actFile);
+    },
+    deleteActFile(actFileId) {
+      const url = `acts/${this.act_id}/act_files/${actFileId}`;
+
+      const headers = {
+        headers: { Authorization: this.$store.state.current_user.token }
+      };
+
+      this.$http
+        .delete(url, headers)
+        .then(() => {
+          this.actFiles = this.actFiles.filter(
+            actFile => actFile.id != actFile.id
+          );
+        })
+        .catch(error => console.error(error));
     }
   }
 };
