@@ -23,7 +23,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <ActFileNew :signification_id="id" />
+        <ActFileNew :signification_id="signification_id" :act_id="act_id" />
       </v-card-actions>
     </v-card>
   </v-flex>
@@ -37,7 +37,8 @@ export default {
     ActFileNew
   },
   props: {
-    id: String,
+    signification_id: String,
+    act_id: String,
     name: String
   },
   data() {

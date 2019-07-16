@@ -37,7 +37,8 @@
           <SignificationEdit
             :key="'SignificationEdit' + signification.id"
             v-for="signification in createdSignifications"
-            :id="signification.id"
+            :signification_id="signification.id"
+            :act_id="actId"
             :name="signification.attributes.name"
           />
           <p class="text-xs-right">
