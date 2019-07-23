@@ -1,9 +1,9 @@
 <template>
   <v-flex xs12 class="mx-2 my-4">
     <v-card class="elevation-3">
-      <v-card-title primary-title>
-        <div class="headline">{{ name }}</div>
-      </v-card-title>
+      <v-toolbar card>
+        <v-toolbar-title>{{ name }}</v-toolbar-title>
+      </v-toolbar>
       <v-card-text>
         <v-list>
           <template v-for="actFile in actFiles">

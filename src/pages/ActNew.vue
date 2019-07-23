@@ -42,8 +42,8 @@
             :name="signification.attributes.name"
           />
           <p class="text-xs-right">
-            <v-btn color="primary" @click="currentStep = 3">Continue</v-btn>
-            <v-btn flat @click="removeAct">précédent</v-btn>
+            <v-btn flat @click="removeAct">Précédent</v-btn>
+            <v-btn color="primary" @click="currentStep = 3">Etape suivante</v-btn>
           </p>
         </v-layout>
       </v-stepper-content>
@@ -62,13 +62,12 @@
             required
             prepend-icon="label"
           ></v-text-field>
-          <v-text-field v-model="reference" label="Acte urgent" required prepend-icon="label"></v-text-field>
+          <v-checkbox v-model="express" label="Acte urgent" required prepend-icon="timer"></v-checkbox>
           <p class="text-xs-right">
-            <v-btn color="primary" @click="currentStep = 1">Continue</v-btn>
+            <v-btn flat @click="currentStep = 2">Précédent</v-btn>
+            <v-btn color="primary" @click="currentStep = 1">Confirmer</v-btn>
           </p>
         </v-flex>
-
-        <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -200,6 +199,7 @@ export default {
   data() {
     return {
       createdSignifications: [],
+      express: false,
       significations: [
         // {
         //   name: 'toto',

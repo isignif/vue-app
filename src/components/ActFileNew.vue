@@ -1,9 +1,10 @@
 <template>
-  <v-layout align-center row fill-height>
-    <v-flex>
-      <v-text-field v-model="name" label="Name" placeholder="ajouter un document" required></v-text-field>
-    </v-flex>
-    <v-flex>
+  <v-card>
+    <v-toolbar card>
+      <v-toolbar-title>Ajouter une pièce jointe</v-toolbar-title>
+    </v-toolbar>
+    <v-card-text class="text-xs-right">
+      <v-text-field v-model="name" label="Nom" required></v-text-field>
       <input v-show="false" type="file" ref="inputUpload" @change="onFileChange" />
       <v-btn @click="files = null" v-if="files">
         {{ files.name }}
@@ -15,8 +16,8 @@
       <v-btn color="primary" @click="onSubmit" :disabled="!name || !files">
         <v-icon>send</v-icon>Envoyer
       </v-btn>
-    </v-flex>
-  </v-layout>
+    </v-card-text>
+  </v-card>
 </template>
 <script>
 export default {
