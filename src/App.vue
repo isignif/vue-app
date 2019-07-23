@@ -6,7 +6,7 @@
         <span>{{title}}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn to="/acts/new" class="primary">
+      <v-btn :to="{ name: 'new_act' }" class="primary">
         <span class="mr-2">Demander une signification d'acte</span>
       </v-btn>
     </v-toolbar>
