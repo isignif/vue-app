@@ -59,7 +59,7 @@ export default {
     fetch() {
       this.$http
         .get(`advocates/${this.id}`, {
-          headers: { Authorization: this.$store.state.current_user.token }
+          headers: { Authorization: this.$store.state.currentUser.token }
         })
         .then(response => {
           let attributes = response.data.data.attributes;

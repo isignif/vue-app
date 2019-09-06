@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import current_user from "./modules/current_user";
+import currentUser from "./modules/currentUser";
 import snackbar from "./modules/snackbar";
 // import products from './modules/products'
 // import createLogger from '../../../src/plugins/logger'
@@ -13,7 +13,7 @@ const ISIGNIF_LOCAL_STORAGE_KEY: string = "isignif_vuex_database";
 
 const store = new Vuex.Store({
   modules: {
-    current_user,
+    currentUser,
     snackbar
   },
   mutations: {
@@ -33,7 +33,7 @@ const store = new Vuex.Store({
         }
       }
 
-      store.dispatch('current_user/checkToken');
+      store.dispatch('currentUser/checkToken');
     }
   },
   strict: debug

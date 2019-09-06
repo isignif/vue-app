@@ -45,7 +45,7 @@ export default {
       const url = `acts/${this.act_id}/act_files`;
 
       const headers = {
-        headers: { Authorization: this.$store.state.current_user.token }
+        headers: { Authorization: this.$store.state.currentUser.token }
       };
 
       this.$http

@@ -79,7 +79,7 @@ export default {
     fetch() {
       this.$http
         .get(`acts`, {
-          headers: { Authorization: this.$store.state.current_user.token }
+          headers: { Authorization: this.$store.state.currentUser.token }
         })
         .then(response => {
           this.acts = response.data.data;

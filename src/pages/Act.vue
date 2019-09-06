@@ -180,7 +180,7 @@ export default {
       this.$http
         .get(`acts/${this.$route.params.id}`, {
           headers: {
-            Authorization: this.$store.state.current_user.token
+            Authorization: this.$store.state.currentUser.token
           }
         })
         .then(response => {

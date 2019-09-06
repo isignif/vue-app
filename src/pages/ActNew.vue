@@ -127,7 +127,7 @@ export default {
 
       this.$http
         .post("acts", parameters, {
-          headers: { Authorization: this.$store.state.current_user.token }
+          headers: { Authorization: this.$store.state.currentUser.token }
         })
         .then(response => {
           const responseData = response.data;
@@ -143,7 +143,7 @@ export default {
       const url = "acts/" + this.actId;
       this.$http
         .delete(url, {
-          headers: { Authorization: this.$store.state.current_user.token }
+          headers: { Authorization: this.$store.state.currentUser.token }
         })
         .then(() => {
           this.currentStep = 1;

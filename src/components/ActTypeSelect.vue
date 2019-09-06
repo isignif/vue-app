@@ -11,7 +11,7 @@ export default {
     load: function() {
       this.$http
         .get("act_types", {
-          headers: { Authorization: this.$store.state.current_user.token }
+          headers: { Authorization: this.$store.state.currentUser.token }
         })
         .then(response => this.extractActTypeOptionsFromResponse(response.data))
         .catch(error => console.error(error));
