@@ -156,8 +156,8 @@ export default {
       //   })
       //   .then(response => {
       //     // let user_data = response.data.data
-      //     // this.$store.dispatch('current_user/signin', user_data)
-      //     // let userName = this.$store.getters['current_user/completeName']
+      //     // this.$store.dispatch('currentUser/signin', user_data)
+      //     // let userName = this.$store.getters['currentUser/completeName']
       //     // TODO
       //     console.log(response);
       //     this.$store.dispatch("snackbar/display", {

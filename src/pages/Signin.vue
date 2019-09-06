@@ -49,10 +49,10 @@ export default {
       this.$http
         .post(`tokens`, params)
         .then(response => {
-          this.$store.dispatch("current_user/setToken", response.data.token);
+          this.$store.dispatch("currentUser/setToken", response.data.token);
 
-          let userName = this.$store.getters["current_user/completeName"];
-          let userId = this.$store.getters["current_user/id"];
+          let userName = this.$store.getters["currentUser/completeName"];
+          let userId = this.$store.getters["currentUser/id"];
 
           this.$store.dispatch("snackbar/display", {
             color: "success",

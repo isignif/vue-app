@@ -33,7 +33,7 @@
       <v-divider />
 
       <!-- Dashboard -->
-      <v-list-tile to="/dashboard" v-if="current_user_id">
+      <v-list-tile to="/dashboard" v-if="currentUserId">
         <v-list-tile-action>
           <v-icon>dashboard</v-icon>
         </v-list-tile-action>
@@ -44,7 +44,7 @@
       </v-list-tile>
 
       <!-- actes -->
-      <v-list-group prepend-icon="assignment" no-action v-if="current_user_id">
+      <v-list-group prepend-icon="assignment" no-action v-if="currentUserId">
         <template v-slot:activator>
           <v-list-tile to="/acts">
             <v-list-tile-title>Actes</v-list-tile-title>
@@ -69,7 +69,7 @@
       </v-list-group>
 
       <!-- Messages -->
-      <v-list-tile to="/messages" v-if="current_user_id">
+      <v-list-tile to="/messages" v-if="currentUserId">
         <v-list-tile-action>
           <v-icon>all_inbox</v-icon>
         </v-list-tile-action>
@@ -82,20 +82,20 @@
       <v-divider />
 
       <v-list-tile
-        :to="{ name: 'advocate', params: { id: current_user_id }}"
-        v-if="current_user_id"
+        :to="{ name: 'advocate', params: { id: currentUserId }}"
+        v-if="currentUserId"
       >
         <v-list-tile-action>
           <v-icon>person</v-icon>
         </v-list-tile-action>
 
         <v-list-tile-content>
-          <v-list-tile-title>{{ current_user_complete_name }}</v-list-tile-title>
+          <v-list-tile-title>{{ currentUser_complete_name }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
 
       <!-- Signin -->
-      <v-list-tile to="/signin" v-if="!current_user_id">
+      <v-list-tile to="/signin" v-if="!currentUserId">
         <v-list-tile-action>
           <v-icon>account_circle</v-icon>
         </v-list-tile-action>
@@ -127,9 +127,9 @@ import { mapState } from "vuex";
 export default {
   name: "NavBar",
   computed: {
-    ...mapState("current_user", {
-      current_user_id: state => state.id,
-      current_user_complete_name: state => {
+    ...mapState("currentUser", {
+      currentUserId: state => state.id,
+      currentUser_complete_name: state => {
         return `${state.firstname} ${state.lastname}`;
       }
     })
