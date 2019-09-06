@@ -2,7 +2,7 @@
 // import jwt_decode from "jwt-decode";
 const jwt_decode = require("jwt-decode");
 
-interface CurrentUserState {
+interface ICurrentUserState {
   id?: Number;
   email?: String;
   firstname?: String;
@@ -11,7 +11,7 @@ interface CurrentUserState {
 }
 
 // initial state
-const state: CurrentUserState = {
+const state: ICurrentUserState = {
   id: undefined,
   email: undefined,
   firstname: undefined,
@@ -19,19 +19,31 @@ const state: CurrentUserState = {
   token: undefined
 };
 
+interface IPayload {
+  email: string;
+  exp: number;
+  firstname: string;
+  lastname: string;
+  user_id: number;
+
+}
+
 // getters
 const getters = {
-  id: (state: CurrentUserState) => state.id,
-  token: (state: CurrentUserState) => state.token,
-  completeName: (state: CurrentUserState, getters: any) => {
+  id: (state: ICurrentUserState) => state.id,
+  token: (state: ICurrentUserState) => state.token,
+  completeName: (state: ICurrentUserState, getters: any): string => {
     if (getters.isLogged == false) {
       return "";
     }
 
     return `${state.firstname} ${state.lastname}`;
   },
-  isLogged: (state: CurrentUserState) => {
+  isLogged: (state: ICurrentUserState): boolean => {
     return state.id !== null;
+  },
+  getPayload: (state: ICurrentUserState): IPayload => {
+    return jwt_decode(state.token);
   }
 };
 
@@ -42,22 +54,35 @@ const actions = {
   },
   signout({ commit }: { commit: any }) {
     commit("REMOVE_USER");
+  },
+  checkToken({ commit, state }: { commit: any, state: ICurrentUserState }) {
+    if (!state.token) {
+      return;
+    }
+    const payload: IPayload = jwt_decode(state.token);
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+
+    if (currentTimestamp > payload.exp) {
+      commit("REMOVE_USER");
+    }
   }
 };
 
 // mutations
 const mutations = {
-  SET_TOKEN(state: CurrentUserState, token: String) {
+  SET_TOKEN(state: ICurrentUserState, token: String) {
     state.token = token;
 
-    const userData = jwt_decode(token);
-    state.id = userData.user_id;
-    state.email = userData.email;
-    state.firstname = userData.firstname;
-    state.lastname = userData.lastname;
+    const payload = jwt_decode(token);
+    console.log(payload)
+    state.id = payload.user_id;
+    state.email = payload.email;
+    state.firstname = payload.firstname;
+    state.lastname = payload.lastname;
   },
-  REMOVE_USER(state: CurrentUserState) {
+  REMOVE_USER(state: ICurrentUserState) {
     state.id = undefined;
+    state.token = undefined;
     state.email = undefined;
     state.firstname = undefined;
     state.lastname = undefined;

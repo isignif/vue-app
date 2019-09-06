@@ -32,6 +32,8 @@ const store = new Vuex.Store({
           );
         }
       }
+
+      store.dispatch('current_user/checkToken');
     }
   },
   strict: debug
