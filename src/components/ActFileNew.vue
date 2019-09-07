@@ -1,23 +1,21 @@
 <template>
-  <v-card>
-    <v-toolbar card>
-      <v-toolbar-title>Ajouter une pièce jointe</v-toolbar-title>
-    </v-toolbar>
-    <v-card-text class="text-xs-right">
-      <v-text-field v-model="name" label="Nom" required></v-text-field>
+  <div>
+    <div class="d-flex align-center">
+      <v-text-field v-model="name" label="Nom" v-if="files" required></v-text-field>
       <input v-show="false" type="file" ref="inputUpload" @change="onFileChange" />
       <v-btn @click="files = null" v-if="files">
-        {{ files.name }}
-        <v-icon>attachment</v-icon>
+        <v-icon>attachment</v-icon>&nbsp;{{ files.name }}
       </v-btn>
-      <v-btn color="secondary" @click="$refs.inputUpload.click()" v-else>
-        <v-icon>add</v-icon>Charger le fichier
+      <v-btn @click="$refs.inputUpload.click()" v-else>
+        <v-icon>cloud_upload</v-icon>&nbsp; Ajouter une pièce jointe
       </v-btn>
-      <v-btn color="primary" @click="onSubmit" :disabled="!name || !files">
-        <v-icon>send</v-icon>Envoyer
+      
+      <v-btn color="primary" @click="onSubmit" :disabled="!name || !files" v-if="files">
+        <v-icon>check</v-icon>
+        Confirmer
       </v-btn>
-    </v-card-text>
-  </v-card>
+    </div>
+  </div>
 </template>
 <script>
 export default {

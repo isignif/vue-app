@@ -21,14 +21,13 @@
           </template>
         </v-list>
       </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
+      <v-card-text>
         <ActFileNew
           :signification_id="signification_id"
           :act_id="act_id"
           @created="onActFileCreated"
         />
-      </v-card-actions>
+      </v-card-text>
     </v-card>
   </v-flex>
 </template>
