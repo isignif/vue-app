@@ -1,7 +1,12 @@
 <template>
-  <v-container>
+  <div class="home">
 
-    <h2 style="text-align: center">Signifiez vos actes simplement</h2>
+    <div class="pa-5 home1">
+      <h1>Signifiez vos actes simplement</h1>
+      <a></a>
+      <p style="text-align: right"><img alt="E" width="500px" src="https://image.flaticon.com/icons/svg/201/201565.svg"></p>
+    </div>
+
     <h3 style="text-align: center">grâce à notre réseau d’huissiers de justice</h3>
 
     <v-layout row align-center>
@@ -23,6 +28,11 @@
           <p>de la signification de vos actes. Suivi, alertes mail, évaluations.. Nous gérons toutes les formalités !</p>
       </v-flex>
     </v-layout>
+  </div>
+    
+
+    <!-- <h2 style="text-align: center">Signifiez vos actes simplement</h2>
+    
 
     <div class="video-container">
       <iframe src="https://www.youtube-nocookie.com/embed/ORluH7jeZ8A" frameborder="0"></iframe> 
@@ -53,9 +63,8 @@
       </v-flex>
     </v-layout>
 
-    <p style="text-align: center"><img alt="Etape 3" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/expert-comptable-disponible.svg"></p>
+    <p style="text-align: center"><img alt="Etape 3" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/expert-comptable-disponible.svg"></p> -->
 
-  </v-container>
 </template>
 
 <script>
@@ -67,7 +76,17 @@ export default {
 };
 </script>
 <style lang="scss">
-  h2{
+  .container{
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: calc(100% + 50px);;
+  }
+  .home1{
+    color: #FFFFFF;
+    background-image: radial-gradient(circle at top left, rgba(44,148,200,1), rgba(33,139,193,1));
+    height: calc(100vh - 96px);
+  }
+  /*h2{
     font-size: 2.5em;
     text-transform: uppercase;
     font-weight: normal;
@@ -97,5 +116,5 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-  }
+  }*/
 </style>
