@@ -154,8 +154,27 @@ export default {
         .catch(error => console.error(error));
     },
     finishStep3: function () {
-      this.displayFinalConfirmation = true;
-      // TODO: send an UPDATE
+      const url = `acts/${this.actId}`;
+
+      const headers = {
+        headers: { Authorization: this.$store.state.currentUser.token }
+      };
+
+      const parameters = {
+        "act[act_type_id]": this.actTypeId,
+        "act[reference]": this.reference,
+        "act[express]": this.express,
+      };
+
+      this.$http
+        .patch(url, parameters, headers)
+        .then(() => {
+          
+        })
+        .catch(error => this.$store.dispatch("snackbar/displayError", "Nous n'avons pas pu mettre à jour votre acte. :("));
+
+        this.displayFinalConfirmation = true;
+
     },
     confirmAct: function() {
       this.displayFinalConfirmation = false;
@@ -171,15 +190,9 @@ export default {
         .then(() => {
           this.displayFinalConfirmation = false;
           this.$router.push({ name: "act", params: { id: this.actId } });
-          this.$store.dispatch("snackbar/display", {
-            color: "success",
-            message: "L'acte a été cré. Votre demande va être traitée prochainement?"
-          });
+          this.$store.dispatch("snackbar/displaySuccess", "L'acte a été cré. Votre demande va être traitée prochainement?");
         })
-        .catch(error => console.error(error));
-
-      // TODO: confirm act
-
+        .catch(error => this.$store.dispatch("snackbar/displayError", error.message));
     },
     removeAct: function() {
       const url = "acts/" + this.actId;
