@@ -1,52 +1,53 @@
 <template>
-  <v-stepper v-model="currentStep">
-    <v-stepper-header>
-      <v-stepper-step :complete="currentStep > 1" step="1">Création des significations</v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step :complete="currentStep > 2" step="2">Ajout des fichiers</v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step step="3">Confirmation</v-stepper-step>
-    </v-stepper-header>
+  <v-container>
+    <v-stepper v-model="currentStep">
+      <v-stepper-header>
+        <v-stepper-step :complete="currentStep > 1" step="1">Création des significations</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step :complete="currentStep > 2" step="2">Ajout des fichiers</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step step="3">Confirmation</v-stepper-step>
+      </v-stepper-header>
 
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-flex>
-          <ActTypeSelect v-model="actTypeId" />
-          <h2 v-if="significations.length == 1">Signification</h2>
-          <h2 v-if="significations.length > 1">Significations</h2>
-          <SignificationNew
-            :key="signification.timestamp"
-            v-for="signification in significations"
-            :timestamp="signification.timestamp"
-            @delete="deleteSignification(signification.timestamp)"
-            @change="updateSignification"
-          />
-          <p class="text-xs-right">
-            <v-btn dark bottom right color="secondary" @click.prevent="addSignification()">
-              <v-icon>add</v-icon>ajouter une signification
-            </v-btn>
-          </p>
-          <p class="text-xs-right">
-            <v-btn color="primary" @click="finishStep1" :disabled="!isFirstStepValid">Etape suivante</v-btn>
-          </p>
-        </v-flex>
-      </v-stepper-content>
+      <v-stepper-items>
+        <v-stepper-content step="1">
+          <v-flex>
+            <ActTypeSelect v-model="actTypeId" />
+            <h2 v-if="significations.length == 1">Signification</h2>
+            <h2 v-if="significations.length > 1">Significations</h2>
+            <SignificationNew
+              :key="signification.timestamp"
+              v-for="signification in significations"
+              :timestamp="signification.timestamp"
+              @delete="deleteSignification(signification.timestamp)"
+              @change="updateSignification"
+            />
+            <p class="text-xs-right">
+              <v-btn dark bottom right color="secondary" @click.prevent="addSignification()">
+                <v-icon>add</v-icon>ajouter une signification
+              </v-btn>
+            </p>
+            <p class="text-xs-right">
+              <v-btn color="primary" @click="finishStep1" :disabled="!isFirstStepValid">Etape suivante</v-btn>
+            </p>
+          </v-flex>
+        </v-stepper-content>
 
-      <v-stepper-content step="2">
-        <v-layout row wrap>
-          <SignificationEdit
-            :key="'SignificationEdit' + signification.id"
-            v-for="signification in createdSignifications"
-            :signification_id="signification.id"
-            :act_id="actId"
-            :name="signification.attributes.name"
-          />
-          <p class="text-xs-right">
-            <v-btn flat @click="removeAct">Précédent</v-btn>
-            <v-btn color="primary" @click="currentStep = 3">Etape suivante</v-btn>
-          </p>
-        </v-layout>
-      </v-stepper-content>
+        <v-stepper-content step="2">
+          <v-layout row wrap>
+            <SignificationEdit
+              :key="'SignificationEdit' + signification.id"
+              v-for="signification in createdSignifications"
+              :signification_id="signification.id"
+              :act_id="actId"
+              :name="signification.attributes.name"
+            />
+            <p class="text-xs-right">
+              <v-btn flat @click="removeAct">Précédent</v-btn>
+              <v-btn color="primary" @click="currentStep = 3">Etape suivante</v-btn>
+            </p>
+          </v-layout>
+        </v-stepper-content>
 
       <v-stepper-content step="3">
         <v-flex class="mb-5">
@@ -82,6 +83,7 @@
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
+  </v-container>
 </template>
 
 <script>

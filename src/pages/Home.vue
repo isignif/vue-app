@@ -1,37 +1,46 @@
 <template>
   <div class="home">
-
     <div class="pa-5 home1">
       <h1>Signifiez vos actes simplement</h1>
       <a></a>
-      <p style="text-align: right"><img alt="E" width="500px" src="https://image.flaticon.com/icons/svg/201/201565.svg"></p>
+      <p style="text-align: right">
+        <img alt="E" width="500px" src="https://image.flaticon.com/icons/svg/201/201565.svg" />
+      </p>
     </div>
 
     <h3 style="text-align: center">grâce à notre réseau d’huissiers de justice</h3>
 
     <v-layout row align-center>
       <v-flex lg class="pa-4" style="text-align: center">
-          <img alt="Etape 1" src="https://isignif.fr/assets/icon_choice-f5646b28cf1727069f367ce979dd11885d7c415ea4a6b6cb244c7455360465e9.png">
-          <h3>1 - Choisissez</h3>
-          <p>vos adresses et l’acte à signifier. Recevez une première estimation du coût de signification</p>
+        <img
+          alt="Etape 1"
+          src="https://isignif.fr/assets/icon_choice-f5646b28cf1727069f367ce979dd11885d7c415ea4a6b6cb244c7455360465e9.png"
+        />
+        <h3>1 - Choisissez</h3>
+        <p>vos adresses et l’acte à signifier. Recevez une première estimation du coût de signification</p>
       </v-flex>
 
       <v-flex lg class="pa-4" style="text-align: center">
-          <img alt="Etape 2" src="https://isignif.fr/assets/icon_create-f65a3a6764d62dd79ca7f37721c41423a7043322cf2138b026b1552a051b8875.png">
-          <h3>2 - Créez rapidement</h3>
-          <p>votre dépôt d’acte. Notre plateforme attribue les missions de significations aux huissiers de justice compétents</p>
+        <img
+          alt="Etape 2"
+          src="https://isignif.fr/assets/icon_create-f65a3a6764d62dd79ca7f37721c41423a7043322cf2138b026b1552a051b8875.png"
+        />
+        <h3>2 - Créez rapidement</h3>
+        <p>votre dépôt d’acte. Notre plateforme attribue les missions de significations aux huissiers de justice compétents</p>
       </v-flex>
 
       <v-flex lg class="pa-4" style="text-align: center">
-          <img alt="Etape 3" src="https://isignif.fr/assets/icon_follow-e203364218404272edd5b638d2757eabfa2d551c2888eb267dd592da53064aff.png">
-          <h3>3 - Suivez l’avancée</h3>
-          <p>de la signification de vos actes. Suivi, alertes mail, évaluations.. Nous gérons toutes les formalités !</p>
+        <img
+          alt="Etape 3"
+          src="https://isignif.fr/assets/icon_follow-e203364218404272edd5b638d2757eabfa2d551c2888eb267dd592da53064aff.png"
+        />
+        <h3>3 - Suivez l’avancée</h3>
+        <p>de la signification de vos actes. Suivi, alertes mail, évaluations.. Nous gérons toutes les formalités !</p>
       </v-flex>
     </v-layout>
   </div>
-    
 
-    <!-- <h2 style="text-align: center">Signifiez vos actes simplement</h2>
+  <!-- <h2 style="text-align: center">Signifiez vos actes simplement</h2>
     
 
     <div class="video-container">
@@ -63,8 +72,7 @@
       </v-flex>
     </v-layout>
 
-    <p style="text-align: center"><img alt="Etape 3" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/expert-comptable-disponible.svg"></p> -->
-
+  <p style="text-align: center"><img alt="Etape 3" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/expert-comptable-disponible.svg"></p>-->
 </template>
 
 <script>
@@ -76,17 +84,21 @@ export default {
 };
 </script>
 <style lang="scss">
-  .container{
-    padding: 0 !important;
-    margin: 0 !important;
-    max-width: calc(100% + 50px);;
-  }
-  .home1{
-    color: #FFFFFF;
-    background-image: radial-gradient(circle at top left, rgba(44,148,200,1), rgba(33,139,193,1));
-    height: calc(100vh - 96px);
-  }
-  /*h2{
+.container {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: calc(100% + 50px);
+}
+.home1 {
+  color: #ffffff;
+  background-image: radial-gradient(
+    circle at top left,
+    rgba(44, 148, 200, 1),
+    rgba(33, 139, 193, 1)
+  );
+  height: calc(100vh - 96px);
+}
+/*h2{
     font-size: 2.5em;
     text-transform: uppercase;
     font-weight: normal;
