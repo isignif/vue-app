@@ -117,9 +117,8 @@ export default {
       this.checkValidityFirstStep();
     },
     checkValidityFirstStep() {
-      this.isFirstStepValid =
-        this.significations.filter(signification => !signification.isValid)
-          .length === 0;
+      const hasInvalid = this.significations.some(signification => !signification.isValid);
+      this.isFirstStepValid = this.actTypeId && this.significations.length > 0 &&  !hasInvalid
     },
     deleteSignification: function(timestamp) {
       this.significations = this.significations.filter(
