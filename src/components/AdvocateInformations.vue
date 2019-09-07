@@ -2,8 +2,8 @@
   <div>
     <Loader v-if="loading" />
 
-    <v-container v-else>
-      <h1>{{ firstname }} {{ lastname }}</h1>
+    <div v-else>
+      <h1 class="pb-5">{{ firstname }} {{ lastname }}</h1>
 
       <v-card>
         <v-list two-line>
@@ -43,7 +43,7 @@
           </v-list-tile>
         </v-list>
       </v-card>
-    </v-container>
+    </div>
   </div>
 </template>
 <script>

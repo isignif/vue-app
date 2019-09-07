@@ -69,16 +69,12 @@
           </p>
           <v-dialog v-model="displayFinalConfirmation" width="500">
             <v-card>
-              <v-card-title class="headline grey lighten-2" primary-title>
-                Confirmation de l'acte
-              </v-card-title>
-              <v-card-text>
-                Vous êtes sur le point de confirmer votre acte. Vous vous engagez à vous acquiter des frais liés à cette prestation. 
-              </v-card-text>
+              <v-card-title class="headline grey lighten-2" primary-title>Confirmation de l'acte</v-card-title>
+              <v-card-text>Vous êtes sur le point de confirmer votre acte. Vous vous engagez à vous acquiter des frais liés à cette prestation.</v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="confirmAct" >J'accepte</v-btn>
+                <v-btn color="primary" flat @click="confirmAct">J'accepte</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -117,8 +113,11 @@ export default {
       this.checkValidityFirstStep();
     },
     checkValidityFirstStep() {
-      const hasInvalid = this.significations.some(signification => !signification.isValid);
-      this.isFirstStepValid = this.actTypeId && this.significations.length > 0 &&  !hasInvalid
+      const hasInvalid = this.significations.some(
+        signification => !signification.isValid
+      );
+      this.isFirstStepValid =
+        this.actTypeId && this.significations.length > 0 && !hasInvalid;
     },
     deleteSignification: function(timestamp) {
       this.significations = this.significations.filter(
@@ -153,7 +152,7 @@ export default {
         })
         .catch(error => console.error(error));
     },
-    finishStep3: function () {
+    finishStep3: function() {
       const url = `acts/${this.actId}`;
 
       const headers = {
@@ -163,18 +162,20 @@ export default {
       const parameters = {
         "act[act_type_id]": this.actTypeId,
         "act[reference]": this.reference,
-        "act[express]": this.express,
+        "act[express]": this.express
       };
 
       this.$http
         .patch(url, parameters, headers)
-        .then(() => {
-          
-        })
-        .catch(error => this.$store.dispatch("snackbar/displayError", "Nous n'avons pas pu mettre à jour votre acte. :("));
+        .then(() => {})
+        .catch(error =>
+          this.$store.dispatch(
+            "snackbar/displayError",
+            "Nous n'avons pas pu mettre à jour votre acte. :("
+          )
+        );
 
-        this.displayFinalConfirmation = true;
-
+      this.displayFinalConfirmation = true;
     },
     confirmAct: function() {
       this.displayFinalConfirmation = false;
@@ -190,9 +191,14 @@ export default {
         .then(() => {
           this.displayFinalConfirmation = false;
           this.$router.push({ name: "act", params: { id: this.actId } });
-          this.$store.dispatch("snackbar/displaySuccess", "L'acte a été cré. Votre demande va être traitée prochainement?");
+          this.$store.dispatch(
+            "snackbar/displaySuccess",
+            "L'acte a été cré. Votre demande va être traitée prochainement?"
+          );
         })
-        .catch(error => this.$store.dispatch("snackbar/displayError", error.message));
+        .catch(error =>
+          this.$store.dispatch("snackbar/displayError", error.message)
+        );
     },
     removeAct: function() {
       const url = "acts/" + this.actId;
@@ -276,7 +282,7 @@ export default {
       actPrice: null,
       currentStep: 1,
       isFirstStepValid: false,
-      displayFinalConfirmation: false,
+      displayFinalConfirmation: false
     };
   }
 };
