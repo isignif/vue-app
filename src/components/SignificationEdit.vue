@@ -5,7 +5,7 @@
         <v-toolbar-title>{{ name }}</v-toolbar-title>
       </v-toolbar>
       <v-card-text>
-        <v-list>
+        <v-list v-if="actFiles.length > 0">
           <template v-for="actFile in actFiles">
             <div :key="'actfile' + actFile.id">
               <v-list-tile>
@@ -20,6 +20,9 @@
             </div>
           </template>
         </v-list>
+        <v-alert type="info" dense outline :value="actFiles.length === 0">
+          Vous n'avez pas de pièce jointe pour cette signification.
+        </v-alert>
       </v-card-text>
       <v-card-text>
         <ActFileNew
