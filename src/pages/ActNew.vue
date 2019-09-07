@@ -65,8 +65,23 @@
           <v-checkbox v-model="express" label="Acte urgent" required prepend-icon="timer"></v-checkbox>
           <p class="text-xs-right">
             <v-btn flat @click="currentStep = 2">Précédent</v-btn>
-            <v-btn color="primary" @click="currentStep = 1">Confirmer</v-btn>
+            <v-btn color="primary" @click="finishStep3">Confirmer</v-btn>
           </p>
+          <v-dialog v-model="displayFinalConfirmation" width="500">
+            <v-card>
+              <v-card-title class="headline grey lighten-2" primary-title>
+                Confirmation de l'acte
+              </v-card-title>
+              <v-card-text>
+                Vous êtes sur le point de confirmer votre acte. Vous vous engagez à vous acquiter des frais liés à cette prestation. 
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" flat @click="confirmAct" >J'accepte</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-flex>
       </v-stepper-content>
     </v-stepper-items>
@@ -102,9 +117,8 @@ export default {
       this.checkValidityFirstStep();
     },
     checkValidityFirstStep() {
-      this.isFirstStepValid =
-        this.significations.filter(signification => !signification.isValid)
-          .length === 0;
+      const hasInvalid = this.significations.some(signification => !signification.isValid);
+      this.isFirstStepValid = this.actTypeId && this.significations.length > 0 &&  !hasInvalid
     },
     deleteSignification: function(timestamp) {
       this.significations = this.significations.filter(
@@ -138,6 +152,47 @@ export default {
           this.currentStep = 2;
         })
         .catch(error => console.error(error));
+    },
+    finishStep3: function () {
+      const url = `acts/${this.actId}`;
+
+      const headers = {
+        headers: { Authorization: this.$store.state.currentUser.token }
+      };
+
+      const parameters = {
+        "act[act_type_id]": this.actTypeId,
+        "act[reference]": this.reference,
+        "act[express]": this.express,
+      };
+
+      this.$http
+        .patch(url, parameters, headers)
+        .then(() => {
+          
+        })
+        .catch(error => this.$store.dispatch("snackbar/displayError", "Nous n'avons pas pu mettre à jour votre acte. :("));
+
+        this.displayFinalConfirmation = true;
+
+    },
+    confirmAct: function() {
+      this.displayFinalConfirmation = false;
+
+      const url = `acts/${this.actId}/confirm`;
+
+      const headers = {
+        headers: { Authorization: this.$store.state.currentUser.token }
+      };
+
+      this.$http
+        .post(url, null, headers)
+        .then(() => {
+          this.displayFinalConfirmation = false;
+          this.$router.push({ name: "act", params: { id: this.actId } });
+          this.$store.dispatch("snackbar/displaySuccess", "L'acte a été cré. Votre demande va être traitée prochainement?");
+        })
+        .catch(error => this.$store.dispatch("snackbar/displayError", error.message));
     },
     removeAct: function() {
       const url = "acts/" + this.actId;
@@ -220,7 +275,8 @@ export default {
       actTypeId: null,
       actPrice: null,
       currentStep: 1,
-      isFirstStepValid: false
+      isFirstStepValid: false,
+      displayFinalConfirmation: false,
     };
   }
 };

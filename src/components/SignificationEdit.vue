@@ -5,7 +5,7 @@
         <v-toolbar-title>{{ name }}</v-toolbar-title>
       </v-toolbar>
       <v-card-text>
-        <v-list>
+        <v-list v-if="actFiles.length > 0">
           <template v-for="actFile in actFiles">
             <div :key="'actfile' + actFile.id">
               <v-list-tile>
@@ -20,15 +20,17 @@
             </div>
           </template>
         </v-list>
+        <v-alert type="info" dense outline :value="actFiles.length === 0">
+          Vous n'avez pas de pièce jointe pour cette signification.
+        </v-alert>
       </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
+      <v-card-text>
         <ActFileNew
           :signification_id="signification_id"
-          :act_id="act_id"
+          :actId="actId"
           @created="onActFileCreated"
         />
-      </v-card-actions>
+      </v-card-text>
     </v-card>
   </v-flex>
 </template>
@@ -42,7 +44,7 @@ export default {
   },
   props: {
     signification_id: String,
-    act_id: String,
+    actId: String,
     name: String
   },
   data() {
@@ -56,7 +58,7 @@ export default {
       this.actFiles.push(actFile);
     },
     deleteActFile(actFileId) {
-      const url = `acts/${this.act_id}/act_files/${actFileId}`;
+      const url = `acts/${this.actId}/act_files/${actFileId}`;
 
       const headers = {
         headers: { Authorization: this.$store.state.currentUser.token }

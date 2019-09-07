@@ -21,6 +21,20 @@ const actions = {
 
     commit("CHANGE_DISPLAY", payload);
   },
+  displaySuccess({ commit }: { commit: any }, message: string) {
+    commit("CHANGE_DISPLAY", {
+      display: true,
+      message: message,
+      color: 'success'
+    });
+  },
+  displayError({ commit }: { commit: any }, message: string) {
+    commit("CHANGE_DISPLAY", {
+      display: true,
+      message: message,
+      color: 'danger'
+    });
+  },
   close({ commit }: { commit: any }) {
     commit("CHANGE_DISPLAY", {
       display: false,
