@@ -21,8 +21,6 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
 }
 
 
-
-
 /*----------------------------*/
 /*-----------BUTTON-----------*/
 /*----------------------------*/
@@ -42,4 +40,13 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
     color: $white;
     background-color: $dark_blue;
   }
+}
+
+
+/*----------------------------*/
+/*--------ROUNDED CARDS-------*/
+/*----------------------------*/
+
+.v-card{
+  border-radius: 5px;
 }
