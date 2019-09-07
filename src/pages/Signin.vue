@@ -11,9 +11,9 @@
             <v-text-field
               v-model="password"
               label="Mot de passe"
-              :type="show_password ? 'text' : 'password'"
-              @click:append="show_password = !show_password"
-              :append-icon="show_password ? 'visibility' : 'visibility_off'"
+              :type="showPassword ? 'text' : 'password'"
+              @click:append="showPassword = !showPassword"
+              :append-icon="showPassword ? 'visibility' : 'visibility_off'"
               required
             ></v-text-field>
           </v-flex>
@@ -34,7 +34,7 @@
 export default {
   data: () => ({
     valid: false,
-    show_password: false,
+    showPassword: false,
     email: "",
     password: "",
     emailRules: [v => /.+@.+/.test(v) || "Le courriel n'est pas valide"]

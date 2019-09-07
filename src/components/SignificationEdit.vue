@@ -27,7 +27,7 @@
       <v-card-text>
         <ActFileNew
           :signification_id="signification_id"
-          :act_id="act_id"
+          :actId="actId"
           @created="onActFileCreated"
         />
       </v-card-text>
@@ -44,7 +44,7 @@ export default {
   },
   props: {
     signification_id: String,
-    act_id: String,
+    actId: String,
     name: String
   },
   data() {
@@ -58,7 +58,7 @@ export default {
       this.actFiles.push(actFile);
     },
     deleteActFile(actFileId) {
-      const url = `acts/${this.act_id}/act_files/${actFileId}`;
+      const url = `acts/${this.actId}/act_files/${actFileId}`;
 
       const headers = {
         headers: { Authorization: this.$store.state.currentUser.token }
