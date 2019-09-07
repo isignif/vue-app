@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700');
+
+
+$brown: #A07E6B;
+$grey: #F7F7F7;
+$blue: #3A718C;
+$black: #373837;
+
+$white: #FFFFFF;
+$dark_blue: #365B6E;
+
+
+/*----------------------------*/
+/*---------APPLY FONT---------*/
+/*----------------------------*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{
+  font-family: 'Quicksand', sans-serif;
+}
+
+
+
+
+/*----------------------------*/
+/*-----------BUTTON-----------*/
+/*----------------------------*/
+
+.primary{
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'Quicksand', sans-serif;
+  color: $white;
+  background: $blue !important;
+  border-color: $blue;
+  border-radius: 4px;
+  font-size: 13px;
+  padding: 8px 17px;
+  &:hover{
+    text-decoration: none;
+    color: $white;
+    background-color: $dark_blue;
+  }
+}
