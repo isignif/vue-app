@@ -19,7 +19,9 @@
         <h3>1 - Choisissez</h3>
         <p>vos adresses et l’acte à signifier. Recevez une première estimation du coût de signification</p>
       </v-flex>
+    </v-layout>
 
+    <v-layout row align-center class="pa-5 home1" style="text-align: left">
       <v-flex lg class="pa-4" style="text-align: center">
         <img
           alt="Etape 2"
@@ -43,9 +45,43 @@
   <!-- <h2 style="text-align: center">Signifiez vos actes simplement</h2>
     
 
+    <div class="pa-5 home2">
+      <h2 class="pt-4">Notre fonctionnement est simple</h2>
+      <v-layout row align-center>
+        <v-flex lg class="pa-4" style="text-align: center">
+          <div style="padding: 0 60px">
+            <img alt="Etape 1" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/expert-comptable-disponible.svg">
+            <h3>1 - Choisissez</h3>
+            <p>vos adresses et l’acte à signifier. Recevez une première estimation du coût de signification</p>
+          </div>
+        </v-flex>
+
+        <v-flex lg class="pa-4" style="text-align: center">
+          <div style="padding: 0 60px">
+            <img alt="Etape 2" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/comptabilite-en-ligne-automatique.svg">
+            <h3>2 - Créez rapidement</h3>
+            <p>votre dépôt d’acte. Notre plateforme attribue les missions de significations aux huissiers de justice compétents</p>
+          </div>
+        </v-flex>
+
+        <v-flex lg class="pa-4" style="text-align: center">
+          <div style="padding: 0 60px">
+            <img alt="Etape 3" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/comptabilite-en-ligne-securisee.svg">
+            <h3>3 - Suivez l’avancée</h3>
+            <p>de la signification de vos actes. Suivi, alertes mail, évaluations.. Nous gérons toutes les formalités !</p>
+          </div>
+        </v-flex>
+      </v-layout>
+    </div>
+
+    
     <div class="video-container">
       <iframe src="https://www.youtube-nocookie.com/embed/ORluH7jeZ8A" frameborder="0"></iframe> 
     </div>
+
+
+  </div>
+    
 
     <h2 class="pa-4" style="text-align: center">Les avantages de notre plateforme</h2>
 
@@ -106,10 +142,25 @@ export default {
       color: #3A718C;
     }
   }
-  h3{
-      margin-bottom: 50px;
+  .home2{
+    h2{
+      text-align: center;
+      font-size: 2.5em;
+      text-transform: uppercase;
+      color: #2C94C8;
       font-weight: normal;
-      color: #3A718C;
+      margin-bottom: 100px;
+    }
+    img{
+      max-width: 120px;
+      margin-bottom: 20px;
+    }
+    h3{
+      font-size: 20px;
+    }
+    p{
+      font-size: 15px;
+    }
   }
   .video-container {
     position: relative;
@@ -128,5 +179,18 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
+  }
+  /*h2{
+    font-size: 2.5em;
+    text-transform: uppercase;
+    font-weight: normal;
+    &:nth-child(1){
+      color: #3A718C;
+    }
+  }
+  h3{
+      margin-bottom: 50px;
+      font-weight: normal;
+      color: #3A718C;
   }*/
 </style>
