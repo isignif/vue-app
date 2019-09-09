@@ -74,39 +74,89 @@
       </v-layout>
     </div>
 
+
+    <div class="pa-5 home3">
+      <h2 class="pt-4" style="line-height: 45px">Essayez iSignif gratuitement <br><small>ou passez au Premium pour une utilisation illimitée</small></h2>
+      <v-layout row align-center>
+
+        <v-flex lg class="pa-4">
+          <div style="float: right">
+            <v-card style="padding: 20px; margin: 0 auto; text-align: left; box-shadow: none !important; -webkit-box-shadow: none !important">
+              <v-card-title style="font-weight: 100; font-size: 25px; padding-bottom: 0">iSignif Basique</v-card-title>
+              <v-card-text style="padding-top: 10px">
+                <h4>Gratuit</h4>
+                <hr>
+                <br>
+                <p class="card-text">✔ Jusqu'à 50 demandes de significations / mois</p>
+                <p class="card-text" style="color: darkgrey ">✖ Destinataires illimités</p>
+                <p class="card-text" style="color: darkgrey ">✖ Nouvelles fonctionnalités</p>
+                <p class="card-text" style="color: darkgrey">✖ Suivi optimal orienté logiciel SaaS</p>
+                <p class="card-text" style="color: darkgrey">✖ Construction libre du réseau d'huissiers de justice</p>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn style="margin: 0 auto" text class="primary freemium_btn">Inscrivez-vous</v-btn>
+              </v-card-actions>
+            </v-card>
+          </div>
+        </v-flex>
+
+        <v-flex lg class="pa-4">
+          <div style="float: left">
+            <v-card style="padding: 20px; margin: 0 auto; text-align: left">
+              <v-card-title style="font-weight: 500; font-size: 27px; padding-bottom: 0; color: #2C94C8">iSignif PREMIUM</v-card-title>
+              <v-card-text style="padding-top: 10px">
+                <h4>7,99€ HT <small>/ mois</small></h4>
+                <hr>
+                <br>
+                <p class="card-text">✔ Demandes de significations illimitées</p>
+                <p class="card-text">✔ Destinataires illimités</p>
+                <p class="card-text">✔ Nouvelles fonctionnalités</p>
+                <p class="card-text">✔ Suivi optimal orienté logiciel SaaS</p>
+                <p class="card-text">✔ Construction libre du réseau d'huissiers de justice</p>
+                <p class="card-text">✔ Alertes SMS pour les actes urgents</p>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn style="margin: 0 auto" text class="primary font-weight-bold">Souscrire
+                  <i aria-hidden="true" class="v-icon material-icons" style="margin-left: 5px; font-size: 15px">keyboard_arrow_right</i></v-btn>
+              </v-card-actions>
+            </v-card>
+          </div>
+        </v-flex>
+
+      </v-layout>
+    </div>
+
+
+    <div class="pa-5 home4">
+      <h2 class="pt-4">Ils nous font confiance</h2>
+      <v-layout row align-center>
+
+    <h2 class="pa-4" style="text-align: center">Les avantages de notre plateforme</h2>
+
+        <v-flex lg class="pa-4" style="text-align: center">
+          <div style="padding: 0 40px">
+            <img src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/press/dougs-logo.png" alt="Partenaire">
+          </div>
+        </v-flex>
+
+        <v-flex lg class="pa-4" style="text-align: center">
+          <div style="padding: 0 40px">
+            <img src="https://i0.wp.com/proformal.fr/wp-content/uploads/2019/01/proformal-liberez-vous-des-formalites-legales.png?fit=423%2C285&ssl=1" alt="Partenaire">
+          </div>
+        </v-flex>
+
+        <v-flex lg class="pa-4" style="text-align: center">
+          <div style="padding: 0 40px">
+            <img src="https://www.mpmtourisme.com/sites/mpmtourisme.com/files/styles/bandeau_haut/public/apidae-commerce-service/1837/4355729-diaporama_0.png?itok=bQXG7NFn" alt="Partenaire">
+          </div>
+        </v-flex>
+
+      </v-layout>
+    </div>
     
     <div class="video-container">
       <iframe src="https://www.youtube-nocookie.com/embed/ORluH7jeZ8A" frameborder="0"></iframe> 
     </div>
-
-
-  </div>
-    
-
-    <h2 class="pa-4" style="text-align: center">Les avantages de notre plateforme</h2>
-
-    <v-layout row align-center>
-      <v-flex lg class="pa-4" style="text-align: center">
-        <h3>Un guichet unique</h3>
-        <p>Plusieurs adresses à signifier, un seul interlocuteur pour un gain de temps optimal : iSignif.</p>
-      </v-flex>
-
-      <v-flex lg class="pa-4" style="text-align: center">
-        <h3>La qualité d'un réseau</h3>
-        <p>Des huissiers partenaires compétents sur toute la France et conformes à l’exigence iSignif.</p>
-      </v-flex>
-    </v-layout>
-    <v-layout row align-center>
-      <v-flex lg class="pa-4" style="text-align: center">
-        <h3>Délai moyen de signification : 5 jours ouvrés</h3>
-        <p>iSignif s'efforce de vous proposer un service de signification rapide et diligent.</p>
-      </v-flex>
-
-      <v-flex lg class="pa-4" style="text-align: center">
-        <h3>Utilisation gratuite</h3>
-        <p>iSignif est complètement gratuit jusqu'à 50 demandes / mois, au délà un abonnement à 7,99 HT / mois.</p>
-      </v-flex>
-    </v-layout>
 
   <p style="text-align: center"><img alt="Etape 3" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/expert-comptable-disponible.svg"></p>-->
 </template>
@@ -134,7 +184,7 @@ export default {
   );
   height: calc(100vh - 96px);
 }
-/*h2{
+h2{
     font-size: 2.5em;
     text-transform: uppercase;
     font-weight: normal;
@@ -162,35 +212,69 @@ export default {
       font-size: 15px;
     }
   }
-  .video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 30px;
-    height: 0;
-    overflow: hidden;
-    max-width: 1500px;
-    margin: 50px auto;
-  }
-  .video-container iframe,  
-  .video-container object,  
-  .video-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  /*h2{
-    font-size: 2.5em;
-    text-transform: uppercase;
-    font-weight: normal;
-    &:nth-child(1){
-      color: #3A718C;
+  .home3{
+    background: #f4f4f4;
+    text-align: left;
+    font-size: 16px;
+    h2{
+      text-align: center;
+      font-size: 2.5em;
+      text-transform: uppercase;
+      font-weight: normal;
+      margin-bottom: 50px;
+      small {
+        font-weight: 100;
+        font-size: 20px;
+      }
+    }
+    h4 {
+      font-size: 30px;
+      small{
+        color: grey;
+        font-size: 14px;
+        font-weight: normal
+      }
+    }
+    hr{
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      border: 0;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    .freemium_btn{
+      background: transparent !important;
+      border: 1px solid #2C94C8 !important;
+      color: #2C94C8 !important;
     }
   }
-  h3{
-      margin-bottom: 50px;
+  .home4{
+    h2{
+      text-align: center;
+      font-size: 2.5em;
+      text-transform: uppercase;
       font-weight: normal;
-      color: #3A718C;
-  }*/
+      margin-bottom: 50px;
+    }
+    img{
+      max-width: 200px;
+    }
+  }
+  // .video-container {
+  //   position: relative;
+  //   padding-bottom: 56.25%;
+  //   padding-top: 30px;
+  //   height: 0;
+  //   overflow: hidden;
+  //   max-width: 1500px;
+  //   margin: 50px auto;
+  // }
+  // .video-container iframe,  
+  // .video-container object,  
+  // .video-container embed {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  // }
 </style>
