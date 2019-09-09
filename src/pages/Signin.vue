@@ -1,5 +1,6 @@
 <template>
   <v-card>
+    <Loader v-if="loading" />
     <v-form v-model="valid">
       <v-container>
         <v-layout>
@@ -31,8 +32,14 @@
   </v-card>
 </template>
 <script >
+import Loader from "../components/Loader";
+
 export default {
+  components: {
+    Loader
+  },
   data: () => ({
+    loading: false,
     valid: false,
     showPassword: false,
     email: "",
@@ -45,6 +52,8 @@ export default {
         "user[email]": this.email,
         "user[password]": this.password
       };
+
+      this.loading = true;
 
       this.$http
         .post(`tokens`, params)
@@ -67,7 +76,8 @@ export default {
             color: "red",
             message: "Le couple iddentifiant / mot de passe n'est pas valide"
           });
-        });
+        })
+        .finally(() => this.loading = false);
     }
   }
 };
