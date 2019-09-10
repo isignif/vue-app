@@ -11,6 +11,14 @@ Cette application permet aux demandeurs d'actes de:
 
 Elle permet aussi aux huissiers de justice de signifier et suivre les demandes qu'ils reçoit
 
+## Librairies utilisées
+
+- [Vuetify](https://vuetifyjs.com/) basé sur [Vue.js](https://vuetifyjs.com/) avec des composants [Material design](https://material.io/design/)
+- [Vuex](https://github.com/vuejs/vuex) pour la gestion des états entre les composants
+- [Vue resource](https://github.com/pagekit/vue-resource) pour la gestions des requêts à l'API
+- [Yarn](https://yarnpkg.com/lang/en/) pour la gestion des dépendances
+- [Typescript](https://www.typescriptlang.org/)
+
 ## Installation
 
 1. install dependencies using `yarn install`
