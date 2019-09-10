@@ -50,7 +50,7 @@
       <v-layout row align-center>
         <v-flex lg class="pa-4" style="text-align: center">
           <div style="padding: 0 60px">
-            <img alt="Etape 1" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/expert-comptable-disponible.svg">
+            <img alt="Etape 1" src="../assets/monitors.png">
             <h3>1 - Choisissez</h3>
             <p>vos adresses et l’acte à signifier. Recevez une première estimation du coût de signification</p>
           </div>
@@ -58,7 +58,7 @@
 
         <v-flex lg class="pa-4" style="text-align: center">
           <div style="padding: 0 60px">
-            <img alt="Etape 2" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/comptabilite-en-ligne-automatique.svg">
+            <img alt="Etape 2" src="../assets/idea.png">
             <h3>2 - Créez rapidement</h3>
             <p>votre dépôt d’acte. Notre plateforme attribue les missions de significations aux huissiers de justice compétents</p>
           </div>
@@ -66,7 +66,7 @@
 
         <v-flex lg class="pa-4" style="text-align: center">
           <div style="padding: 0 60px">
-            <img alt="Etape 3" src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/home/comptabilite-en-ligne-securisee.svg">
+            <img alt="Etape 3" src="../assets/paperplane.png">
             <h3>3 - Suivez l’avancée</h3>
             <p>de la signification de vos actes. Suivi, alertes mail, évaluations.. Nous gérons toutes les formalités !</p>
           </div>
@@ -135,19 +135,7 @@
 
         <v-flex lg class="pa-4" style="text-align: center">
           <div style="padding: 0 40px">
-            <img src="https://www.dougs.fr/wp-content/themes/dougs-site/library/images/press/dougs-logo.png" alt="Partenaire">
-          </div>
-        </v-flex>
-
-        <v-flex lg class="pa-4" style="text-align: center">
-          <div style="padding: 0 40px">
             <img src="https://i0.wp.com/proformal.fr/wp-content/uploads/2019/01/proformal-liberez-vous-des-formalites-legales.png?fit=423%2C285&ssl=1" alt="Partenaire">
-          </div>
-        </v-flex>
-
-        <v-flex lg class="pa-4" style="text-align: center">
-          <div style="padding: 0 40px">
-            <img src="https://www.mpmtourisme.com/sites/mpmtourisme.com/files/styles/bandeau_haut/public/apidae-commerce-service/1837/4355729-diaporama_0.png?itok=bQXG7NFn" alt="Partenaire">
           </div>
         </v-flex>
 
