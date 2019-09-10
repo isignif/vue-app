@@ -11,18 +11,16 @@ Cette application permet aux demandeurs d'actes de:
 
 Elle permet aussi aux huissiers de justice de signifier et suivre les demandes qu'ils reçoit
 
-## Project setup
+## Installation
 
 1. install dependencies using `yarn install`
 2. build the project using `yarn run build` (or start a development server using `yarn run serve`)
 
-## Produit en marque blanche
+## Produit en [marque blanche](https://fr.wikipedia.org/wiki/Marque_blanche)
 
 Le projet est en open-source sous [licence GPL 3](https://github.com/isignif/vue-app/blob/master/LICENSE.txt). Cela signifie que vous avez le droit de copier le code et le modifier à votre guise.
 
-Ainsi iSignif vous permet de cloner le projet et de personnaliser l'application afin qu'elle respecte votre charte graphique.
-
-TODO: explain how
+Ainsi vous pouvez cloner le projet et personnaliser l'application afin qu'elle respecte votre charte graphique et inclure votre logo. voir la section [installation](#installation)
 
 ## Ideas
 
