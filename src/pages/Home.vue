@@ -204,6 +204,10 @@ h2{
     background: #f4f4f4;
     text-align: left;
     font-size: 16px;
+    background-image: url('../assets/bckTarif.png');
+    background-repeat: no-repeat;
+    background-size: 45%;
+    background-position: 100% 100%;
     h2{
       text-align: center;
       font-size: 2.5em;
