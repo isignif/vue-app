@@ -20,6 +20,13 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
   font-family: 'Quicksand', sans-serif;
 }
 
+/*----------------------------*/
+/*-----------COLORS-----------*/
+/*----------------------------*/
+
+$blue: #2C94C8;
+$white: #FFFFFF;
+$grey: #F4F4F4;
 
 /*----------------------------*/
 /*----------GENERAL-----------*/
@@ -29,39 +36,20 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
   max-width: 100% !important;
 }
 
-
 /*----------------------------*/
 /*-----------BUTTONS----------*/
 /*----------------------------*/
 
-.primary{
-  text-transform: uppercase;
-  text-decoration: none;
-  font-family: 'Quicksand', sans-serif;
-  color: $white;
-  background: $blue !important;
-  border-color: $blue;
-  border-radius: 4px;
-  font-size: 13px;
-  padding: 8px 17px;
-  &:hover{
-    text-decoration: none;
-    color: $white;
-    background-color: $dark_blue;
-  }
-}
-
-.btn_normal{
+.btn_iSignif_1{
   color: $blue;
-  border: 1px solid #FFFFFF;
+  border: 1px solid $white;
   border-radius: 25px;
-  padding: 10px 15px;
-  background-color: #FFFFFF;
+  background-color: $white;
   text-transform: uppercase;
   font-weight: bold;
   i{
-    font-size: 16px;
-    padding-bottom: 0.5px;
+    font-size: 1.1rem;
+    padding-bottom: 0.08rem;
   }
 }
 
@@ -70,11 +58,60 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
   border-color: $blue !important;
 }
 
-
 /*----------------------------*/
 /*--------ROUNDED CARDS-------*/
 /*----------------------------*/
 
 .v-card{
   border-radius: 7px;
+}
+
+/*----------------------------*/
+/*-----------TITLES-----------*/
+/*----------------------------*/
+
+h1{
+  text-transform: uppercase;
+  font-size: 3rem;
+  line-height: 3.7rem;
+  font-weight: normal;
+  small{
+    font-weight: lighter;
+  }
+}
+
+h2{
+  text-transform: uppercase;
+  font-size: 2.7rem;
+  line-height: 3rem;
+  font-weight: normal;
+  small{
+    font-weight: lighter;
+  }
+}
+
+h3{
+  font-size: 1.4rem;
+  small{
+    font-weight: lighter;
+  }
+}
+
+h4{
+  font-size: 1.4rem;
+  small{
+    font-weight: lighter;
+  }
+}
+
+/*----------------------------*/
+/*------------TEXT------------*/
+/*----------------------------*/
+
+p{
+  font-size: 1.2rem;
+}
+
+.blue--text{
+  color: $blue !important;
 }
