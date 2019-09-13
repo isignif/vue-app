@@ -46,10 +46,10 @@
     
 
     <div class="pa-5 home2">
-      <h2 class="pt-4 text-xs-center blue--text">Notre fonctionnement est simple</h2>
+      <h2 class="pt-4 mb-3 text-xs-center blue--text">Notre fonctionnement est simple</h2>
       <v-layout row align-center>
         <v-flex lg class="pa-4 text-xs-center">
-          <div style="padding: 0 60px">
+          <div class="" class="px-2">
             <img alt="Etape 1" class="mb-5" src="../assets/monitors.png">
             <h3>1 - Choisissez</h3>
             <p>vos adresses et l’acte à signifier. Recevez une première estimation du coût de signification</p>
@@ -57,7 +57,7 @@
         </v-flex>
 
         <v-flex lg class="pa-4 text-xs-center">
-          <div style="padding: 0 60px">
+          <div class="px-2">
             <img alt="Etape 2" class="mb-5" src="../assets/idea.png">
             <h3>2 - Créez rapidement</h3>
             <p>votre dépôt d’acte. Notre plateforme attribue les missions de significations aux huissiers de justice compétents</p>
@@ -65,7 +65,7 @@
         </v-flex>
 
         <v-flex lg class="pa-4 text-xs-center">
-          <div style="padding: 0 60px">
+          <div class="px-2">
             <img alt="Etape 3" class="mb-5" src="../assets/paperplane.png">
             <h3>3 - Suivez l’avancée</h3>
             <p>de la signification de vos actes. Suivi, alertes mail, évaluations.. Nous gérons toutes les formalités !</p>
@@ -101,7 +101,6 @@
         </v-flex>
 
         <v-flex lg class="pa-4 mycard">
-          <div style="float: left">
           <v-card class="pa-3">
             <v-card-title class="pb-0">iSignif PREMIUM</v-card-title>
             <v-card-text class="pt-2">
@@ -117,10 +116,9 @@
             </v-card-text>
             <v-card-actions>
               <v-btn class="primary font-weight-bold ma-auto" text>Souscrire
-              <i aria-hidden="true" class="v-icon material-icons ml-2" style="font-size: 15px">keyboard_arrow_right</i></v-btn>
+              <i aria-hidden="true" class="v-icon material-icons ml-2">keyboard_arrow_right</i></v-btn>
             </v-card-actions>
           </v-card>
-          </div>
         </v-flex>
 
       </v-layout>
@@ -182,9 +180,6 @@ h2{
     }
   }
   .home2{
-    h2{
-      margin-bottom: 100px;
-    }
     img{
       max-width: 120px;
     }
