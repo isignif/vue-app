@@ -3,7 +3,7 @@
     <Loader v-if="loading" />
     <v-form v-model="valid">
       <v-container>
-        <v-layout  row wrap>
+        <v-layout row wrap>
           <v-flex xs12 md6>
             <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
           </v-flex>
@@ -18,7 +18,6 @@
               required
             ></v-text-field>
           </v-flex>
-
         </v-layout>
 
         <v-btn :disabled="!valid" @click="submit" large color="primary">Se connecter</v-btn>
@@ -76,7 +75,7 @@ export default {
             message: "Le couple iddentifiant / mot de passe n'est pas valide"
           });
         })
-        .finally(() => this.loading = false);
+        .finally(() => (this.loading = false));
     }
   }
 };

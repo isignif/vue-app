@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <template>
       <div>
         <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
@@ -165,7 +165,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </div>
+  </v-container>
 </template>
 <script>
 import Loader from "../components/Loader";

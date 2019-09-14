@@ -1,52 +1,53 @@
 <template>
-  <v-stepper v-model="currentStep">
-    <v-stepper-header>
-      <v-stepper-step :complete="currentStep > 1" step="1">Création des significations</v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step :complete="currentStep > 2" step="2">Ajout des fichiers</v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step step="3">Confirmation</v-stepper-step>
-    </v-stepper-header>
+  <v-container>
+    <v-stepper v-model="currentStep">
+      <v-stepper-header>
+        <v-stepper-step :complete="currentStep > 1" step="1">Création des significations</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step :complete="currentStep > 2" step="2">Ajout des fichiers</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step step="3">Confirmation</v-stepper-step>
+      </v-stepper-header>
 
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-flex>
-          <ActTypeSelect v-model="actTypeId" />
-          <h2 v-if="significations.length == 1">Signification</h2>
-          <h2 v-if="significations.length > 1">Significations</h2>
-          <SignificationNew
-            :key="signification.timestamp"
-            v-for="signification in significations"
-            :timestamp="signification.timestamp"
-            @delete="deleteSignification(signification.timestamp)"
-            @change="updateSignification"
-          />
-          <p class="text-xs-right">
-            <v-btn dark bottom right color="secondary" @click.prevent="addSignification()">
-              <v-icon>add</v-icon>ajouter une signification
-            </v-btn>
-          </p>
-          <p class="text-xs-right">
-            <v-btn color="primary" @click="finishStep1" :disabled="!isFirstStepValid">Etape suivante</v-btn>
-          </p>
-        </v-flex>
-      </v-stepper-content>
+      <v-stepper-items>
+        <v-stepper-content step="1">
+          <v-flex>
+            <ActTypeSelect v-model="actTypeId" />
+            <h2 v-if="significations.length == 1">Signification</h2>
+            <h2 v-if="significations.length > 1">Significations</h2>
+            <SignificationNew
+              :key="signification.timestamp"
+              v-for="signification in significations"
+              :timestamp="signification.timestamp"
+              @delete="deleteSignification(signification.timestamp)"
+              @change="updateSignification"
+            />
+            <p class="text-xs-right">
+              <v-btn dark bottom right color="secondary" @click.prevent="addSignification()">
+                <v-icon>add</v-icon>ajouter une signification
+              </v-btn>
+            </p>
+            <p class="text-xs-right">
+              <v-btn color="primary" @click="finishStep1" :disabled="!isFirstStepValid">Etape suivante</v-btn>
+            </p>
+          </v-flex>
+        </v-stepper-content>
 
-      <v-stepper-content step="2">
-        <v-layout row wrap>
-          <SignificationEdit
-            :key="'SignificationEdit' + signification.id"
-            v-for="signification in createdSignifications"
-            :signification_id="signification.id"
-            :act_id="actId"
-            :name="signification.attributes.name"
-          />
-          <p class="text-xs-right">
-            <v-btn flat @click="removeAct">Précédent</v-btn>
-            <v-btn color="primary" @click="currentStep = 3">Etape suivante</v-btn>
-          </p>
-        </v-layout>
-      </v-stepper-content>
+        <v-stepper-content step="2">
+          <v-layout row wrap>
+            <SignificationEdit
+              :key="'SignificationEdit' + signification.id"
+              v-for="signification in createdSignifications"
+              :signification_id="signification.id"
+              :act_id="actId"
+              :name="signification.attributes.name"
+            />
+            <p class="text-xs-right">
+              <v-btn flat @click="removeAct">Précédent</v-btn>
+              <v-btn color="primary" @click="currentStep = 3">Etape suivante</v-btn>
+            </p>
+          </v-layout>
+        </v-stepper-content>
 
       <v-stepper-content step="3">
         <v-flex class="mb-5">
@@ -69,16 +70,12 @@
           </p>
           <v-dialog v-model="displayFinalConfirmation" width="500">
             <v-card>
-              <v-card-title class="headline grey lighten-2" primary-title>
-                Confirmation de l'acte
-              </v-card-title>
-              <v-card-text>
-                Vous êtes sur le point de confirmer votre acte. Vous vous engagez à vous acquiter des frais liés à cette prestation. 
-              </v-card-text>
+              <v-card-title class="headline grey lighten-2" primary-title>Confirmation de l'acte</v-card-title>
+              <v-card-text>Vous êtes sur le point de confirmer votre acte. Vous vous engagez à vous acquiter des frais liés à cette prestation.</v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="confirmAct" >J'accepte</v-btn>
+                <v-btn color="primary" flat @click="confirmAct">J'accepte</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -86,6 +83,7 @@
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
+  </v-container>
 </template>
 
 <script>
@@ -117,8 +115,11 @@ export default {
       this.checkValidityFirstStep();
     },
     checkValidityFirstStep() {
-      const hasInvalid = this.significations.some(signification => !signification.isValid);
-      this.isFirstStepValid = this.actTypeId && this.significations.length > 0 &&  !hasInvalid
+      const hasInvalid = this.significations.some(
+        signification => !signification.isValid
+      );
+      this.isFirstStepValid =
+        this.actTypeId && this.significations.length > 0 && !hasInvalid;
     },
     deleteSignification: function(timestamp) {
       this.significations = this.significations.filter(
@@ -153,7 +154,7 @@ export default {
         })
         .catch(error => console.error(error));
     },
-    finishStep3: function () {
+    finishStep3: function() {
       const url = `acts/${this.actId}`;
 
       const headers = {
@@ -163,18 +164,20 @@ export default {
       const parameters = {
         "act[act_type_id]": this.actTypeId,
         "act[reference]": this.reference,
-        "act[express]": this.express,
+        "act[express]": this.express
       };
 
       this.$http
         .patch(url, parameters, headers)
-        .then(() => {
-          
-        })
-        .catch(error => this.$store.dispatch("snackbar/displayError", "Nous n'avons pas pu mettre à jour votre acte. :("));
+        .then(() => {})
+        .catch(error =>
+          this.$store.dispatch(
+            "snackbar/displayError",
+            "Nous n'avons pas pu mettre à jour votre acte. :("
+          )
+        );
 
-        this.displayFinalConfirmation = true;
-
+      this.displayFinalConfirmation = true;
     },
     confirmAct: function() {
       this.displayFinalConfirmation = false;
@@ -190,9 +193,14 @@ export default {
         .then(() => {
           this.displayFinalConfirmation = false;
           this.$router.push({ name: "act", params: { id: this.actId } });
-          this.$store.dispatch("snackbar/displaySuccess", "L'acte a été cré. Votre demande va être traitée prochainement?");
+          this.$store.dispatch(
+            "snackbar/displaySuccess",
+            "L'acte a été cré. Votre demande va être traitée prochainement?"
+          );
         })
-        .catch(error => this.$store.dispatch("snackbar/displayError", error.message));
+        .catch(error =>
+          this.$store.dispatch("snackbar/displayError", error.message)
+        );
     },
     removeAct: function() {
       const url = "acts/" + this.actId;
@@ -276,7 +284,7 @@ export default {
       actPrice: null,
       currentStep: 1,
       isFirstStepValid: false,
-      displayFinalConfirmation: false,
+      displayFinalConfirmation: false
     };
   }
 };

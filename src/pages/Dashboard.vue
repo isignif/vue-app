@@ -1,5 +1,7 @@
 <template>
-  <pre>TODO: finish dashoard</pre>
+  <v-container>
+    <pre>TODO: finish dashoard</pre>
+  </v-container>
 </template>
 
 <script>
