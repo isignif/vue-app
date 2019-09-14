@@ -155,7 +155,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "../assets/stylesheets/custom.scss";
+@import "../assets/stylesheets/variables.scss";
 
 .container {
   padding: 0 !important;
