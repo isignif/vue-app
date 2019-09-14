@@ -4,8 +4,8 @@
       <v-list>
         <v-list-tile>
           <v-list-tile-title class="title" style="display: flex; justify-content: center">
-            <img v-if="mini" src="../assets/faviconBlc.png" height="100%"/>
-            <img v-else src="../assets/logoBlc.png" height="100%" />
+            <img v-if="mini" src="../assets/favicon.png" height="100%"/>
+            <img v-else src="../assets/logo.svg" height="100%" />
           </v-list-tile-title>
           <v-list-tile-action v-if="!mini">
             <v-btn icon @click.stop="mini = !mini">
