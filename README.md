@@ -28,7 +28,13 @@ Elle permet aussi aux huissiers de justice de signifier et suivre les demandes q
 
 Le projet est en open-source sous [licence GPL 3](https://github.com/isignif/vue-app/blob/master/LICENSE.txt). Cela signifie que vous avez le droit de copier le code et le modifier à votre guise.
 
-Ainsi vous pouvez cloner le projet et personnaliser l'application afin qu'elle respecte votre charte graphique et inclure votre logo. voir la section [installation](#installation)
+Vous n'avez ensuite qu'a modifier peu de choses pour personnaliser l'application:
+
+- le fichier `src/assets/stylesheets/variables.scss` qui définie les couleurs de l'application
+- les images situées dans le dossier `src/assets/branding` quie définissent les logo de la marque qui seront affiché dans l'application
+
+Ainsi vous pouvez cloner le projet et personnaliser l'application afin qu'elle respecte votre charte graphique et inclure votre logo. voir la section [installation](#installation).
+
 
 ## Ideas
 
