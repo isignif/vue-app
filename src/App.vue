@@ -1,13 +1,13 @@
 <template>
   <v-app>
     <NavBar />
-    <v-toolbar app dark>
-      <v-toolbar-title class="headline text-uppercase">
+    <v-toolbar app flat>
+      <v-toolbar-title class="headline ">
         <span>{{title}}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn :to="{ name: 'new_act' }" class="primary">
-        <span class="mr-2">Demander une signification d'acte</span>
+        <span class="mr-2">Déposer un acte</span>
       </v-btn>
     </v-toolbar>
 

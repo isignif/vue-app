@@ -3,7 +3,7 @@
     <Loader v-if="loading" />
     <v-form v-model="valid">
       <v-container>
-        <v-layout>
+        <v-layout  row wrap>
           <v-flex xs12 md6>
             <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
           </v-flex>
@@ -19,7 +19,6 @@
             ></v-text-field>
           </v-flex>
 
-          <v-flex xs12 md6></v-flex>
         </v-layout>
 
         <v-btn :disabled="!valid" @click="submit" large color="primary">Se connecter</v-btn>

@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer app v-model="drawer" :mini-variant.sync="mini" hide-overlay stateless>
-    <v-toolbar flat dark>
+    <v-toolbar flat>
       <v-list>
         <v-list-tile>
           <v-list-tile-title class="title" style="display: flex; justify-content: center">

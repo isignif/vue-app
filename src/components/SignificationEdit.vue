@@ -1,6 +1,6 @@
 <template>
   <v-flex xs12 class="mx-2 my-4">
-    <v-card class="elevation-3">
+    <v-card class="elevation-1">
       <v-toolbar card>
         <v-toolbar-title>{{ name }}</v-toolbar-title>
       </v-toolbar>
