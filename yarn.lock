@@ -8708,6 +8708,11 @@ vuetify-loader@^1.0.5:
   dependencies:
     loader-utils "^1.1.0"
 
+vuetify-toast-snackbar@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/vuetify-toast-snackbar/-/vuetify-toast-snackbar-0.5.0.tgz#cf0aba41d582ee3165161be6e94c6a804a42745e"
+  integrity sha512-p/8Tr4nmnhLZIBTLv0Ta+JzyiLSs3aYtpkdbFYGyg4AcuTbrKhMXdOWM9z1Fh/rfy+VBy6C0K55/jylDmGw3UQ==
+
 vuetify@^1.5.5:
   version "1.5.7"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.5.7.tgz#92e7558f590ccb5696bbd1156381e8537c86c2f9"

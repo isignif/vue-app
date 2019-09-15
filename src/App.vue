@@ -22,13 +22,11 @@
       <v-spacer></v-spacer>
       <div>iSignif &copy; {{ new Date().getFullYear() }}</div>
     </v-footer>
-    <Snackbar />
   </v-app>
 </template>
 
 <script>
 import NavBar from "./components/NavBar";
-import Snackbar from "./components/Snackbar";
 
 const PAGES_TITLE = {
   home: "Accueil",
@@ -46,8 +44,7 @@ const PAGES_TITLE = {
 export default {
   name: "App",
   components: {
-    NavBar,
-    Snackbar
+    NavBar
   },
   computed: {
     title() {
