@@ -61,19 +61,11 @@ export default {
           let userName = this.$store.getters["currentUser/completeName"];
           let userId = this.$store.getters["currentUser/id"];
 
-          this.$store.dispatch("snackbar/display", {
-            color: "success",
-            message: `Bonjour ${userName}`
-          });
-
+          this.$toast.success(`Bonjour ${userName}`);
           this.$router.push({ name: "advocate", params: { id: userId } });
         })
         .catch(error => {
-          console.error(error);
-          this.$store.dispatch("snackbar/display", {
-            color: "red",
-            message: "Le couple iddentifiant / mot de passe n'est pas valide"
-          });
+          this.$toast.error("Le couple iddentifiant / mot de passe n'est pas valide");
         })
         .finally(() => (this.loading = false));
     }

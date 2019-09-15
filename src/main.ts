@@ -8,6 +8,8 @@ import VueResource from "vue-resource";
 import "./plugins/vuetify";
 import store from "./store";
 
+import VuetifyToast from 'vuetify-toast-snackbar'
+
 import Home from "./pages/Home.vue";
 import Signin from "./pages/Signin.vue";
 import Signup from "./pages/Signup.vue";
@@ -21,6 +23,7 @@ import ActNew from "./pages/ActNew.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+Vue.use(VuetifyToast);
 
 Vue.config.productionTip = process.env.NODE_ENV !== "production";
 (Vue as any).http.options.root = require("./config").api_url;
