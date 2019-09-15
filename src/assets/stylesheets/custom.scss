@@ -15,7 +15,7 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
 /*----------------------------*/
 
 .container{
-  max-width: 100% !important;
+    max-width: 100% !important;
 }
 
 .v-content__wrap{
@@ -32,11 +32,11 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
 }
 
 /*----------------------------*/
-/*--------ROUNDED CARDS-------*/
+/*----------ROUNDED-----------*/
 /*----------------------------*/
 
-.v-card{
-  border-radius: 7px;
+.v-card, button{
+  border-radius: 7px !important;
 }
 
 /*----------------------------*/
