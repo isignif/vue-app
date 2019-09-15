@@ -20,26 +20,9 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
 /*----------GENERAL-----------*/
 /*----------------------------*/
 
-.container{
-  max-width: 100% !important;
-}
-
 /*----------------------------*/
 /*-----------BUTTONS----------*/
 /*----------------------------*/
-
-.btn_iSignif_1{
-  color: $blue;
-  border: 1px solid $white;
-  border-radius: 25px;
-  background-color: $white;
-  text-transform: uppercase;
-  font-weight: bold;
-  i{
-    font-size: 1.1rem;
-    padding-bottom: 0.08rem;
-  }
-}
 
 .v-chip--outline.blue--text{
   color: $blue !important;
