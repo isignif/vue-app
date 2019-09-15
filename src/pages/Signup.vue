@@ -159,18 +159,12 @@ export default {
           }
         })
         .then(response => {
-          this.$store.dispatch("snackbar/display", {
-            color: "success",
-            message: `Votre compte a été crée. Un email de confirmation vous a été envoyé.`
-          });
+          this.$toast.success(`Votre compte a été crée. Un email de confirmation vous a été envoyé.`);
           this.$router.push({ name: 'home' });
         })
         .catch(error => {
           console.error(error);
-          this.$store.dispatch("snackbar/display", {
-            color: "red",
-            message: `Une erreur est survenue. (${error.message})`
-          });
+          this.$toast.error(`Une erreur est survenue. (${error.message})`);
         });
     }
   }
