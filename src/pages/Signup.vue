@@ -5,7 +5,7 @@
         <v-container>
           <v-layout row wrap>
             <v-flex xs12>
-              <v-radio-group v-model="type" row>
+              <v-radio-group v-model="type" required :rules="requiredRules" row>
                 <v-radio label="Avocat" value="advocate"></v-radio>
                 <v-radio label="Huissier de justice" value="bailiff"></v-radio>
               </v-radio-group>
@@ -22,21 +22,22 @@
             </v-flex>
 
             <v-flex xs12 md6 v-if="email">
-              <v-text-field v-model="firstname" label="Prénom" required prepend-icon="person"></v-text-field>
+              <v-text-field v-model="firstname" label="Prénom" required prepend-icon="person" :rules="requiredRules"></v-text-field>
             </v-flex>
 
             <v-flex xs12 md6 v-if="email">
-              <v-text-field v-model="lastname" label="Nom" required></v-text-field>
+              <v-text-field v-model="lastname" label="Nom" required :rules="requiredRules"></v-text-field>
             </v-flex>
 
             <v-flex :class="password ? 'xs12 md6' : 'xs12'">
               <v-text-field
                 v-model="password"
                 label="Mot de passe"
-                :type="show_password ? 'text' : 'password'"
-                @click:append="show_password = !show_password"
-                :append-icon="show_password ? 'visibility' : 'visibility_off'"
+                :type="showPassword ? 'text' : 'password'"
+                @click:append="showPassword = !showPassword"
+                :append-icon="showPassword ? 'visibility' : 'visibility_off'"
                 required
+                :rules="requiredRules"
                 prepend-icon="lock"
               ></v-text-field>
             </v-flex>
@@ -45,34 +46,35 @@
               <v-text-field
                 v-model="password_confirmation"
                 label="ConfirmationMot de passe"
-                :type="show_password ? 'text' : 'password'"
-                @click:append="show_password = !show_password"
-                :append-icon="show_password ? 'visibility' : 'visibility_off'"
+                :type="showPassword ? 'text' : 'password'"
+                @click:append="showPassword = !showPassword"
+                :append-icon="showPassword ? 'visibility' : 'visibility_off'"
                 :count="6"
                 required
+                :rules="requiredRules"
                 v-if="password"
               ></v-text-field>
             </v-flex>
 
             <v-flex xs12>
-              <v-text-field v-model="address_1" label="Addresse" prepend-icon="place" required></v-text-field>
+              <v-text-field v-model="address1" label="Addresse" prepend-icon="place" required :rules="requiredRules"></v-text-field>
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
-                v-model="address_2"
+                v-model="address2"
                 label="Complément d'adresse"
                 prepend-icon="-"
-                v-if="address_1"
+                v-if="address1"
               ></v-text-field>
             </v-flex>
 
-            <v-flex xs12 md6 v-if="address_1">
-              <v-text-field v-model="town" label="Ville" prepend-icon="location_city" required></v-text-field>
+            <v-flex xs12 md6 v-if="address1">
+              <v-text-field v-model="town" label="Ville" prepend-icon="location_city" required :rules="requiredRules"></v-text-field>
             </v-flex>
 
-            <v-flex xs12 md6 v-if="address_1">
-              <v-text-field v-model="zip_code" label="Code postal" prepend-icon="-" required></v-text-field>
+            <v-flex xs12 md6 v-if="address1">
+              <v-text-field v-model="zipCode" label="Code postal" prepend-icon="-" required :rules="requiredRules"></v-text-field>
             </v-flex>
 
             <v-flex xs12 d-flex v-if="type == 'bailiff'">
@@ -84,16 +86,16 @@
               ></v-select>
             </v-flex>
 
-            <v-flex :class="company_name ? 'xs12 md6' : 'xs12'">
+            <v-flex :class="companyName ? 'xs12 md6' : 'xs12'">
               <v-text-field
-                v-model="company_name"
+                v-model="companyName"
                 label="Raison sociale"
                 prepend-icon="store_mall_directory"
                 required
               ></v-text-field>
             </v-flex>
 
-            <v-flex xs12 md6 v-if="company_name">
+            <v-flex xs12 md6 v-if="companyName">
               <v-text-field v-model="siret" label="N° SIRET" prepend-icon="-"></v-text-field>
             </v-flex>
 
@@ -106,7 +108,7 @@
             </v-flex>
           </v-layout>
 
-          <v-btn :disabled="!valid" @click="submit" large color="primary">Se connecter</v-btn>
+          <v-btn :disabled="!valid" @click="submit" large color="primary">Créer son compte</v-btn>
 
           <v-btn flat small :to="{ name: 'signin'}">J'ai déjà un compte</v-btn>
 
@@ -120,61 +122,50 @@
 export default {
   data: () => ({
     valid: false,
-    show_password: false,
+    showPassword: false,
     type: "",
     email: "",
     firstname: "",
     lastname: "",
-    address_1: "",
-    address_2: "",
-    zip_code: "",
+    address1: "",
+    address2: "",
+    zipCode: "",
     town: "",
     password: "",
     password_confirmation: "",
     siret: "",
-    company_name: "",
+    companyName: "",
     cometence_areas: [],
     phone: "",
-    emailRules: [v => /.+@.+/.test(v) || "Le courriel n'est pas valide"]
+    emailRules: [v => /.+@.+/.test(v) || "Le courriel n'est pas valide"],
+    requiredRules: [(v) => !!v || 'Ce champ est obligatoire'],
   }),
   methods: {
     submit() {
-      // TODO
-      // let apiController = this.type == "advocate" ? "advocates" : "bailiffs";
-      // this.$http
-      //   .post(`${api_url}/${apiController}`, {
-      //     advocate: {
-      //       email: this.email,
-      //       password: this.password,
-      //       firstname: this.firstname,
-      //       lastname: this.lastname,
-      //       address_1: this.address_1,
-      //       address_2: this.address_2,
-      //       zip_code: this.zip_code,
-      //       town: this.town,
-      //       siret: this.siret,
-      //       company_name: this.company_name
-      //     }
-      //   })
-      //   .then(response => {
-      //     // let user_data = response.data.data
-      //     // this.$store.dispatch('currentUser/signin', user_data)
-      //     // let userName = this.$store.getters['currentUser/completeName']
-      //     // TODO
-      //     console.log(response);
-      //     this.$store.dispatch("snackbar/display", {
-      //       color: "success",
-      //       message: `La demande a été transmise`
-      //     });
-      //     // this.$router.push({ name: 'advocate', params: { id: user_data.id } });
-      //   })
-      //   .catch(error => {
-      //     console.error(error);
-      //     this.$store.dispatch("snackbar/display", {
-      //       color: "red",
-      //       message: "Une erreur est survenue."
-      //     });
-      //   });
+      let apiController = this.type == "advocate" ? "advocates" : "bailiffs";
+      this.$http
+        .post(apiController, {
+          advocate: {
+            email: this.email,
+            password: this.password,
+            firstname: this.firstname,
+            lastname: this.lastname,
+            address_1: this.address1,
+            address_2: this.address2,
+            zip_code: this.zipCode,
+            town: this.town,
+            siret: this.siret,
+            company_name: this.companyName
+          }
+        })
+        .then(response => {
+          this.$toast.success(`Votre compte a été crée. Un email de confirmation vous a été envoyé.`);
+          this.$router.push({ name: 'home' });
+        })
+        .catch(error => {
+          console.error(error);
+          this.$toast.error(`Une erreur est survenue. (${error.message})`);
+        });
     }
   }
 };

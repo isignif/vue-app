@@ -28,10 +28,7 @@ export default {
         .then(response => (this.options = response.data))
         .catch(error => {
           console.error(error);
-          this.$store.dispatch("snackbar/display", {
-            color: "red",
-            message: "Une erreur est survenue durant la recherche de la ville"
-          });
+          this.$toast.error("Une erreur est survenue durant la recherche de la ville");
         })
         .finally(() => (this.loading = false));
     }

@@ -171,10 +171,7 @@ export default {
         .patch(url, parameters, headers)
         .then(() => {})
         .catch(error =>
-          this.$store.dispatch(
-            "snackbar/displayError",
-            "Nous n'avons pas pu mettre à jour votre acte. :("
-          )
+          this.$toast.error("Nous n'avons pas pu mettre à jour votre acte. :(")
         );
 
       this.displayFinalConfirmation = true;
@@ -193,14 +190,9 @@ export default {
         .then(() => {
           this.displayFinalConfirmation = false;
           this.$router.push({ name: "act", params: { id: this.actId } });
-          this.$store.dispatch(
-            "snackbar/displaySuccess",
-            "L'acte a été cré. Votre demande va être traitée prochainement?"
-          );
+          this.$toast.success("L'acte a été cré. Votre demande va être traitée prochainement?");
         })
-        .catch(error =>
-          this.$store.dispatch("snackbar/displayError", error.message)
-        );
+        .catch(error => this.$toast.error(error.message));
     },
     removeAct: function() {
       const url = "acts/" + this.actId;
