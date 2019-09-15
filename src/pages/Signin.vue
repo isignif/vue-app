@@ -1,30 +1,29 @@
 <template>
-  <v-card>
+  <v-card class="pa-4 ma-auto mt-5" style="max-width: 500px">
     <Loader v-if="loading" />
     <v-form v-model="valid">
       <v-container>
-        <v-layout row wrap>
-          <v-flex xs12 md6>
-            <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-          </v-flex>
+        <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+        <br>
+        <v-text-field
+          v-model="password"
+          label="Mot de passe"
+          :type="showPassword ? 'text' : 'password'"
+          @click:append="showPassword = !showPassword"
+          :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+          required
+        ></v-text-field>
 
-          <v-flex xs12 md6>
-            <v-text-field
-              v-model="password"
-              label="Mot de passe"
-              :type="showPassword ? 'text' : 'password'"
-              @click:append="showPassword = !showPassword"
-              :append-icon="showPassword ? 'visibility' : 'visibility_off'"
-              required
-            ></v-text-field>
-          </v-flex>
-        </v-layout>
+        <div class="text-xs-center mt-4">
+          <v-btn :disabled="!valid" @click="submit" large color="primary">Se connecter</v-btn>
+        </div>
 
-        <v-btn :disabled="!valid" @click="submit" large color="primary">Se connecter</v-btn>
+        <div class="text-xs-center mt-4">
+          <v-btn flat small secondary :to="{ name: 'signup'}">Créer un compte</v-btn>
+          <v-btn flat small secondary>Mot de passe oublié ?</v-btn>
+        </div>
 
-        <v-btn flat small secondary :to="{ name: 'signup'}">Créer un compte</v-btn>
 
-        <v-btn flat small secondary>Mot de passe oublié</v-btn>
       </v-container>
     </v-form>
   </v-card>
