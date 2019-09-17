@@ -1,11 +1,11 @@
 <template>
     <v-card pa-5>
         <v-list two-line>
-            <v-card-title v-if="!actMessages">Aucun message</v-card-title>
-            <template v-for="item in actMessages">
-                <v-list-tile :key="item.id">
+            <v-card-title v-if="messages">Aucun message</v-card-title>
+            <template v-for="message in messages">
+                <v-list-tile :key="message.id">
                     <v-list-tile-content>
-                    <v-list-tile-title v-html="item.attributes"><!-- A FAIRE --></v-list-tile-title>
+                    <v-list-tile-title v-html="message.attributes"><!-- A FAIRE --></v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
             </template>
@@ -20,8 +20,11 @@ export default {
     actId: String,
     significationId: String
   },
+  data: () => ({
+    messages: []
+  }),
   methods: {
-    messages() {
+    fetch() {
       this.$http
         .get(`acts/${this.actId}/significations/${this.significationId}/messages`, {
           headers: {
@@ -29,13 +32,13 @@ export default {
           }
         })
         .then(response => {
-          this.actMessages = response.data.data;
+          this.messages = response.data.data;
         })
         .catch(error => console.error(error));
     }
   },
   mounted() {
-    this.messages();
+    this.fetch();
   },
 };
 </script>
