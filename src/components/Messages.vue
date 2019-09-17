@@ -17,13 +17,13 @@
 export default {
   name: "Messages",
   props: {
-    act_id: String,
-    signification_id: String
+    actId: String,
+    significationId: String
   },
   methods: {
     messages() {
       this.$http
-        .get(`acts/${this.act_id}/significations/${this.signification_id}/messages`, {
+        .get(`acts/${this.actId}/significations/${this.significationId}/messages`, {
           headers: {
             Authorization: this.$store.state.currentUser.token
           }

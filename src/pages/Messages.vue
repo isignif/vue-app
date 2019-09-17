@@ -2,7 +2,7 @@
   <v-container>
     <v-card>
       <!-- METTRE LES BONS PARAMETRES -->
-      <Messages :act_id="this.$route.params.id" :signification_id="this.signification_id" />
+      <Messages :actId="this.$route.params.id" :significationId="this.signification_id" />
     </v-card>
   </v-container>
 </template>
