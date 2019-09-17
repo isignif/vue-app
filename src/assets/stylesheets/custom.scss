@@ -11,14 +11,16 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
 }
 
 /*----------------------------*/
-/*-----------COLORS-----------*/
-/*----------------------------*/
-
-
-
-/*----------------------------*/
 /*----------GENERAL-----------*/
 /*----------------------------*/
+
+.container{
+    max-width: 100% !important;
+}
+
+.v-content__wrap{
+  margin: 35px;
+}
 
 /*----------------------------*/
 /*-----------BUTTONS----------*/
@@ -30,11 +32,11 @@ article, aside, canvas, details, embed, figure, figcaption, footer, header, hgro
 }
 
 /*----------------------------*/
-/*--------ROUNDED CARDS-------*/
+/*----------ROUNDED-----------*/
 /*----------------------------*/
 
-.v-card{
-  border-radius: 7px;
+.v-card, button{
+  border-radius: 7px !important;
 }
 
 /*----------------------------*/

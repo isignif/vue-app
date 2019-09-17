@@ -6,9 +6,7 @@
         <span>{{title}}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn :to="{ name: 'new_act' }" class="primary">
-        <span class="mr-2">Déposer un acte</span>
-      </v-btn>
+      <v-btn :to="{ name: 'new_act' }" medium color="primary" style="border-radius: 7px">Déposer un acte</v-btn>
     </v-toolbar>
 
     <v-content>
