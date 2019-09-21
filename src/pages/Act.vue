@@ -97,17 +97,7 @@
           </template>
           <v-card pa-5>
             <v-container pa-5>
-              <v-timeline>
-                <v-timeline-item v-for="n in 4" :key="n" color="primary">
-                  <template v-slot:opposite>
-                    <span>Tus eu perfecto</span>
-                  </template>
-                  <v-card class="elevation-2">
-                    <v-card-title class="headline">Lorem ipsum</v-card-title>
-                    <v-card-text>Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.</v-card-text>
-                  </v-card>
-                </v-timeline-item>
-              </v-timeline>
+              <ActTimeline :actId="this.$route.params.id" />
             </v-container>
           </v-card>
         </v-expansion-panel-content>
@@ -169,11 +159,13 @@
 </template>
 <script>
 import Loader from "../components/Loader";
+import ActTimeline from "../components/ActTimeline";
 
 export default {
   name: "ActInformations",
   components: {
-    Loader
+    Loader,
+    ActTimeline
   },
   methods: {
     fetch() {
