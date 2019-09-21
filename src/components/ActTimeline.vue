@@ -3,15 +3,18 @@
     <!-- TODO -->
     <v-timeline-item v-for="actHistory in this.actHistories" :key="actHistory.id" color="primary">
       <template v-slot:opposite>
-        <span>{{ getAuthorDate(actHistory) }}</span>
+        <span>{{ getAuthorName(actHistory) }}</span>
       </template>
-      <v-card class="elevation-2">
-        <v-card-title v-if="getSignificationTitle(actHistory)">
-          {{ getSignificationTitle(actHistory) }}
+      <v-card class="elevation-1">
+        <v-card-title>
+          <strong>
+            {{ getHumanReadableStep(actHistory) }}
+          </strong>
+          <span v-if="getSignificationTitle(actHistory)">
+            @ {{ getSignificationTitle(actHistory) }}
+          </span>
         </v-card-title>
         <v-card-text>
-          {{ actHistory.attributes.step }}
-          
         </v-card-text>
       </v-card>
     </v-timeline-item>
@@ -20,7 +23,8 @@
 <script lang="ts">
 import Vue from "vue";
 
-import { User, IUserDefintion } from '../models/User';
+import { User, IUserDefinition } from '../models/User';
+import { ActHistory, IActHistoryDefinition } from '../models/ActHistory';
 
 
 export default Vue.extend({
@@ -33,10 +37,13 @@ export default Vue.extend({
     included: []
   }),
   methods: {
-    getAuthorDate(actHistory): string {
+    getHumanReadableStep(actHistory: IActHistoryDefinition): string {
+      return (new ActHistory(actHistory)).humanReadableStep;
+    },
+    getAuthorName(actHistory: IActHistoryDefinition): string {
       const userId = actHistory.attributes.user_id;
 
-      const userDefinition: IUserDefintion = this.included.find((s: IUserDefintion) => {
+      const userDefinition: IUserDefinition = this.included.find((s: IUserDefinition) => {
         return s.id == userId && s.type === 'user';
       });
 
@@ -44,7 +51,7 @@ export default Vue.extend({
 
       return user.completeName;
     },
-    getSignificationTitle(actHistory) {
+    getSignificationTitle(actHistory: IActHistoryDefinition) {
       const significationId = actHistory.attributes.signification_id;
       const signification = this.included.find(s => s.id == significationId && s.type === 'signification');
 

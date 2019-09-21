@@ -1,16 +1,16 @@
 
 /**
- * JSON defintion
+ * JSON Definition
  */
-interface IUserAttributesDefintion {
+interface IUserAttributesDefinition {
     firstname: string;
     lastname: string;
 }
 
-export interface IUserDefintion {
+export interface IUserDefinition {
     id: number;
     type: string;
-    attributes: IUserAttributesDefintion;
+    attributes: IUserAttributesDefinition;
 }
 
 export class User {
@@ -18,7 +18,7 @@ export class User {
     public firstName: string;
     public lastName: string;
 
-    constructor(definition: IUserDefintion) {
+    constructor(definition: IUserDefinition) {
         this.id = definition.id;
         this.firstName = definition.attributes.firstname;
         this.lastName = definition.attributes.lastname;
