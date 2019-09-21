@@ -1,7 +1,13 @@
 <template>
-  <v-timeline>
+  <v-timeline dense>
     <!-- TODO -->
-    <v-timeline-item v-for="actHistory in this.actHistories" :key="actHistory.id" :color="getStepColor(actHistory)" right>
+    <v-timeline-item
+      v-for="actHistory in this.actHistories"
+      :key="actHistory.id"
+      :color="getStepColor(actHistory)"
+      right
+      small
+    >
       <!-- <template v-slot:icon>
         <v-avatar>
           <img src="http://i.pravatar.cc/64">
@@ -10,13 +16,16 @@
       <template v-slot:opposite>
         <span>{{ getActHistoryDate(actHistory) }}</span>
       </template>
-      <v-card class="elevation-1">
+      <v-card>
         <v-card-title>
          <strong>{{ getHumanReadableStep(actHistory) }}</strong>&nbsp;par {{ getAuthorName(actHistory) }}
           <span v-if="getSignificationTitle(actHistory)">
             @ {{ getSignificationTitle(actHistory) }}
           </span>
         </v-card-title>
+        <v-card-text>
+          {{ getActHistoryDate(actHistory) }}
+        </v-card-text>
       </v-card>
     </v-timeline-item>
   </v-timeline>
