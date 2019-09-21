@@ -3,19 +3,15 @@
     <!-- TODO -->
     <v-timeline-item v-for="actHistory in this.actHistories" :key="actHistory.id" color="primary">
       <template v-slot:opposite>
-        <span>{{ getAuthorName(actHistory) }}</span>
+        <span>{{ getActHistoryDate(actHistory) }}</span>
       </template>
       <v-card class="elevation-1">
         <v-card-title>
-          <strong>
-            {{ getHumanReadableStep(actHistory) }}
-          </strong>
+         <strong>{{ getHumanReadableStep(actHistory) }}</strong>&nbsp;par {{ getAuthorName(actHistory) }}
           <span v-if="getSignificationTitle(actHistory)">
             @ {{ getSignificationTitle(actHistory) }}
           </span>
         </v-card-title>
-        <v-card-text>
-        </v-card-text>
       </v-card>
     </v-timeline-item>
   </v-timeline>
@@ -39,6 +35,9 @@ export default Vue.extend({
   methods: {
     getHumanReadableStep(actHistory: IActHistoryDefinition): string {
       return (new ActHistory(actHistory)).humanReadableStep;
+    },
+    getActHistoryDate(actHistory: IActHistoryDefinition): string {
+      return (new ActHistory(actHistory)).formatedCreatedAt;
     },
     getAuthorName(actHistory: IActHistoryDefinition): string {
       const userId = actHistory.attributes.user_id;

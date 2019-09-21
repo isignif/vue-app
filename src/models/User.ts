@@ -1,12 +1,12 @@
 
-/**
- * JSON Definition
- */
 interface IUserAttributesDefinition {
     firstname: string;
     lastname: string;
 }
 
+/**
+ * API JSON Definition
+ */
 export interface IUserDefinition {
     id: number;
     type: string;
