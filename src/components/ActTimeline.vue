@@ -1,7 +1,12 @@
 <template>
   <v-timeline>
     <!-- TODO -->
-    <v-timeline-item v-for="actHistory in this.actHistories" :key="actHistory.id" color="primary">
+    <v-timeline-item v-for="actHistory in this.actHistories" :key="actHistory.id" :color="getStepColor(actHistory)" right>
+      <!-- <template v-slot:icon>
+        <v-avatar>
+          <img src="http://i.pravatar.cc/64">
+        </v-avatar>
+      </template> -->
       <template v-slot:opposite>
         <span>{{ getActHistoryDate(actHistory) }}</span>
       </template>
@@ -33,6 +38,9 @@ export default Vue.extend({
     included: []
   }),
   methods: {
+    getStepColor(actHistory: IActHistoryDefinition): string {
+      return (new ActHistory(actHistory)).color;
+    },
     getHumanReadableStep(actHistory: IActHistoryDefinition): string {
       return (new ActHistory(actHistory)).humanReadableStep;
     },
