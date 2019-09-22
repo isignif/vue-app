@@ -1,14 +1,6 @@
 <template>
   <v-container>
-    <template>
-      <div>
-        <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
-        <v-breadcrumbs :items="items" divider="-"></v-breadcrumbs>
-      </div>
-    </template>
-
     <Loader v-if="loading" />
-
     <v-container v-else>
       <h1>Acte n° {{ id }}</h1>
 
