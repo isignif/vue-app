@@ -35,6 +35,7 @@ import Vue from "vue";
 
 import { User, IUserDefinition } from '../models/User';
 import { ActHistory, IActHistoryDefinition } from '../models/ActHistory';
+import { HttpResponse } from 'vue-resource/types/vue_resource';
 
 
 export default Vue.extend({
@@ -74,10 +75,10 @@ export default Vue.extend({
       return signification ? signification.attributes.name : null;
     },
     async fetch() {
-      this.$http
+      (this.$http
         .get(`acts/${this.actId}/act_histories`, {
           headers: { Authorization: this.$store.state.currentUser.token }
-        })
+        }) as Promise<HttpResponse>)
         .then(res => {
           this.actHistories = res.data.data;
           this.included = res.data.included;
