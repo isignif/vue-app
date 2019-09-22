@@ -2,7 +2,7 @@
   <v-container>
     <Loader v-if="loading" />
     <v-container v-else>
-      <h1>Acte n° {{ id }}</h1>
+      <h1>Acte n° {{ act.id }}</h1>
 
       <v-expansion-panel>
         <!-- Informations -->
