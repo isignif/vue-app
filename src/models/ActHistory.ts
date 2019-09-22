@@ -1,5 +1,6 @@
+import { Model, IDefinition, IDefinitionAttributes } from './Model';
 
-interface IActHistoryAttributesDefinition {
+interface IActHistoryAttributesDefinition extends IDefinitionAttributes {
   step: string;
   act_id: number;
   user_id: number;
@@ -10,21 +11,20 @@ interface IActHistoryAttributesDefinition {
 /**
  * API JSON Definition
  */
-export interface IActHistoryDefinition {
+export interface IActHistoryDefinition extends IDefinition {
   id: number;
   type: string;
   attributes: IActHistoryAttributesDefinition;
 }
 
-export class ActHistory {
+export class ActHistory extends Model {
   public id: number;
   public step: string;
   public createdAt: Date;
 
   constructor(definition: IActHistoryDefinition) {
-    this.id = definition.id;
+    super(definition);
     this.step = definition.attributes.step;
-    this.createdAt = new Date(definition.attributes.created_at);
   }
 
   get humanReadableStep(): string {
@@ -62,10 +62,8 @@ export class ActHistory {
         return 'danger';
       case 'archive':
         return 'secondary';
+      default:
+        return 'secondary';
     }
-  }
-
-  get formatedCreatedAt(): string {
-    return `${this.createdAt.toLocaleDateString('fr-FR')} ${this.createdAt.getHours()}:${this.createdAt.getMinutes()}`
   }
 }
