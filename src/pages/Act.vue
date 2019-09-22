@@ -89,7 +89,7 @@
           </template>
           <v-card pa-5>
             <v-container pa-5>
-              <ActTimeline :actId="this.$route.params.id" />
+              <ActTimeline :actId="Number(this.$route.params.id)" />
             </v-container>
           </v-card>
         </v-expansion-panel-content>
