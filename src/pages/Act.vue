@@ -19,10 +19,10 @@
                 </v-list-tile-action>
 
                 <v-list-tile-content>
-                  <v-list-tile-title title="Date de création">Crée le {{ created_at }}</v-list-tile-title>
+                  <v-list-tile-title title="Date de création">Crée le {{ act.formatedCreatedAt }}</v-list-tile-title>
                   <v-list-tile-sub-title
-                    v-if="created_at != updated_at"
-                  >Mis à jour le {{ updated_at }}</v-list-tile-sub-title>
+                    v-if="act.createdAt != act.updatedAt"
+                  >Mis à jour le {{ act.formatedUpdatedAt }}</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
             </v-list>
@@ -42,8 +42,8 @@
                 </v-list-tile-action>
 
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ bill_recipient }}</v-list-tile-title>
-                  <v-list-tile-sub-title v-if="bill_siret">SIRET: {{ bill_siret }}</v-list-tile-sub-title>
+                  <v-list-tile-title>{{ act.billRecipient }}</v-list-tile-title>
+                  <v-list-tile-sub-title v-if="bill_siret">SIRET: {{ act.billSiret }}</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
 
@@ -54,8 +54,8 @@
                 </v-list-tile-action>
 
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ bill_address }}</v-list-tile-title>
-                  <v-list-tile-sub-title>{{ bill_zip_code }}, {{ bill_town }}</v-list-tile-sub-title>
+                  <v-list-tile-title>{{ act.billAddress }}</v-list-tile-title>
+                  <v-list-tile-sub-title>{{ act.billZipCode }}, {{ act.billTown }}</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
 
@@ -66,7 +66,7 @@
                 </v-list-tile-action>
 
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ bill_email }}</v-list-tile-title>
+                  <v-list-tile-title>{{ act.billEmail }}</v-list-tile-title>
                 </v-list-tile-content>
               </v-list-tile>
 
@@ -76,7 +76,7 @@
                 </v-list-tile-action>
 
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ bill_phone }}</v-list-tile-title>
+                  <v-list-tile-title>{{ act.billPhone }}</v-list-tile-title>
                 </v-list-tile-content>
               </v-list-tile>
             </v-list>
@@ -151,6 +151,7 @@
 </template>
 <script>
 import Loader from "../components/Loader";
+import { Act } from "../models/Act";
 import ActTimeline from "../components/ActTimeline";
 
 export default {
@@ -168,31 +169,7 @@ export default {
           }
         })
         .then(response => {
-          let jsonData = response.data.data;
-          let attributes = jsonData.attributes;
-
-          this.id = jsonData.id;
-          this.firstname = attributes.firstname;
-          this.lastname = attributes.lastname;
-          this.email = attributes.email;
-          this.phone = attributes.phone;
-          this.address_1 = attributes.address_1;
-          this.address_2 = attributes.address_2;
-          this.zip_code = attributes.zip_code;
-          this.town = attributes.town;
-          this.phone = attributes.phone;
-
-          this.bill_recipient = attributes.bill_recipient;
-          this.bill_siret = attributes.bill_siret;
-          this.bill_address = attributes.bill_address;
-          this.bill_zip_code = attributes.bill_zip_code;
-          this.bill_town = attributes.bill_town;
-          this.bill_email = attributes.bill_email;
-          this.bill_phone = attributes.bill_phone;
-
-          this.created_at = attributes.created_at;
-          this.updated_at = attributes.updated_at;
-
+          this.act = new Act(response.data.data)
           this.loading = false;
         })
         .catch(error => console.error(error));
@@ -204,18 +181,7 @@ export default {
   data() {
     return {
       loading: true,
-      id: null,
-      firstname: null,
-      lastname: null,
-      email: null,
-
-      bill_recipient: null,
-      bill_siret: null,
-      bill_address: null,
-      bill_zip_code: null,
-      bill_town: null,
-      bill_email: null,
-      bill_phone: null
+      act: null,
     };
   }
 };
