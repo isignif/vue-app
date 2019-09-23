@@ -35,11 +35,13 @@
               se rendant au domicile du destinataire. Elle est notamment utilisée dans le cadre d'une procédure judiciaire. L'huissier de justice, dans ce contexte, est amené à signifier les assignations à comparaître d'une part, les décisions de justice
               d'autre part. La signification par huissier de justice présente néanmoins l'avantage d'une sécurité juridique renforcée. Il est obligatoire de faire signifier par huissier les actes suivants :
             </p>
-            <ul>
-              <li>Les citations à comparaître et les assignations en justice</li>
-              <li>Les jugements des tribunaux : arrêts de la Cour d'appel et de la Cour de cassation, sentences arbitrales</li>
-              <li>Certains actes extra-judiciaires : congé dans le cadre d'un bail commercial et notification au bailleur de la cession d'un fonds de commerce</li>
-            </ul>
+            <p>
+              <ul>
+                <li>Les citations à comparaître et les assignations en justice</li>
+                <li>Les jugements des tribunaux : arrêts de la Cour d'appel et de la Cour de cassation, sentences arbitrales</li>
+                <li>Certains actes extra-judiciaires : congé dans le cadre d'un bail commercial et notification au bailleur de la cession d'un fonds de commerce</li>
+              </ul>
+            </p>
             <p>
               Pour donner date et contenu certains à une notification d'acte, il est possible de procéder à une signification
               par Huissier de justice. L'opposition au prix de vente d'un fonds de commerce, le commandement de payer en cas de
@@ -91,11 +93,12 @@
 
       <v-expansion-panel-content>
         <template v-slot:header>
-          <h3 class="font-weight-medium">Vous êtes demandeur de signification:</h3>
+          <h3 class="font-weight-medium">Vous êtes demandeur de signification ?</h3>
         </template>
         <v-card>
           <v-card-text>
-            <p>Déposer une demande:</p>
+            <p><strong>Déposer une demande :</strong></p>
+            <p>
             <ul>
               <li>Cliquer sur le bouton « Demander une signification » en page d’accueil avant ou après connexion</li>
               <li>
@@ -160,11 +163,50 @@
 
       <v-expansion-panel-content>
         <template v-slot:header>
-          <h3 class="font-weight-medium">Vous êtes huissier de justice :</h3>
+          <h3 class="font-weight-medium">Vous êtes huissier de justice ?</h3>
         </template>
         <v-card>
           <v-card-text>
-            <p>TODO</p>
+            <p><strong>Répondre à une demande de signification :</strong><br>
+              </p><ul>
+                <li>Par mail, vous recevrez une notification de demande de signification. Sa lecture accusera réception de cette dernière.
+                  L’acte à signifier et d’éventuels autres fichiers sont joints dans le dossier</li>
+                <li>Vous pouvez demander plus de précision par la messagerie ou bien par ses coordonnées en cliquant sur le profil du correspondant</li>
+                <li>Lorsque votre signification est effectuée, vous devez rejoindre le dossier et cliquer sur le bouton de la signification
+                  correspondante (1 bouton par signification si il y a plusieurs adresses sur la même commune). Vous pouvez à ce moment là faire
+                  le retour en insérant l’acte signifié et tout autres documents utiles, un commentaire est aussi possible. Ces documents peuvent
+                  être joints par la suite</li>
+                <li>La dossier sera archivé lorsque tout les huissiers mandatés auront transmis a minima l’acte signifié (PV de signification)</li>
+              </ul>
+            <p></p>
+            <p><strong>Précisions de facturation :</strong><br>
+              Par défaut un destinataire équivaut à une signification et donc une facturation ; toutefois, en pratique, en cas de signification
+              de plusieurs actes à la même adresse ou adresse très proches, la plupart des huissiers ne comptabilisent qu’un coût (un couple,
+              un gérant et sa société, colocataires …). L’appréciation revient à chaque huissier de justice.
+            </p>
+            <p><strong>Actes d’exécution :</strong><br>
+              iSignif vous permet de transmettre vos actes d’exécution aux confrères du réseau iSignif.  La commission sera réduite à 1€HT, facturée
+              à l’huissier recevant la demande.
+            </p>
+            <p><strong>Vos engagements :</strong><br>
+              </p><ul>
+                <li>L’étude s’engage à être responsable de la gestion de la signification sur sa zone de compétence. Elle peut recourir à l’acte
+                  équitable</li>
+                <li>L’étude s’engage à respecter les délais de 8 heures ouvrées pour accuser réception de la demande de signification et 5 jours
+                  pour signifier</li>
+                <li>L’étude s’engage à assurer un certain niveau qualité de signification : vérification minimum de la rédaction de l’acte
+                  conformément aux missions légales de l’huissier de justice, recherches sur place, délivrance à personne dans la mesure du possible
+                  et toutes autres modalités obligatoires</li>
+                <li>L’étude agira en toute transparence et avec exactitude pour aider au mieux ses clients. Elle s’engage à respecter l’arrêté
+                  du 26 février 2016 fixant les tarifs réglementés des huissiers de justice, sous réserve de certains actes au coût libre</li>
+                <li>L'étude s’engage à prendre en compte les avis des utilisateurs pour améliorer son offre de service</li>
+              </ul>
+            <p></p>
+            <p><strong>Evaluer vos clients :</strong><br>
+              Les huissiers de justice peuvent noter leurs demandeurs de signification. Les impayés ou retards de paiement sont extrêmement
+              fréquents. Ainsi, si vous tarder à payer les significations, les huissiers en seront informés et pourront prendre des mesures
+              préventives comme la demande d’un paiement avant mission etc.
+            </p>
           </v-card-text>
         </v-card>
       </v-expansion-panel-content>
@@ -175,7 +217,24 @@
         </template>
         <v-card>
           <v-card-text>
-            <p>TODO</p>
+            <p>Si la demande est en simple étape « Créé » : la suppression est simple, la demande n’ayant pas été transmise.</p>
+            <p>
+              <ul>
+                <li>Si aucun huissier de justice n'a Accusé Réception : la suppression est simple et un mail est envoyé à l'huissier pour
+                  l’informer de l’annulation</li>
+                <li>Si un huissier a Accusé Réception et pas les autres : la suppression est simple pour les huissiers sans AR et un mail
+                  les prévient. Les huissiers ayant AR reçoivent une demande d’annulation et doivent la confirmer ou non en fonction du
+                  traitement de la signification</li>
+                <li>Si tout les huissiers ont Accusé Réception : les huissiers reçoivent une demande d’annulation et doivent la confirmer
+                  ou non en fonction du traitement de la signification</li>
+                <li>Si un huissier a signifié : l’annulation est impossible pour cette signification</li>
+              </ul>
+            </p>
+            <p><strong>L’huissier de justice recevant une demande annulation a 2 choix possibles :</strong></p>
+            <ul>
+              <li>Refuser l'annulation et continuer le traitement du dossier</li>
+              <li>Accepter l’annulation, ce qui conduit à l’archivage du dossier ou la suppression de son mandat si d’autres huissiers sont mandatés sur le dossier</li>
+            </ul>
           </v-card-text>
         </v-card>
       </v-expansion-panel-content>
@@ -186,7 +245,78 @@
         </template>
         <v-card>
           <v-card-text>
-            <p>TODO</p>
+            <p><strong>Pour les demandeurs de signification :</strong></p>
+            <p>Les 3 premiers mois sont gratuits. Une fois la période d’essai du premier mois passée, vous recevrez un mail d’iSignif vous 
+              demandant de confirmer votre utilisation de l’outil. L’abonnement mensuel est de 7,99 € HT. Soit vous choisissez le prélèvement automatique 
+              par Stripe et vous serez notifier chaque mois par mail du prélèvement avec la facture correspondante. Soit, vous recevez mensuellement la 
+              facture par mail à régler manuellement par Stripe. Les versements sont ainsi tous effectués par Carte Bancaire.</p>
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+
+      <v-expansion-panel-content>
+        <template v-slot:header>
+          <h3 class="font-weight-medium">Sécurité de l'application</h3>
+        </template>
+        <v-card>
+          <v-card-text>
+            <p>Chez iSignif, nous prenons la sécurité très au sérieux. Voici quelques mesures que nous avons mis en place afin de garantir la sécurité de l'application:</p>
+            <p>
+              <ul>
+                <li>Chiffrement du trafic via le protocole HTTPS</li>
+                <li>Gestion granulaire des droits sur l'application</li>
+                <li>Archivage et suppression des actes signifiés après deux mois</li>
+                <li>Sauvegarde de vos données tous les jours. Ces sauvegardes sont <a href="https://fr.wikipedia.org/wiki/Cryptographie_asym%C3%A9trique">chiffrées asymétriquement</a> avec GnuPGP</li>
+                <li>Anonymisation des données lorsque vous souhaitez supprimer votre compte (conformément à <a href="https://gdpr-info.eu/art-17-gdpr">l'article 7 de la RGPD</a>)</li>
+                <li>Paiement assuré par Stripe, expert dans le domaine et <a href="https://www.visa.com/splisting/searchGrsp.do?companyNameCriteria=stripe">certifié par VISA</a></li>
+                <li>Composants Open-Source et donc en <a href="https://rubyonrails.org">constante évolution</a></li>
+                <li>Mise en place de toutes <a href="https://docs.ovh.com/fr/vps/conseils-securisation-vps">les recommandations de OVH</a> pour la sécurisation du serveur</li>
+              </ul>
+            </p>
+            <p>Pour terminer, toutes vos données sont stockées en France chez OVH.</p>
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+
+      <v-expansion-panel-content>
+        <template v-slot:header>
+          <h3 class="font-weight-medium">Point déontologique</h3>
+        </template>
+        <v-card>
+          <v-card-text>
+            <p>L’étude d’huissier de justice est un prestataire pour iSignif pour pouvoir répondre sur sa zone de compétence aux requêtes de signification 
+              qu’on lui adresse. Ainsi, la publicité et le démarchage effectué par iSignif ne met jamais en avant les huissiers qui sont simple support de 
+              l’activité d’iSignif. La constitution du réseau favorise iSignif dans la simplification de ses services proposés et la gestion des garanties 
+              de travail. Ainsi, les huissiers partenaires seront proposés par défaut aux demandeurs de signification. Cependant, le demandeur de signification 
+              peut à tout moment émettre le refus de travailler avec un des huissiers du réseau pour une raison qui lui est propre. Il peut ensuite, sous 
+              réserve de la validation d’iSignif, inclure un autre huissier de son choix pour ses demandes de signification sur une zone de compétence précise.</p>
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+
+      <v-expansion-panel-content>
+        <template v-slot:header>
+          <h3 class="font-weight-medium">Autres questions</h3>
+        </template>
+        <v-card>
+          <v-card-text>
+            <p><strong>Mes données sont-elles protégées ?</strong><br>
+              Consultez notre <a href="https://isignif.fr/privacypolicy">Charte du respect de la vie privée</a>.
+            </p>
+            <p><strong>Vous avez constaté un fonctionnement anormal ?</strong><br>
+              Nous vous invitons à nous écrire à <a href="mailto:contact@isignif.fr">contact@isignif.fr</a> ou bien par le formulaire de contact.
+            </p>
+            <p><strong>Vous avez constaté un comportement contraire aux valeurs iSignif ?</strong><br>
+              Nous vous invitons à nous écrire à <a href="mailto:contact@isignif.fr">contact@isignif.fr</a> ou bien par le formulaire de contact.
+            </p>
+            <p><strong>Vous avez une suggestion ?</strong><br>
+              Nous vous invitons à nous écrire à <a href="mailto:contact@isignif.fr">contact@isignif.fr</a> ou bien par le formulaire de contact.
+            </p>
+            <p><strong>Vous souhaitez nous rejoindre ?</strong><br>
+              iSignif a noué des partenariats avec un nombre important d’études sur toute la France, permettant de créer un réseau par défaut compétent sur tout 
+              le territoire. Toutefois, en tant qu’étude d’huissier de justice, vous pouvez demander à rejoindre le réseau sous certaines conditions : respect des 
+              valeurs et engagements iSignif, approbation des administrateurs, recommandations d’avocats… Nous vous invitons à nous 
+              écrire à <a href="mailto:contact@isignif.fr">contact@isignif.fr</a>.</p>
           </v-card-text>
         </v-card>
       </v-expansion-panel-content>
@@ -199,3 +329,10 @@ export default {
   name: "Help"
 };
 </script>
+<style lang="scss">
+  h3{
+    font-size: 1.3rem;
+  }
+</style>
+
+
