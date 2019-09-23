@@ -3,7 +3,7 @@
     <v-expansion-panel>
       <v-expansion-panel-content>
         <template v-slot:header>
-          <div>Qui sommes-nous?</div>
+          <h3 class="font-weight-medium">Qui sommes-nous?</h3>
         </template>
         <v-card>
           <v-card-text>
@@ -26,7 +26,7 @@
 
       <v-expansion-panel-content>
         <template v-slot:header>
-          <div>Qu'est-ce qu'une signification ?</div>
+          <h3 class="font-weight-medium">Qu'est-ce qu'une signification ?</h3>
         </template>
         <v-card>
           <v-card-text>
@@ -51,7 +51,7 @@
 
       <v-expansion-panel-content>
         <template v-slot:header>
-          <div>Comment s’inscrire ?</div>
+          <h3 class="font-weight-medium">Comment s’inscrire ?</h3>
         </template>
         <v-card>
           <v-card-text>
@@ -68,7 +68,7 @@
 
       <v-expansion-panel-content>
         <template v-slot:header>
-          <div>Comment accéder à mon compte ?</div>
+          <h3 class="font-weight-medium">Comment accéder à mon compte ?</h3>
         </template>
         <v-card>
           <v-card-text>
@@ -91,7 +91,7 @@
 
       <v-expansion-panel-content>
         <template v-slot:header>
-          <div>Vous êtes demandeur de signification:</div>
+          <h3 class="font-weight-medium">Vous êtes demandeur de signification:</h3>
         </template>
         <v-card>
           <v-card-text>
@@ -160,7 +160,7 @@
 
       <v-expansion-panel-content>
         <template v-slot:header>
-          <div>Vous êtes huissier de justice :</div>
+          <h3 class="font-weight-medium">Vous êtes huissier de justice :</h3>
         </template>
         <v-card>
           <v-card-text>
@@ -171,7 +171,7 @@
 
       <v-expansion-panel-content>
         <template v-slot:header>
-          <div>Annulation</div>
+          <h3 class="font-weight-medium">Annulation</h3>
         </template>
         <v-card>
           <v-card-text>
@@ -182,7 +182,7 @@
 
       <v-expansion-panel-content>
         <template v-slot:header>
-          <div>Paiements</div>
+          <h3 class="font-weight-medium">Paiements</h3>
         </template>
         <v-card>
           <v-card-text>
