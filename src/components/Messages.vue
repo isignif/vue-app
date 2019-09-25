@@ -1,17 +1,18 @@
 <template>
-  <v-card pa-5>
+  <div>
     <Loader v-if="loading" />
-    <v-list v-else two-line>
-      <v-card-title v-if="messages">Aucun message</v-card-title>
-      <template v-for="message in messages">
-        <v-list-tile :key="message.id">
-          <v-list-tile-content>
-            <v-list-tile-title v-html="message.attributes.content"><!-- A FAIRE --></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </template>
-    </v-list>
-  </v-card>
+    <v-card
+        class="ma-2"
+        v-for="message in messages"
+        :key="message.id"
+        max-width="400"
+      >
+      <v-card-title class="grey--text py-0">AUTHOR HERE</v-card-title>
+      <v-card-text class="d-flex">
+        {{ message.attributes.content }}
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <script>
