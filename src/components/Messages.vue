@@ -17,14 +17,19 @@
 export default {
   name: "Messages",
   props: {
-    actId: String,
-    significationId: String
+    actId: Number,
+    significationId: Number
   },
   data: () => ({
+    loading: false,
     messages: []
   }),
+  watch: {
+    significationId() { this.fetch(); },
+  },
   methods: {
     fetch() {
+      this.loading = true;
       this.$http
         .get(`acts/${this.actId}/significations/${this.significationId}/messages`, {
           headers: {
@@ -34,7 +39,8 @@ export default {
         .then(response => {
           this.messages = response.data.data;
         })
-        .catch(error => console.error(error));
+        .catch(error => console.error(error))
+        .finnally(() => this.loading = false);
     }
   },
   mounted() {

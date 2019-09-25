@@ -5,15 +5,13 @@
       <v-select
           v-model="conversationSelected"
           :items="conversations"
-          item-text="actId"
+          item-text="text"
           item-value="{significationId, actId}"
           label="Conversation"
           persistent-hint
           return-object
           single-line
         ></v-select>
-
-      <!-- METTRE LES BONS PARAMETRES -->
       <Messages
         v-if="conversationSelected"
         :actId="conversationSelected.actId"
@@ -35,27 +33,30 @@ export default {
   },
   data: () => ({
     conversations: [
-      // something like `{actId: 1, significationId: 1}`
+      // something like `{actId: 1, significationId: 1, text: "Toto"}`
     ],
     conversationSelected: null,
   }),
   methods: {
     fetch() {
       this.$http
-        .get(`acts`, {
+        .get(`significations`, {
           headers: {
             Authorization: this.$store.state.currentUser.token
           }
         })
         .then(response => {
-          const acts = response.data.data;
+          const significations = response.data.data;
 
-          acts.forEach(act => {
-            act.relationships.significations.data.forEach(signification => {
-              this.conversations.push({
-                actId: act.id,
-                significationId: signification.id,
-              })
+          significations.forEach(signification => {
+            const actId = parseInt(signification.relationships.act.data.id);
+            const significationName = signification.attributes.name || '???';
+            const text = `Acte #${actId} - ${significationName}`;
+
+            this.conversations.push({
+              text,
+              actId,
+              significationId: parseInt(signification.id),
             });
           });
         })
