@@ -1,16 +1,17 @@
 <template>
-    <v-card pa-5>
-        <v-list two-line>
-            <v-card-title v-if="messages">Aucun message</v-card-title>
-            <template v-for="message in messages">
-                <v-list-tile :key="message.id">
-                    <v-list-tile-content>
-                    <v-list-tile-title v-html="message.attributes"><!-- A FAIRE --></v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-            </template>
-        </v-list>
-    </v-card>
+  <v-card pa-5>
+    <Loader v-if="loading" />
+    <v-list v-else two-line>
+      <v-card-title v-if="messages">Aucun message</v-card-title>
+      <template v-for="message in messages">
+        <v-list-tile :key="message.id">
+          <v-list-tile-content>
+            <v-list-tile-title v-html="message.attributes.content"><!-- A FAIRE --></v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
+    </v-list>
+  </v-card>
 </template>
 
 <script>
@@ -36,11 +37,9 @@ export default {
             Authorization: this.$store.state.currentUser.token
           }
         })
-        .then(response => {
-          this.messages = response.data.data;
-        })
-        .catch(error => console.error(error))
-        .finnally(() => this.loading = false);
+        .then(response => this.messages = response.data.data)
+        .catch(e => this.$toast.error(`Impossible de récupérrer les messages (${e.message})`))
+        .finally(() => this.loading = false);
     }
   },
   mounted() {

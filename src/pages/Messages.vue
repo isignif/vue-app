@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <v-card>
-
       <v-select
           v-model="conversationSelected"
           :items="conversations"
@@ -13,9 +12,12 @@
           single-line
         ></v-select>
       <Messages
-        v-if="conversationSelected"
+        v-if="conversationSelected !== null"
         :actId="conversationSelected.actId"
         :significationId="conversationSelected.significationId" />
+      <v-alert type="info" v-if="conversationSelected === null">
+        Sélectionnez une signification pour accéder à sa messagerie.
+      </v-alert>
     </v-card>
   </v-container>
 </template>
@@ -58,6 +60,8 @@ export default {
               actId,
               significationId: parseInt(signification.id),
             });
+
+            this.conversations.sort(function(a, b){return b.actId - a.actId});
           });
         })
         .catch(error => console.error(error));
