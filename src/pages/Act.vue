@@ -105,6 +105,13 @@
             </v-card-text>
           </v-card>
         </v-expansion-panel-content>
+        <!-- Messagerie -->
+        <v-expansion-panel-content>
+          <template v-slot:header>
+            <div>Messages</div>
+          </template>
+          <Messages :act_id="this.$route.params.id" :signification_id="this.signification_id" />
+        </v-expansion-panel-content>
       </v-expansion-panel>
 
       <h2>Informations</h2>
@@ -153,12 +160,14 @@
 import Loader from "../components/Loader";
 import { Act } from "../models/Act";
 import ActTimeline from "../components/ActTimeline";
+import Messages from "../components/Messages";
 
 export default {
   name: "ActInformations",
   components: {
     Loader,
-    ActTimeline
+    ActTimeline,
+    Messages
   },
   methods: {
     fetch() {
@@ -173,10 +182,10 @@ export default {
           this.loading = false;
         })
         .catch(error => console.error(error));
-    }
+    },
   },
   mounted() {
-    this.fetch();
+    this.fetch()
   },
   data() {
     return {
