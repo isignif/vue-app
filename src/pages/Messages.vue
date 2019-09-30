@@ -1,7 +1,20 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-select
+  <v-card>
+    <v-layout>
+      <v-flex xs6 md4>
+        <v-list two-line>
+          <v-list-tile
+            v-for="conversation in conversations"
+            :key="conversation.significationId"
+            avatar
+            @click="conversationSelected = conversation"
+          >
+            <v-list-tile-content>
+              <v-list-tile-title v-text="conversation.text"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+        <!-- <v-select
           v-model="conversationSelected"
           :items="conversations"
           item-text="text"
@@ -10,16 +23,20 @@
           persistent-hint
           return-object
           single-line
-        ></v-select>
-      <Messages
+        ></v-select> -->
+      </v-flex>
+      <v-flex xs6 md8>
+        <Messages
         v-if="conversationSelected !== null"
         :actId="conversationSelected.actId"
         :significationId="conversationSelected.significationId" />
-      <v-alert type="info" v-if="conversationSelected === null">
-        Sélectionnez une signification pour accéder à sa messagerie.
-      </v-alert>
-    </v-card>
-  </v-container>
+        <v-alert type="info" v-model="shouldSelectSomething">
+          Sélectionnez une signification pour accéder à sa messagerie.
+        </v-alert>
+      </v-flex>
+    </v-layout>
+  </v-card>
+
 </template>
 <script>
 import Loader from "../components/Loader";
@@ -39,6 +56,11 @@ export default {
     ],
     conversationSelected: null,
   }),
+  computed: {
+    shouldSelectSomething: function() {
+      return !this.conversationSelected;
+    }
+  },
   methods: {
     fetch() {
       this.$http
