@@ -1,78 +1,72 @@
 <template>
   <v-card>
-    <Loader v-if="loading" />
-    <div v-else>
-      <v-card-title>
-        Liste des actes
-        <v-spacer></v-spacer>
-        <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
-      </v-card-title>
-      <v-data-table :headers="headers" :items="acts" class="elevation-1" :search="search">
-        <v-progress-linear v-slot:progress color="primary" indeterminate></v-progress-linear>
-        <template v-slot:items="props">
-          <tr @click="props.expanded = !props.expanded">
-            <!-- Référence de l'acte -->
-            <td>
-              {{ props.item.attributes.reference }}
-              <span
-                class="red--text"
-                v-if="props.item.attributes.reference == null"
-              >Référence vide</span>
-            </td>
-            <!-- Dénomination de l'acte -->
-            <td>{{ getActTypeName(props.item.attributes.act_type_id) }}</td>
-            <!-- Correspondant -->
-            <td>{{ getuserName(props.item.attributes.advocate_id) }}</td>
-            <!-- Huissier de justice -->
-            <!-- <td>
-              <ul>
-                <li :key="bailiffName" v-for="bailiffName in getBailiffsNames(props.item.id)">{{ bailiffName }}</li>
-              </ul>
-            </td>-->
-            <!-- Etape -->
-            <td>
-              <ActHistoryStep :step="props.item.attributes.current_step" />
-            </td>
-            <!-- Date de création -->
-            <!-- <td>{{ props.item.attributes.created_at }}</td> -->
-            <td>
-              <v-btn flat small :to="{ name: 'act', params: { id: props.item.id }}">
-                Afficher
-                <v-icon>chevron_right</v-icon>
-              </v-btn>
-            </td>
-          </tr>
-        </template>
-        <!-- dipslay bailiffs -->
-        <template v-slot:expand="props">
-          <v-card flat>
-            <v-list>
-              <template v-for="item in getBailiffsNames(props.item.id)">
-                <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
-                <v-list-tile :key="item" avatar>
-                  <v-list-tile-content>
-                    <v-list-tile-title v-html="item"></v-list-tile-title>
-                    <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-              </template>
-            </v-list>
-          </v-card>
-        </template>
-      </v-data-table>
-    </div>
+    <v-card-title>
+      Liste des actes
+      <v-spacer></v-spacer>
+      <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+    </v-card-title>
+    <v-data-table :headers="headers" :items="acts" class="elevation-1" :search="search" :loading="loading">
+      <v-progress-linear v-slot:progress color="primary" indeterminate></v-progress-linear>
+      <template v-slot:items="props">
+        <tr @click="props.expanded = !props.expanded">
+          <!-- Référence de l'acte -->
+          <td>
+            {{ props.item.attributes.reference }}
+            <span
+              class="red--text"
+              v-if="props.item.attributes.reference == null"
+            >Référence vide</span>
+          </td>
+          <!-- Dénomination de l'acte -->
+          <td>{{ getActTypeName(props.item.attributes.act_type_id) }}</td>
+          <!-- Correspondant -->
+          <td>{{ getuserName(props.item.attributes.advocate_id) }}</td>
+          <!-- Huissier de justice -->
+          <!-- <td>
+            <ul>
+              <li :key="bailiffName" v-for="bailiffName in getBailiffsNames(props.item.id)">{{ bailiffName }}</li>
+            </ul>
+          </td>-->
+          <!-- Etape -->
+          <td>
+            <ActHistoryStep :step="props.item.attributes.current_step" />
+          </td>
+          <!-- Date de création -->
+          <td>
+            <v-btn flat small :to="{ name: 'act', params: { id: props.item.id }}">
+              Afficher
+              <v-icon>chevron_right</v-icon>
+            </v-btn>
+          </td>
+        </tr>
+      </template>
+      <!-- dipslay bailiffs -->
+      <!-- <template v-slot:expand="props">
+        <v-card flat>
+          <v-list>
+            <template v-for="item in getBailiffsNames(props.item.id)">
+              <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
+              <v-list-tile :key="item" avatar>
+                <v-list-tile-content>
+                  <v-list-tile-title v-html="item"></v-list-tile-title>
+                  <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </template>
+          </v-list>
+        </v-card>
+      </template> -->
+    </v-data-table>
   </v-card>
 </template>
 
 <script>
-import Loader from "./Loader";
 import ActHistoryStep from "./ActHistoryStep";
 
 export default {
   name: "ActsTable",
   props: {},
   components: {
-    Loader,
     ActHistoryStep
   },
   methods: {
@@ -156,10 +150,10 @@ export default {
           text: "Correspondant",
           value: "advocate"
         },
-        {
-          text: "Huissier de justice",
-          value: "bailiffs"
-        },
+        // {
+        //   text: "Huissier de justice",
+        //   value: "bailiffs"
+        // },
         {
           text: "Etape",
           value: "step"
