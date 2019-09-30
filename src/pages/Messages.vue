@@ -12,6 +12,12 @@
             <v-list-tile-content>
               <v-list-tile-title v-text="conversation.text"></v-list-tile-title>
             </v-list-tile-content>
+
+            <v-list-tile-action>
+              <v-btn icon ripple :to="{ name: 'act', params: { id: conversation.actId }}">
+                <v-icon color="grey lighten-1">open_in_new</v-icon>
+              </v-btn>
+            </v-list-tile-action>
           </v-list-tile>
         </v-list>
         <!-- <v-select
