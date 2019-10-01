@@ -1,81 +1,88 @@
 <template>
-  <v-container>
+  <div>
     <Loader v-if="loading" />
     <v-layout row wrap v-else>
-      <v-flex xs10>
-        <v-container>
+      <v-flex xs10 class="pa-3 white elevation-2">
+        <div>
           <h1>Acte n° {{ act.id }}</h1>
 
+          <v-layout row wrap>
+            <v-flex xs-6>
+              <v-list two-line dense>
+                <v-subheader>Informations globales</v-subheader>
+                <!-- person -->
+                <v-list-tile>
+                  <v-list-tile-action>
+                    <v-icon>update</v-icon>
+                  </v-list-tile-action>
 
-          <v-list two-line>
-            <v-subheader inset>Informations globales</v-subheader>
-            <!-- person -->
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon color="primary">update</v-icon>
-              </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title title="Date de création">Crée le {{ act.formatedCreatedAt }}</v-list-tile-title>
+                    <v-list-tile-sub-title
+                      v-if="act.formatedCreatedAt != act.formatedUpdatedAt"
+                    >Mis à jour le {{ act.formatedUpdatedAt }}</v-list-tile-sub-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </v-list>
+            </v-flex>
 
-              <v-list-tile-content>
-                <v-list-tile-title title="Date de création">Crée le {{ act.formatedCreatedAt }}</v-list-tile-title>
-                <v-list-tile-sub-title
-                  v-if="act.createdAt != act.updatedAt"
-                >Mis à jour le {{ act.formatedUpdatedAt }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
+            <v-flex xs-6>
+              <v-list two-line dense>
+                <v-subheader>Informations de facturation</v-subheader>
+                <!-- person -->
+                <v-list-tile>
+                  <v-list-tile-action>
+                    <v-icon>person</v-icon>
+                  </v-list-tile-action>
 
-            <v-subheader inset>Informations de facturation</v-subheader>
-            <!-- person -->
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon color="primary">person</v-icon>
-              </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{ act.billRecipient }}</v-list-tile-title>
+                    <v-list-tile-sub-title v-if="bill_siret">SIRET: {{ act.billSiret }}</v-list-tile-sub-title>
+                  </v-list-tile-content>
+                </v-list-tile>
 
-              <v-list-tile-content>
-                <v-list-tile-title>{{ act.billRecipient }}</v-list-tile-title>
-                <v-list-tile-sub-title v-if="bill_siret">SIRET: {{ act.billSiret }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
+                <!-- place -->
+                <v-list-tile>
+                  <v-list-tile-action>
+                    <v-icon>place</v-icon>
+                  </v-list-tile-action>
 
-            <!-- place -->
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon color="primary">place</v-icon>
-              </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{ act.billAddress }}</v-list-tile-title>
+                    <v-list-tile-sub-title>{{ act.billZipCode }}, {{ act.billTown }}</v-list-tile-sub-title>
+                  </v-list-tile-content>
+                </v-list-tile>
 
-              <v-list-tile-content>
-                <v-list-tile-title>{{ act.billAddress }}</v-list-tile-title>
-                <v-list-tile-sub-title>{{ act.billZipCode }}, {{ act.billTown }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
+                <!-- email -->
+                <v-list-tile>
+                  <v-list-tile-action>
+                    <v-icon>email</v-icon>
+                  </v-list-tile-action>
 
-            <!-- email -->
-            <v-list-tile>
-              <v-list-tile-action>
-                <v-icon color="primary">email</v-icon>
-              </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{ act.billEmail }}</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
 
-              <v-list-tile-content>
-                <v-list-tile-title>{{ act.billEmail }}</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
+                <v-list-tile v-if="bill_phone">
+                  <v-list-tile-action>
+                    <v-icon>phone</v-icon>
+                  </v-list-tile-action>
 
-            <v-list-tile v-if="bill_phone">
-              <v-list-tile-action>
-                <v-icon color="primary">phone</v-icon>
-              </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title>{{ act.billPhone }}</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-        </v-container>
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{ act.billPhone }}</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </v-list>
+            </v-flex>
+          </v-layout>
+        </div>
       </v-flex>
       <v-flex xs2>
         <ActTimeline :actId="Number(this.$route.params.id)" />
       </v-flex>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 <script>
 import Loader from "../components/Loader";
