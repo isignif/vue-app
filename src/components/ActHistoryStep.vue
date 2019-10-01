@@ -1,5 +1,5 @@
 <template>
-  <v-chip outline :color="getActHistoryStepColor(step)">{{ translateActHistoryStep(step) }}</v-chip>
+  <v-chip outline small :color="getActHistoryStepColor(step)">{{ translateActHistoryStep(step) }}</v-chip>
 </template>
 <script lang="ts">
 export default {
