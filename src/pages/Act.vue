@@ -32,24 +32,13 @@
                 <!-- person -->
                 <v-list-tile>
                   <v-list-tile-action>
-                    <v-icon>person</v-icon>
+                    <v-icon>receipt</v-icon>
                   </v-list-tile-action>
 
                   <v-list-tile-content>
                     <v-list-tile-title>{{ act.billRecipient }}</v-list-tile-title>
                     <v-list-tile-sub-title v-if="bill_siret">SIRET: {{ act.billSiret }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-
-                <!-- place -->
-                <v-list-tile>
-                  <v-list-tile-action>
-                    <v-icon>place</v-icon>
-                  </v-list-tile-action>
-
-                  <v-list-tile-content>
-                    <v-list-tile-title>{{ act.billAddress }}</v-list-tile-title>
-                    <v-list-tile-sub-title>{{ act.billZipCode }}, {{ act.billTown }}</v-list-tile-sub-title>
+                    <v-list-tile-sub-title>{{ act.billAddress }}, {{ act.billZipCode }}, {{ act.billTown }}</v-list-tile-sub-title>
                   </v-list-tile-content>
                 </v-list-tile>
 
