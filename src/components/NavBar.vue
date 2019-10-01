@@ -4,7 +4,7 @@
       <v-list>
         <v-list-tile>
           <v-list-tile-title class="title" style="display: flex; justify-content: center">
-            <img v-if="mini" src="../assets/branding/favicon.png" height="100%"/>
+            <img v-if="mini" src="../assets/branding/favicon.png" height="100%" />
             <img v-else src="../assets/branding/logo.svg" height="100%" />
           </v-list-tile-title>
           <v-list-tile-action v-if="!mini">
@@ -20,20 +20,10 @@
 
     <v-list class="pt-0">
       <!-- Page principale -->
-      <v-list-tile to="/">
-        <v-list-tile-action>
-          <v-icon>home</v-icon>
-        </v-list-tile-action>
 
-        <v-list-tile-content>
-          <v-list-tile-title>Page principale</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-
-      <v-divider />
 
       <!-- Dashboard -->
-      <v-list-tile to="/dashboard" v-if="id">
+      <!-- <v-list-tile to="/dashboard" v-if="id">
         <v-list-tile-action>
           <v-icon>dashboard</v-icon>
         </v-list-tile-action>
@@ -41,50 +31,28 @@
         <v-list-tile-content>
           <v-list-tile-title>Dashboard</v-list-tile-title>
         </v-list-tile-content>
-      </v-list-tile>
+      </v-list-tile> -->
 
-      <!-- actes -->
-      <v-list-group prepend-icon="assignment" no-action v-if="id">
-        <template v-slot:activator>
-          <v-list-tile to="/acts">
-            <v-list-tile-title>Actes</v-list-tile-title>
-          </v-list-tile>
-        </template>
-
-        <!-- Mes actes -->
-        <v-list-tile to="/acts" sub-item>
-          <v-list-tile-action>
-            <v-icon>assignment</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Mes demandes</v-list-tile-title>
-        </v-list-tile>
-
-        <!-- Demander une signification -->
-        <v-list-tile :to="{ name: 'new_act' }">
-          <v-list-tile-action>
-            <v-icon>create_new_folder</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Demander une signification</v-list-tile-title>
-        </v-list-tile>
-      </v-list-group>
-
-      <!-- Messages -->
-      <v-list-tile to="/messages" v-if="id">
+      <!-- Mes actes -->
+      <v-list-tile to="/acts" sub-item>
         <v-list-tile-action>
-          <v-icon>all_inbox</v-icon>
+          <v-icon>assignment</v-icon>
         </v-list-tile-action>
-
-        <v-list-tile-content>
-          <v-list-tile-title>Messageries</v-list-tile-title>
-        </v-list-tile-content>
+        <v-list-tile-title>Mes demandes</v-list-tile-title>
       </v-list-tile>
+
+      <!-- Demander une signification -->
+      <v-list-tile :to="{ name: 'new_act' }">
+        <v-list-tile-action>
+          <v-icon>create_new_folder</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-title>Déposer un acte</v-list-tile-title>
+      </v-list-tile>
+
 
       <v-divider />
 
-      <v-list-tile
-        :to="{ name: 'advocate', params: { id: id }}"
-        v-if="id"
-      >
+      <v-list-tile :to="{ name: 'advocate', params: { id: id }}" v-if="id">
         <v-list-tile-action>
           <v-icon>person</v-icon>
         </v-list-tile-action>
@@ -127,7 +95,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "NavBar",
   computed: {
-    ...mapGetters("currentUser", ['id', 'completeName'])
+    ...mapGetters("currentUser", ["id", "completeName"])
   },
   // TODO computed here for logged user
   data() {
