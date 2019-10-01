@@ -10,12 +10,10 @@ import store from "./store";
 
 import VuetifyToast from 'vuetify-toast-snackbar'
 
-import Home from "./pages/Home.vue";
 import Signin from "./pages/Signin.vue";
 import Signup from "./pages/Signup.vue";
 import Dashboard from "./pages/Dashboard.vue";
 import Help from "./pages/Help.vue";
-import Messages from "./pages/Messages.vue";
 import Advocate from "./pages/Advocate.vue";
 import Acts from "./pages/Acts.vue";
 import Act from "./pages/Act.vue";
@@ -30,7 +28,7 @@ Vue.config.productionTip = process.env.NODE_ENV !== "production";
 (Vue as any).http.options.emulateJSON = true;
 
 const routes = [
-  { path: "/", component: Home, name: "home" },
+  { path: "/", component: Acts, name: "home" },
   { path: "/dashboard", component: Dashboard, name: "dashboard" },
   { path: "/signin", component: Signin, name: "signin" },
   { path: "/signup", component: Signup, name: "signup" },
@@ -38,7 +36,6 @@ const routes = [
   { path: "/acts/:id", component: Act, name: "act" },
   { path: "/acts", component: Acts, name: "acts" },
   { path: "/acts_new", component: ActNew, name: "new_act" },
-  { path: "/messages", component: Messages, name: "messages" },
   { path: "/help", component: Help, name: "help" }
 ];
 

@@ -5,22 +5,24 @@
       <v-spacer></v-spacer>
       <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="acts" class="elevation-1" :search="search" :loading="loading">
+    <v-data-table
+      :headers="headers"
+      :items="acts"
+      class="elevation-1"
+      :search="search"
+      :loading="loading"
+    >
       <v-progress-linear v-slot:progress color="primary" indeterminate></v-progress-linear>
       <template v-slot:items="props">
         <tr @click="props.expanded = !props.expanded">
           <!-- Référence de l'acte -->
           <td>
-            {{ props.item.attributes.reference }}
-            <span
-              class="red--text"
-              v-if="props.item.attributes.reference == null"
-            >Référence vide</span>
+            {{ getActName(props.item) }}<br>
+            <span class="grey--text">{{ getActTypeName(props.item.attributes.act_type_id) }}</span>
           </td>
-          <!-- Dénomination de l'acte -->
-          <td>{{ getActTypeName(props.item.attributes.act_type_id) }}</td>
-          <!-- Correspondant -->
-          <td>{{ getuserName(props.item.attributes.advocate_id) }}</td>
+          <td>
+            {{ countSignifications(props.item.id) ? `${countSignifications(props.item.id)} signification` : `${countSignifications(props.item.id)} significations` }}
+          </td>
           <!-- Huissier de justice -->
           <!-- <td>
             <ul>
@@ -28,13 +30,13 @@
             </ul>
           </td>-->
           <!-- Etape -->
-          <td>
+          <td class="text-xs-center">
             <ActHistoryStep :step="props.item.attributes.current_step" />
           </td>
           <!-- Date de création -->
-          <td>
+          <td class="text-xs-right">
             <v-btn flat small :to="{ name: 'act', params: { id: props.item.id }}">
-              Afficher
+              Voir
               <v-icon>chevron_right</v-icon>
             </v-btn>
           </td>
@@ -55,7 +57,7 @@
             </template>
           </v-list>
         </v-card>
-      </template> -->
+      </template>-->
     </v-data-table>
   </v-card>
 </template>
@@ -92,25 +94,38 @@ export default {
         })
         .catch(error => console.error(error));
     },
+    getActName(act) {
+      return act.attributes.reference || `Acte N°${act.id}`;
+    },
     getActTypeName(actTypeId) {
       const actType = this.actTypes.find(actType => actType.id == actTypeId);
 
-      if (actType) {
-        return actType.attributes.name;
+      if (!actType) {
+        return "?";
       }
 
-      return "?";
+      const actTypeName = actType.attributes.name;
+      // return actTypeName;
+      const trunc = actTypeName.substring(0, 40);
+      return trunc.length === actTypeName.length ? trunc : trunc + '...';
     },
-    getuserName(userId) {
-      const userIdString = userId.toString();
-      const user = this.users.find(user => user.id === userIdString);
+    countSignifications(actId) {
+      const actIdInt = parseInt(actId);
 
-      if (user) {
-        return `${user.attributes.firstname} ${user.attributes.lastname}`;
-      }
-
-      return "?";
+      return this.significations
+                .filter(signification => signification.attributes.act_id === actIdInt)
+                .length;
     },
+    // getuserName(userId) {
+    //   const userIdString = userId.toString();
+    //   const user = this.users.find(user => user.id === userIdString);
+
+    //   if (user) {
+    //     return `${user.attributes.firstname} ${user.attributes.lastname}`;
+    //   }
+
+    //   return "?";
+    // },
     getBailiffsNames(actId) {
       const actIdInt = parseInt(actId);
 
@@ -142,14 +157,10 @@ export default {
           text: "Référence de l'acte",
           value: "reference"
         },
-        {
-          text: "Dénomination de l'acte",
-          value: "act_type"
-        },
-        {
-          text: "Correspondant",
-          value: "advocate"
-        },
+        // {
+        //   text: "Correspondant",
+        //   value: "advocate"
+        // },
         // {
         //   text: "Huissier de justice",
         //   value: "bailiffs"
