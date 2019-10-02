@@ -48,6 +48,7 @@
 </template>
 <script>
 import Loader from "./Loader";
+import { jsonApi } from '../devours';
 
 export default {
   name: "AdvocateInformations",
@@ -57,6 +58,13 @@ export default {
   },
   methods: {
     fetch() {
+
+      jsonApi.headers['Authorization'] = this.$store.state.currentUser.token;
+      jsonApi.find('advocate', this.id)
+            .then(advocate  => {
+                console.log(advocate)
+            })
+
       this.$http
         .get(`advocates/${this.id}`, {
           headers: { Authorization: this.$store.state.currentUser.token }
