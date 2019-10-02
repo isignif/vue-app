@@ -7,6 +7,7 @@ import VueResource from "vue-resource";
 
 import "./plugins/vuetify";
 import store from "./store";
+import { apiUrl } from './config';
 
 import VuetifyToast from 'vuetify-toast-snackbar'
 
@@ -24,7 +25,7 @@ Vue.use(VueResource);
 Vue.use(VuetifyToast);
 
 Vue.config.productionTip = process.env.NODE_ENV !== "production";
-(Vue as any).http.options.root = require("./config").api_url;
+(Vue as any).http.options.root = apiUrl;
 (Vue as any).http.options.emulateJSON = true;
 
 const routes = [
