@@ -48,6 +48,7 @@
 </template>
 <script>
 import Loader from "./Loader";
+import UserRessource from '../models/User';
 
 export default {
   name: "AdvocateInformations",
@@ -57,6 +58,13 @@ export default {
   },
   methods: {
     fetch() {
+
+
+      // console.log(new UserRessource())
+
+      UserRessource().find(this.id)
+                  .then((a) => console.log(a))
+
       this.$http
         .get(`advocates/${this.id}`, {
           headers: { Authorization: this.$store.state.currentUser.token }
