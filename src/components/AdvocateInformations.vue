@@ -48,6 +48,7 @@
 </template>
 <script>
 import Loader from "./Loader";
+import {Advocate} from '../models/Advocate';
 
 export default {
   name: "AdvocateInformations",
@@ -57,6 +58,13 @@ export default {
   },
   methods: {
     fetch() {
+
+      // let axiosInstance = Advocate.getHttpClient().getImplementingClient();
+      // axiosInstance.defaults.headers.authentication = this.$store.state.currentUser.token;
+
+      Advocate.find(this.id)
+              .then(a => console.log(a))
+
       this.$http
         .get(`advocates/${this.id}`, {
           headers: { Authorization: this.$store.state.currentUser.token }

@@ -1,4 +1,4 @@
-import { Model, IDefinition, IDefinitionAttributes } from './Model';
+import { AppModel, IDefinition, IDefinitionAttributes } from './AppModel';
 
 interface IUserAttributesDefinition extends IDefinitionAttributes {
   firstname: string;
@@ -14,15 +14,22 @@ export interface IUserDefinition extends IDefinition {
   attributes: IUserAttributesDefinition;
 }
 
-export class User extends Model {
-  public id: number;
-  public firstName: string;
-  public lastName: string;
+export class User extends AppModel {
 
-  constructor(definition: IUserDefinition) {
-    super(definition);
-    this.firstName = definition.attributes.firstname;
-    this.lastName = definition.attributes.lastname;
+  protected jsonApiType = 'users';
+  protected pageSize = 30;
+
+
+  get firstName() : string {
+    return this.getAttribute('firstname');
+  }
+
+  get lastName(): string {
+    return this.getAttribute('lastname');
+  }
+
+  get email(): string {
+    return this.getAttribute('email');
   }
 
   get completeName(): string {

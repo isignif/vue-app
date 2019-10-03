@@ -1,4 +1,4 @@
-import { Model, IDefinition, IDefinitionAttributes } from './Model';
+import { AppModel, IDefinition, IDefinitionAttributes } from './AppModel';
 
 interface IActHistoryAttributesDefinition extends IDefinitionAttributes {
   step: string;
@@ -17,15 +17,19 @@ export interface IActHistoryDefinition extends IDefinition {
   attributes: IActHistoryAttributesDefinition;
 }
 
-export class ActHistory extends Model {
-  public id: number;
+export class ActHistory extends AppModel {
+
+  protected jsonApiType = 'act_histories';
+  protected pageSize = 30;
+
+  // public id: number;
   public step: string;
   public createdAt: Date;
 
-  constructor(definition: IActHistoryDefinition) {
-    super(definition);
-    this.step = definition.attributes.step;
-  }
+  // constructor(definition: IActHistoryDefinition) {
+  //   super(definition);
+  //   this.step = definition.attributes.step;
+  // }
 
   get humanReadableStep(): string {
     switch (this.step) {

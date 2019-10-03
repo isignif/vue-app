@@ -1,4 +1,4 @@
-import { Model, IDefinition, IDefinitionAttributes } from './Model';
+import { AppModel, IDefinition, IDefinitionAttributes } from './AppModel';
 
 interface IActAttributesDefinition extends IDefinitionAttributes {
   bill_recipient: string;
@@ -21,7 +21,10 @@ export interface IActDefinition extends IDefinition {
   attributes: IActAttributesDefinition;
 }
 
-export class Act extends Model {
+export class Act extends AppModel {
+
+  protected jsonApiType = 'acts';
+  protected pageSize = 30;
 
   public step: string;
   public billRecipient: string;
@@ -32,14 +35,14 @@ export class Act extends Model {
   public billEmail: string;
   public billPhone: string;
 
-  constructor(definition: IActDefinition) {
-    super(definition);
-    this.billRecipient = definition.attributes.bill_recipient;
-    this.billSiret = definition.attributes.bill_siret;
-    this.billAddress = definition.attributes.bill_address;
-    this.billZipCode = definition.attributes.bill_zip_code;
-    this.billTown = definition.attributes.bill_town;
-    this.billEmail = definition.attributes.bill_email;
-    this.billPhone = definition.attributes.bill_phone;
-  }
+  // constructor(definition: IActDefinition) {
+  //   super(definition);
+  //   this.billRecipient = definition.attributes.bill_recipient;
+  //   this.billSiret = definition.attributes.bill_siret;
+  //   this.billAddress = definition.attributes.bill_address;
+  //   this.billZipCode = definition.attributes.bill_zip_code;
+  //   this.billTown = definition.attributes.bill_town;
+  //   this.billEmail = definition.attributes.bill_email;
+  //   this.billPhone = definition.attributes.bill_phone;
+  // }
 }
