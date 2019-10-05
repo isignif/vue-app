@@ -7,7 +7,8 @@
         v-for="actHistory in this.actHistories"
         :key="actHistory.id"
         >
-      <v-card xs12
+        <ActHistoryCard :actHistory="actHistory" />
+      <!-- <v-card xs12
         :colora="actHistory.color"
         flat
         class="text-xs-right"
@@ -18,7 +19,7 @@
           <span>@ {{ actHistory.signification }}</span>
           <span class="grey--text">{{ actHistory.formatedCreatedAt }}</span>
         </v-card-text>
-      </v-card>
+      </v-card> -->
     </v-flex>
   </v-layout>
 </template>
@@ -26,13 +27,17 @@
 import Vue from "vue";
 
 import { User } from "../models/User";
-import { ActHistory } from "../models/ActHistory";
+import ActHistoryCard from './ActHistoryCard.vue';
+import { ActHistory } from '../models/ActHistory';
 import { HttpResponse } from "vue-resource/types/vue_resource";
 
 export default Vue.extend({
   name: "ActTimeline",
   props: {
     actId: Number
+  },
+  components: {
+    ActHistoryCard,
   },
   data: () => ({
     loading: false,

@@ -70,6 +70,15 @@ export class ActHistory extends Model {
     }
   }
 
+  public getUser(): Promise<User> {
+    if (this._user) {
+      return Promise.resolve(this._user);
+    } else {
+      return User.get(this.userId, this.token)
+        .then(user => this._user = user);
+    }
+  }
+
   get humanReadableStep(): string {
     switch (this.step) {
       case 'created':
