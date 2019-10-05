@@ -19,14 +19,12 @@ export class ActHistory extends Model {
 
     return axios.get(url, { headers: { Authorization: token } })
       .then((resp) => {
-
-        const includes = resp.data.includes;
+        const included = resp.data.included;
 
         return resp.data.data.map((actHistoryData) => {
           const actHistory = new ActHistory();
           actHistory.id = parseInt(actHistoryData.id);
-          actHistory.hydrateFromAttributes(actHistoryData.attributes);
-
+          actHistory.hydrateFromAttributes(actHistoryData.attributes, included);
 
           return actHistory;
         })
@@ -40,18 +38,26 @@ export class ActHistory extends Model {
       .then((resp) => {
         const actHistory = new ActHistory();
         actHistory.id = id;
-        actHistory.hydrateFromAttributes(resp.data.data.attributes);
+        actHistory.hydrateFromAttributes(resp.data.data.attributes, resp.data.included);
         return actHistory;
       });
   }
 
-  public hydrateFromAttributes(attributes: any): void {
+  public hydrateFromAttributes(attributes: any, included: any[]): void {
     this.step = attributes.step;
     this.userId = parseInt(attributes.user_id);
     this.actId = parseInt(attributes.act_id);
     this.significationId = parseInt(attributes.signification_id);
     this.createdAt = attributes.created_at;
     this.updatedAt = attributes.updated_at;
+
+    const userData = included.find(i => i.id == this.userId && i.type === "user");
+
+    if (userData) {
+      this.user = new User();
+      this.user.id = this.userId;
+      this.user.hydrateFromAttributes(userData.attributes);
+    }
   }
 
   get humanReadableStep(): string {
