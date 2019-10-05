@@ -62,7 +62,7 @@ export class Act extends Model {
       })
   }
 
-  public hydrateFromAttributes(attributes: any, included: any[]): void {
+  public hydrateFromAttributes(attributes: any, included: any[] = []): void {
     this.billRecipient = attributes.bill_recipient;
     this.billSiret = attributes.bill_siret;
     this.billAddress = attributes.bill_address;

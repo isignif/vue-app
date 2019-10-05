@@ -17,7 +17,7 @@ export abstract class Model {
   public createdAt: string;
   public updatedAt: string;
 
-  protected token: string;
+  public token: string;
 
   get createdAtDate(): Date {
     return new Date(this.createdAt);
