@@ -65,11 +65,11 @@ export default {
     },
     countSignifications(actId) {
       return 666;
-      const actIdInt = parseInt(actId);
+      // const actIdInt = parseInt(actId);
 
-      return this.significations
-                .filter(signification => signification.attributes.act_id === actIdInt)
-                .length;
+      // return this.significations
+      //           .filter(signification => signification.attributes.act_id === actIdInt)
+      //           .length;
     },
   },
   mounted() {

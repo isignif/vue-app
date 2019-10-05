@@ -77,14 +77,12 @@
 import Loader from "../components/Loader";
 import { Act } from "../models/Act";
 import ActTimeline from "../components/ActTimeline";
-import Messages from "../components/Messages";
 
 export default {
   name: "ActInformations",
   components: {
     Loader,
     ActTimeline,
-    Messages
   },
   methods: {
     fetch() {
