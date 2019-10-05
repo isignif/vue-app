@@ -64,6 +64,15 @@
                 </v-list-tile>
               </v-list>
             </v-flex>
+
+          </v-layout>
+          <v-layout row wrap>
+            <v-flex xs-12>
+              <h2>Significations</h2>
+              <div v-for="signification in significations" :key="signification.id">
+                <p>{{ signification.name }}</p>
+              </div>
+            </v-flex>
           </v-layout>
         </div>
       </v-flex>
@@ -76,6 +85,7 @@
 <script>
 import Loader from "../components/Loader";
 import { Act } from "../models/Act";
+import { Signification } from "../models/Signification";
 import ActTimeline from "../components/ActTimeline";
 
 export default {
@@ -87,7 +97,14 @@ export default {
   methods: {
     fetch() {
       Act.get(this.$route.params.id, this.$store.state.currentUser.token)
-        .then(act =>  this.act = act)
+        .then(act =>  {
+          this.act = act;
+          return this.act.getSignifications();
+        })
+        .then(significations => {
+          console.log(significations)
+          this.significations = significations;
+        })
         .catch(error => console.error(error))
         .finally(() => this.loading = false);
     }
@@ -98,7 +115,8 @@ export default {
   data() {
     return {
       loading: true,
-      act: null
+      act: null,
+      significations: [],
     };
   }
 };

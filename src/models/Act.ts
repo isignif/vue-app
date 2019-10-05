@@ -4,6 +4,7 @@ import { Model } from './Model';
 import { apiUrl } from './config';
 import { User } from './User';
 import { ActType } from './ActType';
+import { Signification } from './Signification';
 
 export class Act extends Model {
 
@@ -30,6 +31,7 @@ export class Act extends Model {
 
   private _advocate: User;
   private _actType: ActType;
+  private _significations: Signification[];
 
   static all(token: string): Promise<Act[]> {
     const url = `${apiUrl}/acts`;
@@ -115,6 +117,15 @@ export class Act extends Model {
     } else {
       return ActType.get(this.actTypeId, this.token)
         .then(actType => this._actType = actType);
+    }
+  }
+
+  public getSignifications(): Promise<Signification[]> {
+    if (this._significations) {
+      return Promise.resolve(this._significations);
+    } else {
+      return Signification.all(this.id, this.token)
+        .then(significations => this._significations = significations);
     }
   }
 
