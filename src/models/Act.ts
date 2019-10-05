@@ -22,7 +22,7 @@ export class Act extends Model {
       .then((resp) => {
         const act = new Act();
         const attributes = resp.data.data.attributes;
-
+        act.id = id;
         act.billRecipient = attributes.bill_recipient;
         act.billSiret = attributes.bill_siret;
         act.billAddress = attributes.bill_address;

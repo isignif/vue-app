@@ -4,9 +4,6 @@ import { Model } from './Model';
 import { apiUrl } from './config';
 
 export class User extends Model {
-  public id: number;
-  public readonly type = "advocates";
-
   public email: string;
   public firstName: string;
   public lastName: string;
