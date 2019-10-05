@@ -1,6 +1,7 @@
-import { Model, IDefinition, IDefinitionAttributes } from './Model';
-import axios from 'axios'
+import axios from 'axios';
 
+import { Model } from './Model';
+import { apiUrl } from './config';
 
 export class User extends Model {
   public id: number;
@@ -9,8 +10,7 @@ export class User extends Model {
   public email: string;
   public firstName: string;
   public lastName: string;
-  public activated: string;
-  
+  public activated: boolean;
   public lastWork: string;
   public creatorId: number;
   public competenceAreaId: number;
@@ -25,14 +25,12 @@ export class User extends Model {
   public phone: string;
   public premiumUntil: string;
 
-
   static get(id: number, token: string): Promise<User> {
-    const user = new User();
-
-    const url = `${user.baseUrl}/${id}`;
-
+    const url = `${apiUrl}/advocates/${id}`;
+    
     return axios.get(url, {headers: { Authorization: token}})
-          .then((resp) => {
+    .then((resp) => {
+            const user = new User();
             const attributes = resp.data.data.attributes;
             
             user.id = id;

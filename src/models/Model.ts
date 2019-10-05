@@ -19,12 +19,6 @@ export abstract class Model {
 
   public readonly type: string; 
 
-  get baseUrl(): string {
-    const baseUrl =  process.env.NODE_ENV === 'production' ? "https://isignif.fr/api/v1" : "https://test.isignif.fr/api/v1";
-
-    return `${baseUrl}/${this.type}`;
-  }
-
   get createdAtDate(): Date {
     return new Date(this.createdAt);
   }
