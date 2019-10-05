@@ -68,7 +68,7 @@ export class Signification extends Model {
 
     if (actData) {
       this._act = new Act();
-      this._act.id = this.actId;;
+      this._act.id = this.actId;
       this._act.hydrateFromAttributes(actData.attributes);
     }
   }

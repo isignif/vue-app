@@ -69,9 +69,11 @@
           <v-layout row wrap>
             <v-flex xs-12>
               <h2>Significations</h2>
-              <div v-for="signification in significations" :key="signification.id">
-                <p>{{ signification.name }}</p>
-              </div>
+              <SignificationInformations
+                  v-for="signification in significations"
+                  :key="signification.id"
+                  :signification="signification"
+              />
             </v-flex>
           </v-layout>
         </div>
@@ -87,12 +89,14 @@ import Loader from "../components/Loader";
 import { Act } from "../models/Act";
 import { Signification } from "../models/Signification";
 import ActTimeline from "../components/ActTimeline";
+import SignificationInformations from "../components/SignificationInformations";
 
 export default {
   name: "ActInformations",
   components: {
     Loader,
     ActTimeline,
+    SignificationInformations
   },
   methods: {
     fetch() {
@@ -101,10 +105,7 @@ export default {
           this.act = act;
           return this.act.getSignifications();
         })
-        .then(significations => {
-          console.log(significations)
-          this.significations = significations;
-        })
+        .then(significations => this.significations = significations)
         .catch(error => console.error(error))
         .finally(() => this.loading = false);
     }
