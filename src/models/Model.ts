@@ -14,20 +14,30 @@ export interface IDefinition {
 
 export abstract class Model {
   public id: number;
-  public createdAt: Date;
-  public updatedAt: Date;
+  public createdAt: string;
+  public updatedAt: string;
 
-  constructor(definition: IDefinition) {
-    this.id = definition.id;
-    this.createdAt = new Date(definition.attributes.created_at);
-    this.updatedAt = new Date(definition.attributes.updated_at);
+  public readonly type: string; 
+
+  get baseUrl(): string {
+    const baseUrl =  process.env.NODE_ENV === 'production' ? "https://isignif.fr/api/v1" : "https://test.isignif.fr/api/v1";
+
+    return `${baseUrl}/${this.type}`;
+  }
+
+  get createdAtDate(): Date {
+    return new Date(this.createdAt);
+  }
+
+  get updatedAtDate(): Date {
+    return new Date(this.updatedAt);
   }
 
   get formatedCreatedAt(): string {
-    return `${this.createdAt.toLocaleDateString('fr-FR')} ${this.createdAt.getHours()}:${this.createdAt.getMinutes()}`
+    return `${this.createdAtDate.toLocaleDateString('fr-FR')} ${this.createdAtDate.getHours()}:${this.createdAtDate.getMinutes()}`
   }
 
   get formatedUpdatedAt(): string {
-    return `${this.updatedAt.toLocaleDateString('fr-FR')} ${this.updatedAt.getHours()}:${this.updatedAt.getMinutes()}`
+    return `${this.updatedAtDate.toLocaleDateString('fr-FR')} ${this.updatedAtDate.getHours()}:${this.updatedAtDate.getMinutes()}`
   }
 } 
