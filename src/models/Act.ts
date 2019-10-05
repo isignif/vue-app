@@ -1,25 +1,8 @@
-import { Model, IDefinition, IDefinitionAttributes } from './Model';
+import axios from 'axios';
 
-interface IActAttributesDefinition extends IDefinitionAttributes {
-  bill_recipient: string;
-  bill_siret: string;
-  bill_address: string;
-  bill_zip_code: string;
-  bill_town: string;
-  bill_email: string;
-  bill_phone: string;
-  created_at: string;
-  updated_at: string;
-}
+import { Model } from './Model';
+import { apiUrl } from './config';
 
-/**
- * API JSON Definition
- */
-export interface IActDefinition extends IDefinition {
-  id: number;
-  type: string;
-  attributes: IActAttributesDefinition;
-}
 
 export class Act extends Model {
 
@@ -32,14 +15,23 @@ export class Act extends Model {
   public billEmail: string;
   public billPhone: string;
 
-  constructor(definition: IActDefinition) {
-    super(definition);
-    this.billRecipient = definition.attributes.bill_recipient;
-    this.billSiret = definition.attributes.bill_siret;
-    this.billAddress = definition.attributes.bill_address;
-    this.billZipCode = definition.attributes.bill_zip_code;
-    this.billTown = definition.attributes.bill_town;
-    this.billEmail = definition.attributes.bill_email;
-    this.billPhone = definition.attributes.bill_phone;
+  static get(id: number, token: string): Promise<Act> {
+    const url = `${apiUrl}/acts/${id}`;
+
+    return axios.get(url, { headers: { Authorization: token } })
+      .then((resp) => {
+        const act = new Act();
+        const attributes = resp.data.data.attributes;
+
+        act.billRecipient = attributes.bill_recipient;
+        act.billSiret = attributes.bill_siret;
+        act.billAddress = attributes.bill_address;
+        act.billZipCode = attributes.bill_zip_code;
+        act.billTown = attributes.bill_town;
+        act.billEmail = attributes.bill_email;
+        act.billPhone = attributes.bill_phone;
+
+        return act;
+      })
   }
 }
