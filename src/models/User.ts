@@ -31,35 +31,36 @@ export class User extends Model {
     return axios.get(url, {headers: { Authorization: token}})
     .then((resp) => {
             const user = new User();
-            const attributes = resp.data.data.attributes;
-            
             user.id = id;
-            user.email = attributes.email;
-            user.firstName = attributes.firstname;
-            user.lastName = attributes.lastname;
-            user.activated = attributes.activated;
-            user.createdAt = attributes.created_at;
-            user.updatedAt = attributes.updated_at;
-            user.lastWork = attributes.last_work;
-            user.creatorId = parseInt(attributes.creator_id);
-            user.competenceAreaId = parseInt(attributes.competence_area_id);
-            user.mustResetPassword = attributes.must_reset_password;
-            user.approved = attributes.approved;
-            user.address1 = attributes.address_1;
-            user.address2 = attributes.address_2;
-            user.zipCode = attributes.zip_code;
-            user.town = attributes.town;
-            user.companyName = attributes.company_name;
-            user.siret = attributes.siret;
-            user.phone = attributes.phone;
-            user.premiumUntil = attributes.premium_until;
-
+            user.hydrateFromAttributes(resp.data.data.attributes);
             return user;
           })
           .catch(e => {
             console.error(e);
             return null;
           })
+  }
+
+  public hydrateFromAttributes(attributes: any): void {
+    this.email = attributes.email;
+    this.firstName = attributes.firstname;
+    this.lastName = attributes.lastname;
+    this.activated = attributes.activated;
+    this.createdAt = attributes.created_at;
+    this.updatedAt = attributes.updated_at;
+    this.lastWork = attributes.last_work;
+    this.creatorId = parseInt(attributes.creator_id);
+    this.competenceAreaId = parseInt(attributes.competence_area_id);
+    this.mustResetPassword = attributes.must_reset_password;
+    this.approved = attributes.approved;
+    this.address1 = attributes.address_1;
+    this.address2 = attributes.address_2;
+    this.zipCode = attributes.zip_code;
+    this.town = attributes.town;
+    this.companyName = attributes.company_name;
+    this.siret = attributes.siret;
+    this.phone = attributes.phone;
+    this.premiumUntil = attributes.premium_until;
   }
 
   get completeName(): string {
