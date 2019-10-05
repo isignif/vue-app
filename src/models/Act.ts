@@ -5,7 +5,6 @@ import { apiUrl } from './config';
 import { User } from './User';
 import { ActType } from './ActType';
 
-
 export class Act extends Model {
 
   public step: string;
@@ -29,8 +28,8 @@ export class Act extends Model {
 
   public currentStep: string;
 
-  public advocate: User;
-  public actType: ActType;
+  private _advocate: User;
+  private _actType: ActType;
 
   static all(token: string): Promise<Act[]> {
     const url = `${apiUrl}/acts`;
@@ -42,6 +41,7 @@ export class Act extends Model {
         return resp.data.data.map((actData) => {
           const act = new Act();
           act.id = parseInt(actData.id);
+          act.token = token;
           act.hydrateFromAttributes(actData.attributes, included);
 
           return act;
@@ -49,13 +49,13 @@ export class Act extends Model {
       });
   }
 
-
   static get(id: number, token: string): Promise<Act> {
     const url = `${apiUrl}/acts/${id}`;
 
     return axios.get(url, { headers: { Authorization: token } })
       .then((resp) => {
         const act = new Act();
+        act.token = token;
         act.id = id;
         act.hydrateFromAttributes(resp.data.data.attributes, resp.data.included);
         return act;
@@ -83,17 +83,38 @@ export class Act extends Model {
     const userData = included.find(i => i.id == this.advocateId && i.type === "advocate");
 
     if (userData) {
-      this.advocate = new User();
-      this.advocate.id = this.advocateId;
-      this.advocate.hydrateFromAttributes(userData.attributes);
+      this._advocate = new User();
+      this._advocate.id = this.advocateId;
+      this._advocate.hydrateFromAttributes(userData.attributes);
     }
 
     const actTypeData = included.find(i => i.id == this.actTypeId && i.type === "act_type");
 
     if (actTypeData) {
-      this.actType = new ActType();
-      this.actType.id = this.actTypeId;;
-      this.actType.hydrateFromAttributes(actTypeData.attributes);
+      this._actType = new ActType();
+      this._actType.id = this.actTypeId;;
+      this._actType.hydrateFromAttributes(actTypeData.attributes);
+    }
+  }
+
+  /**
+   * Get linked advocate or make an extra HTTP query to get
+   */
+  public getAdvocate(): Promise<User> {
+    if (this._advocate) {
+      return Promise.resolve(this._advocate);
+    } else {
+      return User.get(this.advocateId, this.token)
+        .then(advocate => this._advocate = advocate);
+    }
+  }
+
+  public getActType(): Promise<ActType> {
+    if (this._actType) {
+      return Promise.resolve(this._actType);
+    } else {
+      return ActType.get(this.actTypeId, this.token)
+        .then(actType => this._actType = actType);
     }
   }
 
