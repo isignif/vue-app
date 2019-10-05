@@ -2,6 +2,8 @@
   <v-autocomplete :items="options" label="Type d'acte à signifier" item-value="id" v-model="select"></v-autocomplete>
 </template>
 <script>
+import { ActType } from "../models/ActType";
+
 export default {
   name: "ActTypeSelect",
   created: function() {
@@ -9,21 +11,18 @@ export default {
   },
   methods: {
     load: function() {
-      this.$http
-        .get("act_types", {
-          headers: { Authorization: this.$store.state.currentUser.token }
+      this.loading = true;
+
+      ActType.all()
+        .then(actTypes => {
+          this.options = actTypes.map(actType => ({
+            id: actType.id,
+            text: actType.name
+          }));
         })
-        .then(response => this.extractActTypeOptionsFromResponse(response.data))
-        .catch(error => console.error(error));
+        .catch(e => this.$toast.error(`Une erreur est survenue. (${e.message})`))
+        .finally(() => this.loading = false);
     },
-    extractActTypeOptionsFromResponse: function(responseData) {
-      this.options = responseData.data.map(actType => {
-        return {
-          id: actType.id,
-          text: actType.attributes.name
-        };
-      });
-    }
   },
   data: function() {
     return {

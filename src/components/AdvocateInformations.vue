@@ -2,8 +2,8 @@
   <div>
     <Loader v-if="loading" />
 
-    <div v-else>
-      <h1 class="pb-5">{{ firstname }} {{ lastname }}</h1>
+    <div v-if="user && loading === false">
+      <h1 class="pb-5">{{ user.firstName }} {{ user.lastName }}</h1>
 
       <v-card>
         <v-list two-line>
@@ -13,7 +13,7 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>{{ phone }}</v-list-tile-title>
+              <v-list-tile-title>{{ user.phone }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
@@ -25,7 +25,7 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>{{ email }}</v-list-tile-title>
+              <v-list-tile-title>{{ user.email }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
 
@@ -37,8 +37,8 @@
             </v-list-tile-action>
 
             <v-list-tile-content>
-              <v-list-tile-title>{{ address_1 }} {{ address_2 }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ town }} {{ zip_code }}</v-list-tile-sub-title>
+              <v-list-tile-title>{{ user.address1 }} {{ user.address2 }}</v-list-tile-title>
+              <v-list-tile-sub-title>{{ user.town }} {{ user.zipCode }}</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -48,6 +48,7 @@
 </template>
 <script>
 import Loader from "./Loader";
+import { User } from '../models/User';
 
 export default {
   name: "AdvocateInformations",
@@ -57,26 +58,10 @@ export default {
   },
   methods: {
     fetch() {
-      this.$http
-        .get(`advocates/${this.id}`, {
-          headers: { Authorization: this.$store.state.currentUser.token }
-        })
-        .then(response => {
-          let attributes = response.data.data.attributes;
-
-          this.firstname = attributes.firstname;
-          this.lastname = attributes.lastname;
-          this.email = attributes.email;
-          this.phone = attributes.phone;
-          this.address_1 = attributes.address_1;
-          this.address_2 = attributes.address_2;
-          this.zip_code = attributes.zip_code;
-          this.town = attributes.town;
-          this.phone = attributes.phone;
-
-          this.loading = false;
-        })
-        .catch(error => console.error(error));
+      User.get(this.id, this.$store.state.currentUser.token)
+          .then(user => this.user = user)
+          .catch(error => console.error(error))
+          .finally(() => this.loading = false);
     }
   },
   mounted() {
@@ -85,9 +70,7 @@ export default {
   data() {
     return {
       loading: true,
-      firstname: null,
-      lastname: null,
-      email: null
+      user: null,
     };
   }
 };

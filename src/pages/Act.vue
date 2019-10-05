@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loader v-if="loading" />
-    <v-layout row wrap v-else>
+    <v-layout row wrap  v-if="act && loading === false">
       <v-flex xs10 class="pa-3 white elevation-2">
         <div>
           <h1>Acte n° {{ act.id }}</h1>
@@ -37,7 +37,7 @@
 
                   <v-list-tile-content>
                     <v-list-tile-title>{{ act.billRecipient }}</v-list-tile-title>
-                    <v-list-tile-sub-title v-if="bill_siret">SIRET: {{ act.billSiret }}</v-list-tile-sub-title>
+                    <v-list-tile-sub-title v-if="act.billSiret">SIRET: {{ act.billSiret }}</v-list-tile-sub-title>
                     <v-list-tile-sub-title>{{ act.billAddress }}, {{ act.billZipCode }}, {{ act.billTown }}</v-list-tile-sub-title>
                   </v-list-tile-content>
                 </v-list-tile>
@@ -53,7 +53,7 @@
                   </v-list-tile-content>
                 </v-list-tile>
 
-                <v-list-tile v-if="bill_phone">
+                <v-list-tile v-if="act.billPhone">
                   <v-list-tile-action>
                     <v-icon>phone</v-icon>
                   </v-list-tile-action>
@@ -88,17 +88,10 @@ export default {
   },
   methods: {
     fetch() {
-      this.$http
-        .get(`acts/${this.$route.params.id}`, {
-          headers: {
-            Authorization: this.$store.state.currentUser.token
-          }
-        })
-        .then(response => {
-          this.act = new Act(response.data.data);
-          this.loading = false;
-        })
-        .catch(error => console.error(error));
+      Act.get(this.$route.params.id, this.$store.state.currentUser.token)
+        .then(act =>  this.act = act)
+        .catch(error => console.error(error))
+        .finally(() => this.loading = false);
     }
   },
   mounted() {

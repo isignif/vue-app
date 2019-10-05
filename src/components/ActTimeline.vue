@@ -8,25 +8,16 @@
         :key="actHistory.id"
         >
       <v-card xs12
-        :colora="getStepColor(actHistory)" flat
+        :colora="actHistory.color"
+        flat
         class="text-xs-right"
       >
-        <v-card-title primary-title class="headline pb-0">{{ getHumanReadableStep(actHistory) }}</v-card-title>
+        <v-card-title primary-title class="headline pb-0">{{ actHistory.humanReadableStep }}</v-card-title>
         <v-card-text class="pt-0">
-          {{ getAuthorName(actHistory) }}
-          <span
-            v-if="getSignificationTitle(actHistory)"
-          >@ {{ getSignificationTitle(actHistory) }}</span>
-
-          <span class="grey--text">{{ getActHistoryDate(actHistory) }}</span>
-
-
+          {{ actHistory.user ? actHistory.user.completeName : '???' }}
+          <span>@ {{ actHistory.signification }}</span>
+          <span class="grey--text">{{ actHistory.formatedCreatedAt }}</span>
         </v-card-text>
-        <!-- <template v-slot:icon>
-          <v-avatar>
-            <img src="http://i.pravatar.cc/64">
-          </v-avatar>
-        </template>-->
       </v-card>
     </v-flex>
   </v-layout>
@@ -34,8 +25,8 @@
 <script lang="ts">
 import Vue from "vue";
 
-import { User, IUserDefinition } from "../models/User";
-import { ActHistory, IActHistoryDefinition } from "../models/ActHistory";
+import { User } from "../models/User";
+import { ActHistory } from "../models/ActHistory";
 import { HttpResponse } from "vue-resource/types/vue_resource";
 
 export default Vue.extend({
@@ -44,51 +35,18 @@ export default Vue.extend({
     actId: Number
   },
   data: () => ({
+    loading: false,
     actHistories: [],
     included: []
   }),
   methods: {
-    getStepColor(actHistory: IActHistoryDefinition): string {
-      return new ActHistory(actHistory).color;
-    },
-    getHumanReadableStep(actHistory: IActHistoryDefinition): string {
-      return new ActHistory(actHistory).humanReadableStep;
-    },
-    getActHistoryDate(actHistory: IActHistoryDefinition): string {
-      return new ActHistory(actHistory).formatedCreatedAt;
-    },
-    getAuthorName(actHistory: IActHistoryDefinition): string {
-      const userId = actHistory.attributes.user_id;
-
-      const userDefinition: IUserDefinition = this.included.find(
-        (s: IUserDefinition) => {
-          return s.id == userId && s.type === "user";
-        }
-      );
-
-      const user = new User(userDefinition);
-
-      return user.completeName;
-    },
-    getSignificationTitle(actHistory: IActHistoryDefinition) {
-      const significationId = actHistory.attributes.signification_id;
-      const signification = this.included.find(
-        s => s.id == significationId && s.type === "signification"
-      );
-
-      return signification ? signification.attributes.name : null;
-    },
     async fetch() {
-      (this.$http.get(`acts/${this.actId}/act_histories`, {
-        headers: { Authorization: this.$store.state.currentUser.token }
-      }) as Promise<HttpResponse>)
-        .then(res => {
-          this.actHistories = res.data.data;
-          this.included = res.data.included;
-        })
-        .catch(e =>
-          this.$toast.error(`Une erreur est survenue. (${e.message})`)
-        );
+      this.loading = true;
+
+      ActHistory.fromAct(this.actId, this.$store.state.currentUser.token)
+        .then(actHistories =>  this.actHistories = actHistories)
+        .catch(e => this.$toast.error(`Une erreur est survenue. (${e.message})`))
+        .finally(() => this.loading = false);
     }
   },
   mounted() {
