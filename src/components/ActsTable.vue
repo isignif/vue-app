@@ -17,8 +17,8 @@
         <tr @click="props.expanded = !props.expanded">
           <!-- Référence de l'acte -->
           <td>
-            {{ getActName(props.item) }}<br>
-            <span class="grey--text">{{ getActTypeName(props.item.attributes.act_type_id) }}</span>
+            {{ props.item.name }}<br>
+            <span class="grey--text">{{ props.item.actType.name }}</span>
           </td>
           <td>
             {{ countSignifications(props.item.id) ? `${countSignifications(props.item.id)} signification` : `${countSignifications(props.item.id)} significations` }}
@@ -31,7 +31,7 @@
           </td>-->
           <!-- Etape -->
           <td class="text-xs-center">
-            <ActHistoryStep :step="props.item.attributes.current_step" />
+            <ActHistoryStep :step="props.item.currentStep" />
           </td>
           <!-- Date de création -->
           <td class="text-xs-right">
@@ -64,6 +64,7 @@
 
 <script>
 import ActHistoryStep from "./ActHistoryStep";
+import { Act } from '../models/Act';
 
 export default {
   name: "ActsTable",
@@ -73,72 +74,25 @@ export default {
   },
   methods: {
     fetch() {
-      this.$http
-        .get(`acts`, {
-          headers: { Authorization: this.$store.state.currentUser.token }
-        })
-        .then(response => {
-          this.acts = response.data.data;
-          this.actTypes = response.data.included.filter(
-            included => included.type == "act_type"
-          );
-          this.users = response.data.included.filter(
-            included =>
-              included.type == "advocate" || included.type == "bailiff"
-          );
-          // this.actHistories = response.data.included.filter((included) => included.type == 'act_histories')
-          this.significations = response.data.included.filter(
-            included => included.type == "signification"
-          );
-          this.loading = false;
-        })
-        .catch(error => console.error(error));
-    },
-    getActName(act) {
-      return act.attributes.reference || `Acte N°${act.id}`;
-    },
-    getActTypeName(actTypeId) {
-      const actType = this.actTypes.find(actType => actType.id == actTypeId);
 
-      if (!actType) {
-        return "?";
-      }
+      this.loading = true;
 
-      const actTypeName = actType.attributes.name;
-      // return actTypeName;
-      const trunc = actTypeName.substring(0, 40);
-      return trunc.length === actTypeName.length ? trunc : trunc + '...';
+      Act.all(this.$store.state.currentUser.token)
+      .then(acts => this.acts = acts)
+      .catch(e => {
+        this.$toast.error(`Une erreur est survenue. (${e.message})`);
+        console.error(e);
+        })
+        .finally(() => this.loading = false);
     },
     countSignifications(actId) {
+      return 666;
       const actIdInt = parseInt(actId);
 
       return this.significations
                 .filter(signification => signification.attributes.act_id === actIdInt)
                 .length;
     },
-    // getuserName(userId) {
-    //   const userIdString = userId.toString();
-    //   const user = this.users.find(user => user.id === userIdString);
-
-    //   if (user) {
-    //     return `${user.attributes.firstname} ${user.attributes.lastname}`;
-    //   }
-
-    //   return "?";
-    // },
-    getBailiffsNames(actId) {
-      const actIdInt = parseInt(actId);
-
-      const actBailiffIds = this.significations
-        .filter(signification => signification.attributes.act_id === actIdInt)
-        .map(signification => parseInt(signification.id));
-      return this.users
-        .filter(bailiff => actBailiffIds.indexOf(bailiff.id))
-        .map(
-          bailiff =>
-            `${bailiff.attributes.firstname} ${bailiff.attributes.lastname}`
-        );
-    }
   },
   mounted() {
     this.fetch();
