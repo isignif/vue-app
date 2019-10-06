@@ -28,7 +28,11 @@
               </v-btn>
             </p>
             <p class="text-xs-right">
-              <v-btn color="primary" @click="finishStep1" :disabled="!isFirstStepValid">Etape suivante</v-btn>
+              <v-btn
+                color="primary"
+                @click="finishStep1"
+                :disabled="!isFirstStepValid"
+              >Etape suivante</v-btn>
             </p>
           </v-flex>
         </v-stepper-content>
@@ -49,40 +53,40 @@
           </v-layout>
         </v-stepper-content>
 
-      <v-stepper-content step="3">
-        <v-flex class="mb-5">
-          <v-text-field
-            v-model="reference"
-            label="Référence de l'acte"
-            required
-            prepend-icon="label"
-          ></v-text-field>
-          <v-text-field
-            v-model="reference"
-            label="Date limite souhaité"
-            required
-            prepend-icon="label"
-          ></v-text-field>
-          <v-checkbox v-model="express" label="Acte urgent" required prepend-icon="timer"></v-checkbox>
-          <p class="text-xs-right">
-            <v-btn flat @click="currentStep = 2">Précédent</v-btn>
-            <v-btn color="primary" @click="finishStep3">Confirmer</v-btn>
-          </p>
-          <v-dialog v-model="displayFinalConfirmation" width="500">
-            <v-card>
-              <v-card-title class="headline grey lighten-2" primary-title>Confirmation de l'acte</v-card-title>
-              <v-card-text>Vous êtes sur le point de confirmer votre acte. Vous vous engagez à vous acquiter des frais liés à cette prestation.</v-card-text>
-              <v-divider></v-divider>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="confirmAct">J'accepte</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-flex>
-      </v-stepper-content>
-    </v-stepper-items>
-  </v-stepper>
+        <v-stepper-content step="3">
+          <v-flex class="mb-5">
+            <v-text-field
+              v-model="reference"
+              label="Référence de l'acte"
+              required
+              prepend-icon="label"
+            ></v-text-field>
+            <v-text-field
+              v-model="reference"
+              label="Date limite souhaité"
+              required
+              prepend-icon="label"
+            ></v-text-field>
+            <v-checkbox v-model="express" label="Acte urgent" required prepend-icon="timer"></v-checkbox>
+            <p class="text-xs-right">
+              <v-btn flat @click="currentStep = 2">Précédent</v-btn>
+              <v-btn color="primary" @click="finishStep3">Confirmer</v-btn>
+            </p>
+            <v-dialog v-model="displayFinalConfirmation" width="500">
+              <v-card>
+                <v-card-title class="headline grey lighten-2" primary-title>Confirmation de l'acte</v-card-title>
+                <v-card-text>Vous êtes sur le point de confirmer votre acte. Vous vous engagez à vous acquiter des frais liés à cette prestation.</v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" flat @click="confirmAct">J'accepte</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-flex>
+        </v-stepper-content>
+      </v-stepper-items>
+    </v-stepper>
   </v-container>
 </template>
 
@@ -90,6 +94,7 @@
 import ActTypeSelect from "../components/ActTypeSelect";
 import SignificationNew from "../components/SignificationNew";
 import SignificationEdit from "../components/SignificationEdit";
+import { Act } from "../models/Act";
 
 export default {
   name: "ActNew",
@@ -140,6 +145,23 @@ export default {
         "act[significations]": significations
       };
 
+      const act = new Act();
+      act.actTypeId = this.actTypeId;
+      act.reference = this.reference;
+
+      act
+        .save(this.$store.state.currentUser.token)
+        .then(() => {
+          console.log(act)
+        })
+        .catch(error => {
+          this.$toast.error(
+            "Le couple iddentifiant / mot de passe n'est pas valide"
+          );
+        })
+        .finally(() => (this.loading = false));
+
+        
       this.$http
         .post("acts", parameters, {
           headers: { Authorization: this.$store.state.currentUser.token }
@@ -190,7 +212,9 @@ export default {
         .then(() => {
           this.displayFinalConfirmation = false;
           this.$router.push({ name: "act", params: { id: this.actId } });
-          this.$toast.success("L'acte a été cré. Votre demande va être traitée prochainement?");
+          this.$toast.success(
+            "L'acte a été cré. Votre demande va être traitée prochainement?"
+          );
         })
         .catch(error => this.$toast.error(error.message));
     },

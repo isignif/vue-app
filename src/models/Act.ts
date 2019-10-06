@@ -99,6 +99,8 @@ export class Act extends Model {
     }
   }
 
+  // RELATIONS
+
   /**
    * Get linked advocate or make an extra HTTP query to get
    */
@@ -127,6 +129,35 @@ export class Act extends Model {
       return Signification.all(this.id, this.token)
         .then(significations => this._significations = significations);
     }
+  }
+
+  // METHODS
+
+  public save(token: string = null): Promise<Act> {
+    if (this.id) throw new Error('TODO: update')
+
+    if (token) this.token = token;
+    if (!this.token) throw new Error('You must provide a valid JWT token.');
+
+    const formData = new FormData();
+    formData.append('act[express]', String(this.express));
+    formData.append('act[act_type_id]', String(this.actTypeId));
+    formData.append('act[reference]', this.reference);
+    formData.append('act[bill_reference]', this.billReference);
+    formData.append('act[bill_recipient]', this.billRecipient);
+    formData.append('act[bill_zip_code]', this.billZipCode);
+    formData.append('act[bill_town]', this.billTown);
+    formData.append('act[bill_address]', this.billAddress);
+    formData.append('act[bill_siret]', this.billSiret);
+    formData.append('act[bill_email]', this.billEmail);
+    formData.append('act[bill_phone]', this.billPhone);
+
+    return axios.post(`${apiUrl}/acts`, formData, { headers: { Authorization: this.token } })
+      .then(response => {
+        const responseData = response.data;
+        this.id = parseInt(responseData.data.id);
+        return this;
+      });
   }
 
   get name(): string {
