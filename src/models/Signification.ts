@@ -94,4 +94,26 @@ export class Signification extends Model {
     }
   }
 
+  public save(token: string = null): Promise<Signification> {
+    if (this.id) throw new Error('TODO: update')
+
+    if (token) this.token = token;
+    if (!this.token) throw new Error('You must provide a valid JWT token.');
+
+    const formData = new FormData();
+    formData.append('signification[name]', String(this.name));
+    formData.append('signification[act_id]', String(this.actId));
+    formData.append('signification[town_id]', String(this.townId));
+    formData.append('signification[bailiff_comment]', this.bailiffComment);
+
+    const url = `${apiUrl}/acts/${this.actId}/significations`;
+
+    return axios.post(url, formData, { headers: { Authorization: this.token } })
+      .then(response => {
+        const responseData = response.data;
+        this.id = parseInt(responseData.data.id);
+        return this;
+      });
+  }
+
 }
