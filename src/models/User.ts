@@ -24,18 +24,18 @@ export class User extends Model {
 
   static get(id: number, token: string): Promise<User> {
     const url = `${apiUrl}/advocates/${id}`;
-    
-    return axios.get(url, {headers: { Authorization: token}})
-    .then((resp) => {
-            const user = new User();
-            user.id = id;
-            user.hydrateFromAttributes(resp.data.data.attributes);
-            return user;
-          })
-          .catch(e => {
-            console.error(e);
-            return null;
-          })
+
+    return axios.get(url, { headers: { Authorization: token } })
+      .then((resp) => {
+        const user = new User();
+        user.id = id;
+        user.hydrateFromAttributes(resp.data.data.attributes);
+        return user;
+      })
+      .catch(e => {
+        console.error(e);
+        return null;
+      })
   }
 
   public hydrateFromAttributes(attributes: any): void {
@@ -62,5 +62,20 @@ export class User extends Model {
 
   get completeName(): string {
     return `${this.firstName} ${this.lastName}`;
+  }
+
+  /**
+   * Make an HTTP request to get a JWT token
+   * @param password 
+   */
+  public getToken(password: string): Promise<string> {
+    const url = `${apiUrl}/tokens`;
+
+    const formData = new FormData();
+    formData.append("user[email]", this.email);
+    formData.append("user[password]", password);
+
+    return axios.post(url, formData)
+      .then(resp => resp.data.token)
   }
 }
