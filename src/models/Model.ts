@@ -3,21 +3,12 @@ export interface IDefinitionAttributes{
   updated_at: string;
 }
 
-/**
- * API JSON Definition
- */
-export interface IDefinition {
-  id: number;
-  type: string;
-  attributes: IDefinitionAttributes;
-}
-
 export abstract class Model {
   public id: number;
   public createdAt: string;
   public updatedAt: string;
 
-  public readonly type: string; 
+  public token: string;
 
   get createdAtDate(): Date {
     return new Date(this.createdAt);

@@ -13,7 +13,7 @@ export class Message extends Model {
   public userId: number;
   public readAt: string;
 
-  public user: User;
+  public _user: User;
 
   static fromSignification(actId: number, significationId: number, token: string): Promise<Message[]> {
     const url = `${apiUrl}/acts/${actId}/significations/${significationId}/messages`;
@@ -54,10 +54,18 @@ export class Message extends Model {
     const userData = included.find(i => i.id == this.userId && i.type === "user");
 
     if (userData) {
-      this.user = new User();
-      this.user.id = this.userId;
-      this.user.hydrateFromAttributes(userData.attributes);
+      this._user = new User();
+      this._user.id = this.userId;
+      this._user.hydrateFromAttributes(userData.attributes);
     }
   }
 
+  public getUser(): Promise<User> {
+    if (this._user) {
+      return Promise.resolve(this._user);
+    } else {
+      return User.get(this.userId, this.token)
+        .then(user => this._user = user);
+    }
+  }
 }

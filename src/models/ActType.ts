@@ -26,7 +26,6 @@ export class ActType extends Model {
       });
   }
 
-
   static get(id: number, token: string): Promise<ActType> {
     const url = `${apiUrl}/act_types/${id}`;
 

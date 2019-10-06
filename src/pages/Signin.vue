@@ -4,7 +4,7 @@
     <v-form v-model="valid">
       <v-container>
         <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-        <br>
+        <br />
         <v-text-field
           v-model="password"
           label="Mot de passe"
@@ -22,14 +22,13 @@
           <v-btn flat small secondary :to="{ name: 'signup'}">Créer un compte</v-btn>
           <v-btn flat small secondary>Mot de passe oublié ?</v-btn>
         </div>
-
-
       </v-container>
     </v-form>
   </v-card>
 </template>
 <script >
 import Loader from "../components/Loader";
+import { User } from "../models/User";
 
 export default {
   components: {
@@ -45,17 +44,15 @@ export default {
   }),
   methods: {
     submit() {
-      const params = {
-        "user[email]": this.email,
-        "user[password]": this.password
-      };
-
       this.loading = true;
 
-      this.$http
-        .post(`tokens`, params)
-        .then(response => {
-          this.$store.dispatch("currentUser/setToken", response.data.token);
+      const user = new User();
+      user.email = this.email;
+
+      user
+        .getToken(this.password)
+        .then(token => {
+          this.$store.dispatch("currentUser/setToken", token);
 
           let userName = this.$store.getters["currentUser/completeName"];
           let userId = this.$store.getters["currentUser/id"];
@@ -64,7 +61,9 @@ export default {
           this.$router.push({ name: "advocate", params: { id: userId } });
         })
         .catch(error => {
-          this.$toast.error("Le couple iddentifiant / mot de passe n'est pas valide");
+          this.$toast.error(
+            "Le couple iddentifiant / mot de passe n'est pas valide"
+          );
         })
         .finally(() => (this.loading = false));
     }

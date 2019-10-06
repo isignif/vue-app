@@ -18,17 +18,11 @@
           <!-- Référence de l'acte -->
           <td>
             {{ props.item.name }}<br>
-            <span class="grey--text">{{ props.item.actType.name }}</span>
+            <span class="grey--text">{{ props.item.getActType() }}</span>
           </td>
           <td>
             {{ countSignifications(props.item.id) ? `${countSignifications(props.item.id)} signification` : `${countSignifications(props.item.id)} significations` }}
           </td>
-          <!-- Huissier de justice -->
-          <!-- <td>
-            <ul>
-              <li :key="bailiffName" v-for="bailiffName in getBailiffsNames(props.item.id)">{{ bailiffName }}</li>
-            </ul>
-          </td>-->
           <!-- Etape -->
           <td class="text-xs-center">
             <ActHistoryStep :step="props.item.currentStep" />
@@ -42,22 +36,6 @@
           </td>
         </tr>
       </template>
-      <!-- dipslay bailiffs -->
-      <!-- <template v-slot:expand="props">
-        <v-card flat>
-          <v-list>
-            <template v-for="item in getBailiffsNames(props.item.id)">
-              <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
-              <v-list-tile :key="item" avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title v-html="item"></v-list-tile-title>
-                  <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </template>
-          </v-list>
-        </v-card>
-      </template>-->
     </v-data-table>
   </v-card>
 </template>
@@ -87,11 +65,11 @@ export default {
     },
     countSignifications(actId) {
       return 666;
-      const actIdInt = parseInt(actId);
+      // const actIdInt = parseInt(actId);
 
-      return this.significations
-                .filter(signification => signification.attributes.act_id === actIdInt)
-                .length;
+      // return this.significations
+      //           .filter(signification => signification.attributes.act_id === actIdInt)
+      //           .length;
     },
   },
   mounted() {

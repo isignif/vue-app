@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Model } from './Model';
 import { apiUrl } from './config';
 import { User } from './User';
-
+import { Act } from './Act';
 
 
 export class ActHistory extends Model {
@@ -12,7 +12,8 @@ export class ActHistory extends Model {
   public actId: number;
   public significationId: number;
 
-  public user: User;
+  public _user: User;
+  public _act: Act;
 
   static fromAct(actId: number, token: string): Promise<ActHistory[]> {
     const url = `${apiUrl}/acts/${actId}/act_histories`;
@@ -54,9 +55,27 @@ export class ActHistory extends Model {
     const userData = included.find(i => i.id == this.userId && i.type === "user");
 
     if (userData) {
-      this.user = new User();
-      this.user.id = this.userId;
-      this.user.hydrateFromAttributes(userData.attributes);
+      this._user = new User();
+      this._user.id = this.userId;
+      this._user.hydrateFromAttributes(userData.attributes);
+    }
+  }
+
+  public getAct(): Promise<Act> {
+    if (this._act) {
+      return Promise.resolve(this._act);
+    } else {
+      return Act.get(this.actId, this.token)
+        .then(act => this._act = act);
+    }
+  }
+
+  public getUser(): Promise<User> {
+    if (this._user) {
+      return Promise.resolve(this._user);
+    } else {
+      return User.get(this.userId, this.token)
+        .then(user => this._user = user);
     }
   }
 
