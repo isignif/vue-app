@@ -139,20 +139,26 @@ export default {
         };
       });
 
-      const parameters = {
-        "act[act_type_id]": this.actTypeId,
-        "act[reference]": this.reference,
-        "act[significations]": significations
-      };
+      // const parameters = {
+      //   "act[act_type_id]": this.actTypeId,
+      //   "act[reference]": this.reference,
+      //   "act[significations]": significations
+      // };
 
       const act = new Act();
       act.actTypeId = this.actTypeId;
       act.reference = this.reference;
+      act.token = this.$store.state.currentUser.token;
 
       act
-        .save(this.$store.state.currentUser.token)
+        .save(significations)
         .then(() => {
-          console.log(act)
+          const responseData = response.data;
+          this.actId = responseData.data.id;
+          this.createdSignifications = responseData.included.filter(
+            inc => inc.type == "signification"
+          );
+          this.currentStep = 2;
         })
         .catch(error => {
           this.$toast.error(
@@ -161,20 +167,19 @@ export default {
         })
         .finally(() => (this.loading = false));
 
-        
-      this.$http
-        .post("acts", parameters, {
-          headers: { Authorization: this.$store.state.currentUser.token }
-        })
-        .then(response => {
-          const responseData = response.data;
-          this.actId = responseData.data.id;
-          this.createdSignifications = responseData.included.filter(
-            inc => inc.type == "signification"
-          );
-          this.currentStep = 2;
-        })
-        .catch(error => console.error(error));
+      // this.$http
+      //   .post("acts", parameters, {
+      //     headers: { Authorization: this.$store.state.currentUser.token }
+      //   })
+      //   .then(response => {
+      //     const responseData = response.data;
+      //     this.actId = responseData.data.id;
+      //     this.createdSignifications = responseData.included.filter(
+      //       inc => inc.type == "signification"
+      //     );
+      //     this.currentStep = 2;
+      //   })
+      //   .catch(error => console.error(error));
     },
     finishStep3: function() {
       const url = `acts/${this.actId}`;

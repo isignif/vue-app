@@ -6,6 +6,11 @@ import { User } from './User';
 import { ActType } from './ActType';
 import { Signification } from './Signification';
 
+interface ActSignificationParams {
+  town_id: number;
+  name: string;
+}
+
 export class Act extends Model {
 
   public step: string;
@@ -133,30 +138,29 @@ export class Act extends Model {
 
   // METHODS
 
-  public save(token: string = null): Promise<Act> {
+  public save(significations: ActSignificationParams[] = []): Promise<any> {
     if (this.id) throw new Error('TODO: update')
-
-    if (token) this.token = token;
     if (!this.token) throw new Error('You must provide a valid JWT token.');
 
     const formData = new FormData();
-    formData.append('act[express]', String(this.express));
-    formData.append('act[act_type_id]', String(this.actTypeId));
-    formData.append('act[reference]', this.reference);
-    formData.append('act[bill_reference]', this.billReference);
-    formData.append('act[bill_recipient]', this.billRecipient);
-    formData.append('act[bill_zip_code]', this.billZipCode);
-    formData.append('act[bill_town]', this.billTown);
-    formData.append('act[bill_address]', this.billAddress);
-    formData.append('act[bill_siret]', this.billSiret);
-    formData.append('act[bill_email]', this.billEmail);
-    formData.append('act[bill_phone]', this.billPhone);
+    if(this.express) formData.append('act[express]', String(this.express));
+    if(this.actTypeId) formData.append('act[act_type_id]', String(this.actTypeId));
+    if(this.reference) formData.append('act[reference]', this.reference);
+    if(this.billReference) formData.append('act[bill_reference]', this.billReference);
+    if(this.billRecipient) formData.append('act[bill_recipient]', this.billRecipient);
+    if(this.billZipCode) formData.append('act[bill_zip_code]', this.billZipCode);
+    if(this.billTown) formData.append('act[bill_town]', this.billTown);
+    if(this.billAddress) formData.append('act[bill_address]', this.billAddress);
+    if(this.billSiret) formData.append('act[bill_siret]', this.billSiret);
+    if(this.billEmail) formData.append('act[bill_email]', this.billEmail);
+    if(this.billPhone) formData.append('act[bill_phone]', this.billPhone);
+    if(significations) formData.append('act[significations]', JSON.stringify(significations));
 
     return axios.post(`${apiUrl}/acts`, formData, { headers: { Authorization: this.token } })
       .then(response => {
         const responseData = response.data;
         this.id = parseInt(responseData.data.id);
-        return this;
+        return responseData;
       });
   }
 
