@@ -42,7 +42,7 @@
 
 <script>
 import ActHistoryStep from "./ActHistoryStep";
-import { Act } from '../models/Act';
+import { Act } from '../isignifClient/src/Act';
 
 export default {
   name: "ActsTable",

@@ -26,9 +26,9 @@
 <script lang="ts">
 import Vue from "vue";
 
-import { User } from "../models/User";
+import { User } from "../isignifClient/src/User";
 import ActHistoryCard from './ActHistoryCard.vue';
-import { ActHistory } from '../models/ActHistory';
+import { ActHistory } from '../isignifClient/src/ActHistory';
 import { HttpResponse } from "vue-resource/types/vue_resource";
 
 export default Vue.extend({

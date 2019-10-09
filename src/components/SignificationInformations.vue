@@ -6,8 +6,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { Signification } from '../models/Signification';
-import { User } from '../models/User';
+import { Signification } from '../isignifClient/src/Signification';
+import { User } from '../isignifClient/src/User';
 
 export default Vue.extend({
     name: 'SignificationInformations',

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Message } from "../models/Message";
+import { Message } from "../isignifClient/src/Message";
 
 export default {
   name: "Messages",
