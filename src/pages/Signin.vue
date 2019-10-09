@@ -28,7 +28,7 @@
 </template>
 <script >
 import Loader from "../components/Loader";
-import { User } from "../models/User";
+import { User } from "../isignifClient/src/User";
 
 export default {
   components: {

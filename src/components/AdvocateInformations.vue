@@ -48,7 +48,7 @@
 </template>
 <script>
 import Loader from "./Loader";
-import { User } from '../models/User';
+import { User } from '../isignifClient/src/User';
 
 export default {
   name: "AdvocateInformations",
