@@ -48,7 +48,7 @@
 </template>
 <script>
 import Loader from "./Loader";
-import { User } from '../isignifClient/src/User';
+import { User } from 'isignif-client';
 
 export default {
   name: "AdvocateInformations",
