@@ -86,8 +86,7 @@
 </template>
 <script>
 import Loader from "../components/Loader";
-import { Act } from "../isignifClient/src/Act";
-import { Signification } from "../isignifClient/src/Signification";
+import { Act, Signification } from 'isignif-client';
 import ActTimeline from "../components/ActTimeline";
 import SignificationInformations from "../components/SignificationInformations";
 

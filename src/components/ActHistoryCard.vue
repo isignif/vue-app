@@ -10,8 +10,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { ActHistory } from '../isignifClient/src/ActHistory';
-import { User } from '../isignifClient/src/User';
+import { ActHistory, User } from 'isignif-client';
 
 export default Vue.extend({
   name: 'ActHistoryCard',

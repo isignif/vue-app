@@ -28,7 +28,7 @@
 </template>
 <script >
 import Loader from "../components/Loader";
-import { User } from "../isignifClient/src/User";
+import { User } from 'isignif-client';
 
 export default {
   components: {

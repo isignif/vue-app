@@ -2,7 +2,7 @@
   <v-autocomplete :items="options" label="Type d'acte à signifier" item-value="id" v-model="select"></v-autocomplete>
 </template>
 <script>
-import { ActType } from "../isignifClient/src/ActType";
+import { ActType } from 'isignif-client';
 
 export default {
   name: "ActTypeSelect",
