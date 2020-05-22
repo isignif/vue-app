@@ -1,0 +1,3 @@
+[submodule "isignifClient"]
+	path = src/isignifClient
+	url = git@github.com:isignif/isignif-client.git

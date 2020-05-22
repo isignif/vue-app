@@ -19,6 +19,8 @@ import Acts from "./pages/Acts.vue";
 import Act from "./pages/Act.vue";
 import ActNew from "./pages/ActNew.vue";
 
+import vuetify from './plugins/vuetify';
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(VuetifyToast);
@@ -44,10 +46,11 @@ const router = new VueRouter({
 });
 
 new Vue({
+  vuetify,
   store,
   router,
   render: h => h(App),
   beforeCreate() {
     this.$store.commit("initialiseStore");
   }
-}).$mount("#app");
+} as any).$mount("#app");

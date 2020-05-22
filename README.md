@@ -21,8 +21,8 @@ Elle permet aussi aux huissiers de justice de signifier et suivre les demandes q
 
 ## Installation
 
-1. install dependencies using `yarn install`
-2. build the project using `yarn run build` (or start a development server using `yarn run serve`)
+1. install dependencies using `npm install`
+2. build the project using `npm run build` (or start a development server using `npm run serve`)
 
 ## Produit en [marque blanche](https://fr.wikipedia.org/wiki/Marque_blanche)
 
