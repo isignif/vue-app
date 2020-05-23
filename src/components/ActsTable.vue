@@ -29,7 +29,7 @@
           </td>
           <!-- Date de création -->
           <td class="text-xs-right">
-            <v-btn flat small :to="{ name: 'act', params: { id: props.item.id }}">
+            <v-btn text small :to="{ name: 'act', params: { id: props.item.id }}">
               Voir
               <v-icon>chevron_right</v-icon>
             </v-btn>

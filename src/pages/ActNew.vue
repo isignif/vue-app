@@ -43,7 +43,7 @@
               :name="signification.attributes.name"
             />
             <p class="text-xs-right">
-              <v-btn flat @click="removeAct">Précédent</v-btn>
+              <v-btn text @click="removeAct">Précédent</v-btn>
               <v-btn color="primary" @click="currentStep = 3">Etape suivante</v-btn>
             </p>
           </v-layout>
@@ -65,7 +65,7 @@
           ></v-text-field>
           <v-checkbox v-model="express" label="Acte urgent" required prepend-icon="timer"></v-checkbox>
           <p class="text-xs-right">
-            <v-btn flat @click="currentStep = 2">Précédent</v-btn>
+            <v-btn text @click="currentStep = 2">Précédent</v-btn>
             <v-btn color="primary" @click="finishStep3">Confirmer</v-btn>
           </p>
           <v-dialog v-model="displayFinalConfirmation" width="500">
@@ -75,7 +75,7 @@
               <v-divider></v-divider>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" flat @click="confirmAct">J'accepte</v-btn>
+                <v-btn color="primary" text @click="confirmAct">J'accepte</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>

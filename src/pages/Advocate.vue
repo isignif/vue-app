@@ -3,7 +3,7 @@
     <AdvocateInformations :id="$route.params.id" />
 
     <div v-if="$route.params.id == $store.state.currentUser.id">
-      <v-btn flat color="warning" @click="signout">
+      <v-btn text color="warning" @click="signout">
         <span>Se déconnecter</span>
         <v-icon>exit_to_app</v-icon>
       </v-btn>

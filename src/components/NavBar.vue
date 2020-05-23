@@ -1,18 +1,18 @@
 <template>
   <v-navigation-drawer app v-model="drawer" :mini-variant.sync="mini" hide-overlay stateless>
-    <v-toolbar flat>
+    <v-toolbar >
       <v-list>
-        <v-list-tile>
-          <v-list-tile-title class="title" style="display: flex; justify-content: center">
+        <v-list-item>
+          <v-list-item-avatar>
             <img v-if="mini" src="../assets/branding/favicon.png" height="100%" />
             <img v-else src="../assets/branding/logo.svg" height="100%" />
-          </v-list-tile-title>
-          <v-list-tile-action v-if="!mini">
+          </v-list-item-avatar>
+          <v-list-item-action v-if="!mini">
             <v-btn icon @click.stop="mini = !mini">
               <v-icon>chevron_left</v-icon>
             </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
+          </v-list-item-action>
+        </v-list-item>
       </v-list>
     </v-toolbar>
 
@@ -23,68 +23,68 @@
 
 
       <!-- Dashboard -->
-      <!-- <v-list-tile to="/dashboard" v-if="id">
-        <v-list-tile-action>
+      <!-- <v-list-item to="/dashboard" v-if="id">
+        <v-list-item-action>
           <v-icon>dashboard</v-icon>
-        </v-list-tile-action>
+        </v-list-item-action>
 
-        <v-list-tile-content>
-          <v-list-tile-title>Dashboard</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile> -->
+        <v-list-item-content>
+          <v-list-item-title>Dashboard</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item> -->
 
       <!-- Mes actes -->
-      <v-list-tile to="/acts" sub-item>
-        <v-list-tile-action>
+      <v-list-item to="/acts" sub-item>
+        <v-list-item-action>
           <v-icon>assignment</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-title>Mes demandes</v-list-tile-title>
-      </v-list-tile>
+        </v-list-item-action>
+        <v-list-item-title>Mes demandes</v-list-item-title>
+      </v-list-item>
 
       <!-- Demander une signification -->
-      <v-list-tile :to="{ name: 'new_act' }">
-        <v-list-tile-action>
+      <v-list-item :to="{ name: 'new_act' }">
+        <v-list-item-action>
           <v-icon>create_new_folder</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-title>Déposer un acte</v-list-tile-title>
-      </v-list-tile>
+        </v-list-item-action>
+        <v-list-item-title>Déposer un acte</v-list-item-title>
+      </v-list-item>
 
 
       <v-divider />
 
-      <v-list-tile :to="{ name: 'advocate', params: { id: id }}" v-if="id">
-        <v-list-tile-action>
+      <v-list-item :to="{ name: 'advocate', params: { id: id }}" v-if="id">
+        <v-list-item-action>
           <v-icon>person</v-icon>
-        </v-list-tile-action>
+        </v-list-item-action>
 
-        <v-list-tile-content>
-          <v-list-tile-title>{{ completeName }}</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        <v-list-item-content>
+          <v-list-item-title>{{ completeName }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
       <!-- Signin -->
-      <v-list-tile to="/signin" v-if="!id">
-        <v-list-tile-action>
+      <v-list-item to="/signin" v-if="!id">
+        <v-list-item-action>
           <v-icon>account_circle</v-icon>
-        </v-list-tile-action>
+        </v-list-item-action>
 
-        <v-list-tile-content>
-          <v-list-tile-title>Se connecter</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        <v-list-item-content>
+          <v-list-item-title>Se connecter</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
       <v-divider />
 
       <!-- Aide -->
-      <v-list-tile to="/help">
-        <v-list-tile-action>
+      <v-list-item to="/help">
+        <v-list-item-action>
           <v-icon>help</v-icon>
-        </v-list-tile-action>
+        </v-list-item-action>
 
-        <v-list-tile-content>
-          <v-list-tile-title>Aide</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        <v-list-item-content>
+          <v-list-item-title>Aide</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>

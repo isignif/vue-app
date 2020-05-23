@@ -1,13 +1,13 @@
 <template>
   <v-app>
     <NavBar />
-    <v-toolbar app flat>
+    <v-app-bar app flat>
       <v-toolbar-title class="headline ">
         <span>{{title}}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn :to="{ name: 'new_act' }" medium color="primary" style="border-radius: 7px">Déposer un acte</v-btn>
-    </v-toolbar>
+    </v-app-bar>
 
     <v-content>
       <v-container>

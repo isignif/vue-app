@@ -13,6 +13,11 @@ export default {
   name: "Acts",
   components: {
     ActsTable
+  },
+  mounted() {
+    if (!this.$store.state.currentUser.token) {
+        this.$router.push({ name: 'signin' });
+    }
   }
 };
 </script>

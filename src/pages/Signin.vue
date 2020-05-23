@@ -19,8 +19,8 @@
         </div>
 
         <div class="text-xs-center mt-4">
-          <v-btn flat small secondary :to="{ name: 'signup'}">Créer un compte</v-btn>
-          <v-btn flat small secondary>Mot de passe oublié ?</v-btn>
+          <v-btn text small secondary :to="{ name: 'signup'}">Créer un compte</v-btn>
+          <v-btn text small secondary>Mot de passe oublié ?</v-btn>
         </div>
       </v-container>
     </v-form>
