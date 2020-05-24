@@ -49,7 +49,8 @@ export default Vue.extend({
 
       ActHistory.fromAct(this.actId, this.$store.state.currentUser.token)
         .then(actHistories =>  this.actHistories = actHistories)
-        .catch(e => this.$toast.error(`Une erreur est survenue. (${e.message})`))
+        .catch(e => console.error(`Une erreur est survenue. (${e.message})`))
+        // .catch(e => this.$toast.error(`Une erreur est survenue. (${e.message})`))
         .finally(() => this.loading = false);
     }
   },

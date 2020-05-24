@@ -2,10 +2,10 @@
   <v-layout row wrap class="pa-2 my-4 mx-2" align-center>
       <v-text-field v-model="name" label="Nom" v-if="files" required></v-text-field>
       <input v-show="false" type="file" ref="inputUpload" @change="onFileChange" />
-      <v-btn flat @click="files = null" v-if="files">
+      <v-btn text @click="files = null" v-if="files">
         <v-icon>attachment</v-icon>&nbsp;{{ files.name }}
       </v-btn>
-      <v-btn flat @click="$refs.inputUpload.click()" v-else>
+      <v-btn text @click="$refs.inputUpload.click()" v-else>
         <v-icon>cloud_upload</v-icon>&nbsp; Ajouter une pièce jointe
       </v-btn>
       <v-btn color="primary" @click="onSubmit" :disabled="!name || !files" v-if="files">

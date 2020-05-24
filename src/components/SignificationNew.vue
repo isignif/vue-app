@@ -7,7 +7,7 @@
       <TownSelect v-model="townId" />
     </v-flex>
     <v-flex xs1 class="text-xs-right px-2" fill-height>
-      <v-btn flat icon small color="red" @click="deleteSignification">
+      <v-btn text icon small color="red" @click="deleteSignification">
         <v-icon>delete</v-icon>
       </v-btn>
     </v-flex>

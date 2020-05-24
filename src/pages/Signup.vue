@@ -110,9 +110,8 @@
 
           <v-btn :disabled="!valid" @click="submit" large color="primary">Créer son compte</v-btn>
 
-          <v-btn flat small :to="{ name: 'signin'}">J'ai déjà un compte</v-btn>
-
-          <v-btn flat small secondary>Mot de passe oublié</v-btn>
+          <v-btn text small :to="{ name: 'signin'}">J'ai déjà un compte</v-btn>
+          <v-btn text small secondary>Mot de passe oublié</v-btn>
         </v-container>
       </v-form>
     </v-card>
