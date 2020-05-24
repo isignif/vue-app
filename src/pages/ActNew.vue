@@ -18,7 +18,7 @@
             <SignificationNew
               :key="i"
               v-for="(signification, i) in significations"
-              @delete="signification.remove()"
+              @delete="removeSignification(signification)"
               @name-changed="(n) => signification.name = n"
               @town-changed="(n) => signification.townId = n"
             />
@@ -37,10 +37,10 @@
           <v-layout row wrap>
             <SignificationEdit
               :key="'SignificationEdit' + signification.id"
-              v-for="signification in createdSignifications"
+              v-for="signification in significations"
               :signification_id="signification.id"
-              :act_id="actId"
-              :name="signification.attributes.name"
+              :act_id="act.id"
+              :name="signification.name"
             />
             <p class="text-xs-right">
               <v-btn text @click="removeAct">Précédent</v-btn>
@@ -176,8 +176,20 @@ export default {
       this.act.remove()
         .then(() => {
           this.currentStep = 1;
+          this.significations = [];
         })
         .catch(error => console.error(error));
+    },
+    removeSignification: function (signification) {
+      const index = this.significations.findIndex((s) => {
+        return s.name == signification.name && s.townId == signification.townId
+      });
+
+      this.significations.splice(index, 1);
+
+      if (signification.id) {
+        signification.remove();
+      }
     },
     reloadEstimation() {
       // vue.actPrice = null;

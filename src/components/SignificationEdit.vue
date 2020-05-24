@@ -1,7 +1,7 @@
 <template>
   <v-flex xs12 class="mx-2 my-4">
     <v-card class="elevation-1">
-      <v-toolbar card>
+      <v-toolbar>
         <v-toolbar-title>{{ name }}</v-toolbar-title>
       </v-toolbar>
       <v-card-text>
@@ -20,7 +20,7 @@
             </div>
           </template>
         </v-list>
-        <v-alert type="info" dense outline :value="actFiles.length === 0">
+        <v-alert type="info" dense outlined :value="actFiles.length === 0">
           Vous n'avez pas de pièce jointe pour cette signification.
         </v-alert>
       </v-card-text>
