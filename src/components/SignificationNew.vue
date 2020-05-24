@@ -21,19 +21,10 @@ export default {
   components: {
     TownSelect
   },
-  props: ["timestamp"],
   methods: {
     deleteSignification: function() {
       this.$emit("delete");
     },
-    dispatchChange: function() {
-      this.$emit("change", {
-        name: this.name,
-        townId: this.townId,
-        timestamp: this.timestamp,
-        isValid: this.isValid
-      });
-    }
   },
   data: function() {
     return {
@@ -41,17 +32,12 @@ export default {
       townId: null
     };
   },
-  computed: {
-    isValid: function() {
-      return this.name && this.townId;
-    }
-  },
   watch: {
     name: function() {
-      this.dispatchChange();
+      this.$emit("name-changed", this.name);
     },
     townId: function() {
-      this.dispatchChange();
+      this.$emit("town-changed", this.townId);
     }
   }
 };

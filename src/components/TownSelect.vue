@@ -3,7 +3,7 @@
     :items="options"
     label="Ville"
     v-model="select"
-    item-text="text"
+    item-text="name"
     item-value="id"
     :loading="loading"
     hide-no-data
@@ -12,6 +12,7 @@
   ></v-autocomplete>
 </template>
 <script>
+import { Town } from 'isignif-client';
 // https://vuetifyjs.com/en/components/autocompletes#asynchronous-items
 // https://egndigital.com/vuetify-autocomplete-with-remote-search/
 export default {
@@ -20,14 +21,12 @@ export default {
     this.onSearch("", null);
   },
   methods: {
-    onSearch: function(search) {
+    onSearch: function(term) {
       this.loading = true;
 
-      this.$http
-        .post("towns/search", { term: search })
-        .then(response => (this.options = response.data))
+      Town.search(term)
+        .then(towns => this.options = towns)
         .catch(error => {
-          console.error(error);
           this.$toast.error("Une erreur est survenue durant la recherche de la ville");
         })
         .finally(() => (this.loading = false));

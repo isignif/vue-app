@@ -12,15 +12,15 @@
       <v-stepper-items>
         <v-stepper-content step="1">
           <v-flex>
-            <ActTypeSelect v-model="actTypeId" />
+            <ActTypeSelect v-model="act.actTypeId" />
             <h2 v-if="significations.length == 1">Signification</h2>
             <h2 v-if="significations.length > 1">Significations</h2>
             <SignificationNew
-              :key="signification.timestamp"
-              v-for="signification in significations"
-              :timestamp="signification.timestamp"
-              @delete="deleteSignification(signification.timestamp)"
-              @change="updateSignification"
+              :key="i"
+              v-for="(signification, i) in significations"
+              @delete="signification.remove()"
+              @name-changed="(n) => signification.name = n"
+              @town-changed="(n) => signification.townId = n"
             />
             <p class="text-xs-right">
               <v-btn dark bottom right color="secondary" @click.prevent="addSignification()">
@@ -28,7 +28,7 @@
               </v-btn>
             </p>
             <p class="text-xs-right">
-              <v-btn color="primary" @click="finishStep1" :disabled="!isFirstStepValid">Etape suivante</v-btn>
+              <v-btn color="primary" @click="finishStep1">Etape suivante</v-btn>
             </p>
           </v-flex>
         </v-stepper-content>
@@ -52,18 +52,18 @@
       <v-stepper-content step="3">
         <v-flex class="mb-5">
           <v-text-field
-            v-model="reference"
+            v-model="act.reference"
             label="Référence de l'acte"
             required
             prepend-icon="label"
           ></v-text-field>
           <v-text-field
-            v-model="reference"
+            v-model="act.reference"
             label="Date limite souhaité"
             required
             prepend-icon="label"
           ></v-text-field>
-          <v-checkbox v-model="express" label="Acte urgent" required prepend-icon="timer"></v-checkbox>
+          <v-checkbox v-model="act.express" label="Acte urgent" required prepend-icon="timer"></v-checkbox>
           <p class="text-xs-right">
             <v-btn text @click="currentStep = 2">Précédent</v-btn>
             <v-btn color="primary" @click="finishStep3">Confirmer</v-btn>
@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import { Act, Signification } from 'isignif-client';
 import ActTypeSelect from "../components/ActTypeSelect";
 import SignificationNew from "../components/SignificationNew";
 import SignificationEdit from "../components/SignificationEdit";
@@ -100,26 +101,7 @@ export default {
   },
   methods: {
     addSignification() {
-      this.significations.push({
-        name: null,
-        town: null,
-        id: null,
-        timestamp: new Date().valueOf()
-      });
-    },
-    updateSignification(significationData) {
-      const significationIndex = this.significations.findIndex(
-        signification => signification.timestamp == significationData.timestamp
-      );
-      this.significations[significationIndex] = significationData;
-      this.checkValidityFirstStep();
-    },
-    checkValidityFirstStep() {
-      const hasInvalid = this.significations.some(
-        signification => !signification.isValid
-      );
-      this.isFirstStepValid =
-        this.actTypeId && this.significations.length > 0 && !hasInvalid;
+      this.significations.push(new Signification());
     },
     deleteSignification: function(timestamp) {
       this.significations = this.significations.filter(
@@ -127,66 +109,62 @@ export default {
       );
     },
     finishStep1: function() {
-      const significations = this.significations.map(signification => {
-        return {
-          town_id: signification.townId,
-          name: signification.name
-        };
-      });
+      if (!this.act.actTypeId) {
+        return this.$toast.error("Vous n'avez pas renseigné le type d'acte à signifier.");
+      }
+      if (this.significations.length === 0) {
+        return this.$toast.error('Cet acte ne possède pas de significations.')
+      }
+      if (this.significations.some(s => !s.name || !s.townId)) {
+        return this.$toast.error('Cet acte possède des significations incomplètes.')
+      }
 
-      const parameters = {
-        "act[act_type_id]": this.actTypeId,
-        "act[reference]": this.reference,
-        "act[significations]": significations
-      };
+      this.act.save()
+        .then(() => {
+          const saves = this.significations.map((signification) => {
+            signification.actId = this.act.id;
+            signification.token = this.act.token;
+            return signification.save();
+          });
 
-      this.$http
-        .post("acts", parameters, {
-          headers: { Authorization: this.$store.state.currentUser.token }
+          return Promise.all(saves);
         })
-        .then(response => {
-          const responseData = response.data;
-          this.actId = responseData.data.id;
-          this.createdSignifications = responseData.included.filter(
-            inc => inc.type == "signification"
-          );
-          this.currentStep = 2;
+        .catch(error => {
+          console.error(error);
+          this.$toast.error("Une erreur est survenue lors de la création de l'acte.");
         })
-        .catch(error => console.error(error));
+        .then(() => this.currentStep = 2)
+        .catch(error => {
+          console.error(error);
+          this.$toast.error("Une erreur est survenue lors de la création des significations.");
+        });
     },
     finishStep3: function() {
-      const url = `acts/${this.actId}`;
+      // const url = `acts/${this.actId}`;
 
-      const headers = {
-        headers: { Authorization: this.$store.state.currentUser.token }
-      };
+      // const headers = {
+      //   headers: { Authorization: this.$store.state.currentUser.token }
+      // };
 
-      const parameters = {
-        "act[act_type_id]": this.actTypeId,
-        "act[reference]": this.reference,
-        "act[express]": this.express
-      };
+      // const parameters = {
+      //   "act[act_type_id]": this.actTypeId,
+      //   "act[reference]": this.reference,
+      //   "act[express]": this.express
+      // };
 
-      this.$http
-        .patch(url, parameters, headers)
-        .then(() => {})
-        .catch(error =>
-          this.$toast.error("Nous n'avons pas pu mettre à jour votre acte. :(")
-        );
+      // this.$http
+      //   .patch(url, parameters, headers)
+      //   .then(() => {})
+      //   .catch(error =>
+      //     this.$toast.error("Nous n'avons pas pu mettre à jour votre acte. :(")
+      //   );
 
-      this.displayFinalConfirmation = true;
+      // this.displayFinalConfirmation = true;
     },
     confirmAct: function() {
       this.displayFinalConfirmation = false;
 
-      const url = `acts/${this.actId}/confirm`;
-
-      const headers = {
-        headers: { Authorization: this.$store.state.currentUser.token }
-      };
-
-      this.$http
-        .post(url, null, headers)
+      act.confirm()
         .then(() => {
           this.displayFinalConfirmation = false;
           this.$router.push({ name: "act", params: { id: this.actId } });
@@ -195,11 +173,7 @@ export default {
         .catch(error => this.$toast.error(error.message));
     },
     removeAct: function() {
-      const url = "acts/" + this.actId;
-      this.$http
-        .delete(url, {
-          headers: { Authorization: this.$store.state.currentUser.token }
-        })
+      this.act.remove()
         .then(() => {
           this.currentStep = 1;
         })
@@ -246,38 +220,20 @@ export default {
       return unvalidSignifications.length === 0;
     }
   },
-  watch: {
-    significations() {
-      this.checkValidityFirstStep();
-    }
-  },
   data() {
     return {
       createdSignifications: [],
-      express: false,
-      significations: [
-        // {
-        //   name: 'toto',
-        //   town: 1,
-        //   id: 1,
-        //   timestamp: 123,
-        // },
-        // {
-        //   name: 'tata',
-        //   town: 1,
-        //   id: 1,
-        //   timestamp: 124,
-        // }
-      ],
-      actId: null,
+      significations: [],
       valid: false,
-      reference: null,
-      actTypeId: null,
+      act: new Act,
       actPrice: null,
       currentStep: 1,
       isFirstStepValid: false,
       displayFinalConfirmation: false
     };
+  },
+  mounted() {
+    this.act.token = this.$store.state.currentUser.token;
   }
 };
 </script>

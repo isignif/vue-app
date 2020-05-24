@@ -13,7 +13,7 @@ export default {
     load: function() {
       this.loading = true;
 
-      ActType.all()
+      ActType.all(this.$store.state.currentUser.token)
         .then(actTypes => {
           this.options = actTypes.map(actType => ({
             id: actType.id,

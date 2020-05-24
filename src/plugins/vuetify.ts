@@ -3,8 +3,7 @@ import Vue from "vue";
 
 import Vuetify, { VSnackbar, VBtn, VIcon } from 'vuetify/lib'
 
-Vue.use(Vuetify);
-// Vue.use(Vuetify, {
+Vue.use(Vuetify, {
 //   iconfont: "md",
 //   theme: {
 //     primary: "#2C94C8",
@@ -12,12 +11,13 @@ Vue.use(Vuetify);
 //     accent: "#8c9eff",
 //     error: "#b71c1c"
 //   },
-//   components: {
-//     VSnackbar,
-//     VBtn,
-//     VIcon
-//   }
-// });
+  components: {
+    VSnackbar,
+    VBtn,
+    VIcon
+  }
+});
+
 export default new Vuetify({
   themes: {
     light: {
@@ -30,4 +30,9 @@ export default new Vuetify({
   icons: {
     iconfont: 'mdi',
   },
+//   components: {
+//     VSnackbar,
+//     VBtn,
+//     VIcon
+//   }
 });
