@@ -26,7 +26,7 @@
       </v-card-text>
       <v-card-text>
         <ActFileNew
-          :signification_id="signification_id"
+          :significationId="significationId"
           :actId="actId"
           @created="onActFileCreated"
         />
@@ -35,6 +35,7 @@
   </v-flex>
 </template>
 <script>
+import { Act, Signification } from 'isignif-client';
 import ActFileNew from "./ActFileNew";
 
 export default {
@@ -43,18 +44,20 @@ export default {
     ActFileNew
   },
   props: {
-    signification_id: String,
-    actId: String,
+    significationId: Number,
+    actId: Number,
     name: String
   },
   data() {
     return {
+      signification: new Signification,
       files: [],
       actFiles: []
     };
   },
   methods: {
     onActFileCreated(actFile) {
+      this.signification
       this.actFiles.push(actFile);
     },
     deleteActFile(actFileId) {
@@ -73,6 +76,14 @@ export default {
         })
         .catch(error => console.error(error));
     }
+  },
+  mounted() {
+    Signification.get(this.actId, this.significationId, this.$store.state.currentUser.token)
+      .then(s => this.signification = s)
+      .catch(error => {
+        console.error(error);
+        this.$toast.error("Une erreur est survenue lors de la récupération de sinformation de la signification");
+      });
   }
 };
 </script>

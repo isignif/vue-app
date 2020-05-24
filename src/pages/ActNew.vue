@@ -37,9 +37,9 @@
           <v-layout row wrap>
             <SignificationEdit
               :key="'SignificationEdit' + signification.id"
-              v-for="signification in significations"
-              :signification_id="signification.id"
-              :act_id="act.id"
+              v-for="signification in significations.filter(s => s.id)"
+              :signification-id="signification.id"
+              :act-id="act.id"
               :name="signification.name"
             />
             <p class="text-xs-right">
@@ -176,7 +176,7 @@ export default {
       this.act.remove()
         .then(() => {
           this.currentStep = 1;
-          this.significations = [];
+          this.significations.forEach(s => s.id = undefined);
         })
         .catch(error => console.error(error));
     },
