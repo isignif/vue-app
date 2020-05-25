@@ -4,6 +4,7 @@ import App from "./App.vue";
 // vue plugin
 import VueRouter from "vue-router";
 import VueResource from "vue-resource";
+import { configuration } from 'isignif-client';
 
 import "./plugins/vuetify";
 import store from "./store";
@@ -28,6 +29,11 @@ Vue.use(VuetifyToast);
 Vue.config.productionTip = process.env.NODE_ENV !== "production";
 (Vue as any).http.options.root = require("./config").api_url;
 (Vue as any).http.options.emulateJSON = true;
+
+if (process.env.NODE_ENV !== "production") {
+  configuration.apiUrl = "http://localhost:3000/api/v1";
+}
+
 
 const routes = [
   { path: "/", component: Acts, name: "home" },

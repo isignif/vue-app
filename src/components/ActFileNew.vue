@@ -56,9 +56,12 @@ export default {
     },
     onSubmit() {
       const actFile = new ActFile();
+      actFile.actId = this.actId;
+      actFile.significationId = this.significationId;
       actFile.token = this.token;
       actFile.files = this.files;
       actFile.name = this.name;
+      actFile.kind = 'default'; // TODO: add selector
 
       if (!actFile.files) {
         return this.$toast.error("Vous n'avez pas attaché de fichiers.");
@@ -67,7 +70,7 @@ export default {
         return this.$toast.error("Vous devez spécifier un nom.");
       }
 
-      this.actFile
+      actFile
         .save()
         .then(response => {
           this.$toast.success("Le fichier a été ajouté.");
