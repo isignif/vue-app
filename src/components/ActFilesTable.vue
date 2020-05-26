@@ -1,8 +1,8 @@
 <template>
   <v-layout row wrap class="pa-2 my-4 mx-2" align-center>
-    <v-flex xs12 class="px-2" v-for="file in actFiles" :key="file.id">
-        {{ file }}
-    </v-flex>
+    <v-card outlined xs12 class="px-2" v-for="file in actFiles" :key="file.id">
+        {{ file.name }}
+    </v-card>
     <v-flex xs12 class="px-2">
             <ActFileNew
               v-if="actId"

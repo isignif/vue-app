@@ -8,4 +8,3 @@ x new @login
 x create @login
 affichage @messagerie
 création @messagerie
-...

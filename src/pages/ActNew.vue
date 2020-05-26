@@ -35,10 +35,9 @@
 
         <v-stepper-content step="2">
           <v-layout row wrap>
-            <ActFileNew
+            <ActFilesTable
               v-if="act.id"
               :actId="act.id"
-              @created="onActFileCreated"
             />
             <p class="text-xs-right">
               <v-btn text @click="removeAct">Précédent</v-btn>
@@ -88,14 +87,14 @@
 import { Act, Signification } from 'isignif-client';
 import ActTypeSelect from "../components/ActTypeSelect";
 import SignificationNew from "../components/SignificationNew";
-import ActFileNew from "../components/ActFilesTable";
+import ActFilesTable from "../components/ActFilesTable";
 
 export default {
   name: "ActNew",
   components: {
     SignificationNew,
     ActTypeSelect,
-    ActFileNew
+    ActFilesTable
   },
   methods: {
     addSignification() {
