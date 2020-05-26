@@ -2,7 +2,7 @@
   <v-flex xs12 class="mx-2 my-4">
     <v-card class="elevation-1">
       <v-toolbar>
-        <v-toolbar-title>{{ name }}</v-toolbar-title>
+        <v-toolbar-title>Signification: {{ signification.name }}</v-toolbar-title>
       </v-toolbar>
       <v-card-text>
         <v-list v-if="actFiles.length > 0">
@@ -46,7 +46,6 @@ export default {
   props: {
     significationId: Number,
     actId: Number,
-    name: String
   },
   data() {
     return {

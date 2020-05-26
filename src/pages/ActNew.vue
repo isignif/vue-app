@@ -35,12 +35,10 @@
 
         <v-stepper-content step="2">
           <v-layout row wrap>
-            <SignificationEdit
-              :key="'SignificationEdit' + signification.id"
-              v-for="signification in significations.filter(s => s.id)"
-              :signification-id="signification.id"
-              :act-id="act.id"
-              :name="signification.name"
+            <ActFileNew
+              v-if="act.id"
+              :actId="act.id"
+              @created="onActFileCreated"
             />
             <p class="text-xs-right">
               <v-btn text @click="removeAct">Précédent</v-btn>
@@ -90,14 +88,14 @@
 import { Act, Signification } from 'isignif-client';
 import ActTypeSelect from "../components/ActTypeSelect";
 import SignificationNew from "../components/SignificationNew";
-import SignificationEdit from "../components/SignificationEdit";
+import ActFileNew from "../components/ActFilesTable";
 
 export default {
   name: "ActNew",
   components: {
     SignificationNew,
     ActTypeSelect,
-    SignificationEdit
+    ActFileNew
   },
   methods: {
     addSignification() {
