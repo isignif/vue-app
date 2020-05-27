@@ -6,76 +6,29 @@
         <div>
           <h1>Acte n° {{ act.id }}</h1>
 
-          <v-layout row wrap>
-            <v-flex xs-6>
-              <v-list two-line dense>
-                <v-subheader>Informations globales</v-subheader>
-                <!-- person -->
-                <v-list-tile>
-                  <v-list-tile-action>
-                    <v-icon>update</v-icon>
-                  </v-list-tile-action>
+          <p> Il s'agit d'une demande de "Acte de saisie-attribution", créée par Romain NICOLAS le {{ act.createdAt }}. Il a été estimé à 131.52 €. La référence du demandeur est "".</p>
 
-                  <v-list-tile-content>
-                    <v-list-tile-title title="Date de création">Crée le {{ act.formatedCreatedAt }}</v-list-tile-title>
-                    <v-list-tile-sub-title
-                      v-if="act.formatedCreatedAt != act.formatedUpdatedAt"
-                    >Mis à jour le {{ act.formatedUpdatedAt }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-              </v-list>
-            </v-flex>
+          <p>Cet acte est à facturer à:</p>
+          <address>
+            {{ act.billRecipient }} {{ act.billEmail }}<br/>
+            SIRET: {{ act.billSiret }}<br/>
+            {{ act.billAddress }}, {{ act.billZipCode }}, {{ act.billTown }}
+          </address>
 
-            <v-flex xs-6>
-              <v-list two-line dense>
-                <v-subheader>Informations de facturation</v-subheader>
-                <!-- person -->
-                <v-list-tile>
-                  <v-list-tile-action>
-                    <v-icon>receipt</v-icon>
-                  </v-list-tile-action>
+          <div v-if="act.comment">
+            <p>Le demandeur a ajouté le commentaire suivant:</p>
+            <blockquote>
+              <p>{{ act.comment }}</p>
+            </blockquote>
+          </div>
 
-                  <v-list-tile-content>
-                    <v-list-tile-title>{{ act.billRecipient }}</v-list-tile-title>
-                    <v-list-tile-sub-title v-if="act.billSiret">SIRET: {{ act.billSiret }}</v-list-tile-sub-title>
-                    <v-list-tile-sub-title>{{ act.billAddress }}, {{ act.billZipCode }}, {{ act.billTown }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
 
-                <!-- email -->
-                <v-list-tile>
-                  <v-list-tile-action>
-                    <v-icon>email</v-icon>
-                  </v-list-tile-action>
-
-                  <v-list-tile-content>
-                    <v-list-tile-title>{{ act.billEmail }}</v-list-tile-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-
-                <v-list-tile v-if="act.billPhone">
-                  <v-list-tile-action>
-                    <v-icon>phone</v-icon>
-                  </v-list-tile-action>
-
-                  <v-list-tile-content>
-                    <v-list-tile-title>{{ act.billPhone }}</v-list-tile-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-              </v-list>
-            </v-flex>
-
-          </v-layout>
-          <v-layout row wrap>
-            <v-flex xs-12>
-              <h2>Significations</h2>
-              <SignificationInformations
-                  v-for="signification in significations"
-                  :key="signification.id"
-                  :signification="signification"
-              />
-            </v-flex>
-          </v-layout>
+          <h2>Significations</h2>
+          <SignificationInformations
+              v-for="signification in significations"
+              :key="signification.id"
+              :signification="signification"
+          />
         </div>
       </v-flex>
       <v-flex xs2>
