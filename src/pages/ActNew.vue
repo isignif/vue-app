@@ -12,7 +12,7 @@
       <v-stepper-items>
         <v-stepper-content step="1">
           <v-flex>
-            <ActTypeSelect v-model="act.actTypeId" />
+            <ActTypeSelect v-model="act.actTypeId" @change="addSignificationIfNecessary()" />
             <h2 v-if="significations.length == 1">Signification</h2>
             <h2 v-if="significations.length > 1">Significations</h2>
             <SignificationNew
@@ -51,6 +51,7 @@
           <v-text-field
             v-model="act.reference"
             label="Référence de l'acte"
+            :error-messages="actReferenceErrors"
             required
             prepend-icon="label"
           ></v-text-field>
@@ -137,34 +138,23 @@ export default {
         });
     },
     finishStep3: function() {
-      // const url = `acts/${this.actId}`;
+      if (!this.act.reference) {
+        // TODO: this does not works
+        this.actReferenceErrors = ['Vous devez renseigner une référence'];
+        return;
+      }
 
-      // const headers = {
-      //   headers: { Authorization: this.$store.state.currentUser.token }
-      // };
+      this.actReferenceErrors = [];
 
-      // const parameters = {
-      //   "act[act_type_id]": this.actTypeId,
-      //   "act[reference]": this.reference,
-      //   "act[express]": this.express
-      // };
-
-      // this.$http
-      //   .patch(url, parameters, headers)
-      //   .then(() => {})
-      //   .catch(error =>
-      //     this.$toast.error("Nous n'avons pas pu mettre à jour votre acte. :(")
-      //   );
-
-      // this.displayFinalConfirmation = true;
+      this.displayFinalConfirmation = true;
     },
     confirmAct: function() {
       this.displayFinalConfirmation = false;
 
-      act.confirm()
+      this.act.confirm()
         .then(() => {
           this.displayFinalConfirmation = false;
-          this.$router.push({ name: "act", params: { id: this.actId } });
+          this.$router.push({ name: "act", params: { id: this.act.id } });
           this.$toast.success("L'acte a été cré. Votre demande va être traitée prochainement?");
         })
         .catch(error => this.$toast.error(error.message));
@@ -189,31 +179,7 @@ export default {
       }
     },
     reloadEstimation() {
-      // vue.actPrice = null;
-      // if (this.actTypeId === null) {
-      //   return;
-      // }
-      // let json = {
-      //   price: 121.23
-      // };
-      // vue.actPrice = json.price;
-      // $.ajax({
-      //   url: '<%= Rails.application.routes.url_helpers.estimate_act_path %>',
-      //   type: 'POST',
-      //   dataType: 'json',
-      //   data: {
-      //     act: {
-      //       act_type_id: this.actType.id,
-      //       town_id: vue.towns.map(function(t){ return t.id })
-      //     }
-      //   },
-      //   success: function(json) {
-      //     vue.actPrice = json.price
-      //   },
-      //   errors: function(error) {
-      //     alert(error)
-      //   },
-      // });
+      // TODO
     },
     checkValidityStep() {
       if (this.significations.length === 0) {
@@ -227,6 +193,11 @@ export default {
       );
 
       return unvalidSignifications.length === 0;
+    },
+    addSignificationIfNecessary() {
+      if (this.significations.length === 0) {
+        return this.addSignification();
+      }
     }
   },
   data() {
@@ -238,7 +209,7 @@ export default {
       actPrice: null,
       currentStep: 1,
       isFirstStepValid: false,
-      displayFinalConfirmation: false
+      displayFinalConfirmation: false,
     };
   },
   mounted() {

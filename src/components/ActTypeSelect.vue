@@ -34,6 +34,7 @@ export default {
   watch: {
     select: function(value) {
       this.$emit("input", parseInt(value));
+      this.$emit("change");
     }
   }
 };

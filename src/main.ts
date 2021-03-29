@@ -28,10 +28,6 @@ Vue.config.productionTip = process.env.NODE_ENV !== "production";
 
 configuration.apiUrl = apiUrl;
 
-// if (process.env.NODE_ENV !== "production") {
-//   configuration.apiUrl = "http://localhost:3000/api/v1";
-// }
-
 const routes = [
   { path: "/", component: Acts, name: "home" },
   { path: "/dashboard", component: Dashboard, name: "dashboard" },
