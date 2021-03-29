@@ -1,26 +1,22 @@
+import { configuration } from "isignif-client";
 import Vue from "vue";
-import "./plugins/vuetify";
-import App from "./App.vue";
+import VueResource from "vue-resource";
 // vue plugin
 import VueRouter from "vue-router";
-import VueResource from "vue-resource";
-import { configuration } from 'isignif-client';
-
-import "./plugins/vuetify";
-import store from "./store";
-
-import VuetifyToast from 'vuetify-toast-snackbar'
-
-import Signin from "./pages/Signin.vue";
-import Signup from "./pages/Signup.vue";
-import Dashboard from "./pages/Dashboard.vue";
-import Help from "./pages/Help.vue";
-import Advocate from "./pages/Advocate.vue";
-import Acts from "./pages/Acts.vue";
+import VuetifyToast from "vuetify-toast-snackbar";
+import App from "./App.vue";
+import { apiUrl } from "./config";
 import Act from "./pages/Act.vue";
 import ActNew from "./pages/ActNew.vue";
-
-import vuetify from './plugins/vuetify';
+import Acts from "./pages/Acts.vue";
+import Advocate from "./pages/Advocate.vue";
+import Dashboard from "./pages/Dashboard.vue";
+import Help from "./pages/Help.vue";
+import Signin from "./pages/Signin.vue";
+import Signup from "./pages/Signup.vue";
+import "./plugins/vuetify";
+import vuetify from "./plugins/vuetify";
+import store from "./store";
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -30,10 +26,11 @@ Vue.config.productionTip = process.env.NODE_ENV !== "production";
 (Vue as any).http.options.root = require("./config").api_url;
 (Vue as any).http.options.emulateJSON = true;
 
-if (process.env.NODE_ENV !== "production") {
-  configuration.apiUrl = "http://localhost:3000/api/v1";
-}
+configuration.apiUrl = apiUrl;
 
+// if (process.env.NODE_ENV !== "production") {
+//   configuration.apiUrl = "http://localhost:3000/api/v1";
+// }
 
 const routes = [
   { path: "/", component: Acts, name: "home" },
@@ -44,19 +41,19 @@ const routes = [
   { path: "/acts/:id", component: Act, name: "act" },
   { path: "/acts", component: Acts, name: "acts" },
   { path: "/acts_new", component: ActNew, name: "new_act" },
-  { path: "/help", component: Help, name: "help" }
+  { path: "/help", component: Help, name: "help" },
 ];
 
 const router = new VueRouter({
-  routes // short for `routes: routes`
+  routes, // short for `routes: routes`
 });
 
 new Vue({
   vuetify,
   store,
   router,
-  render: h => h(App),
+  render: (h) => h(App),
   beforeCreate() {
     this.$store.commit("initialiseStore");
-  }
+  },
 } as any).$mount("#app");
