@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-container>
     <Loader v-if="loading" />
-    <v-layout row wrap v-if="act && loading === false">
-      <v-flex xs10 class="pa-3 white elevation-2">
+    <v-row v-if="act && loading === false">
+      <v-col cols="10" class="pa-3 white elevation-2">
         <div>
           <h1>Acte n° {{ act.id }}</h1>
 
@@ -25,7 +25,8 @@
               <p>{{ act.comment }}</p>
             </blockquote>
           </div>
-
+        </div>
+        <div>
           <h2>Significations</h2>
           <SignificationInformations
             v-for="signification in significations"
@@ -33,12 +34,12 @@
             :signification="signification"
           />
         </div>
-      </v-flex>
-      <v-flex xs2>
+      </v-col>
+      <v-col cols="2">
         <ActTimeline :actId="Number(this.$route.params.id)" />
-      </v-flex>
-    </v-layout>
-  </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script>
 import Loader from "../components/Loader";

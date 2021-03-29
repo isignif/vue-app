@@ -4,35 +4,45 @@
     <v-card-title>
       Liste des actes
       <v-spacer></v-spacer>
-      <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
     </v-card-title>
-    <ActCard :act="act" v-for="act in acts" :key="act.id" />
+    <v-row>
+      <v-col v-for="act in acts" :key="act.id">
+        <ActCard :act="act" />
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 
 <script>
 import Loader from "./Loader";
 import ActCard from "./ActCard";
-import { Act } from 'isignif-client';
+import { Act } from "isignif-client";
 
 export default {
   name: "ActsTable",
   props: {},
   components: {
     ActCard,
-    Loader
+    Loader,
   },
   methods: {
     fetch() {
       this.loading = true;
 
       Act.all(this.$store.state.currentUser.token)
-        .then(acts => this.acts = acts)
-        .catch(e => {
+        .then((acts) => (this.acts = acts))
+        .catch((e) => {
           this.$toast.error(`Une erreur est survenue. (${e.message})`);
           console.error(e);
-          })
-          .finally(() => this.loading = false);
+        })
+        .finally(() => (this.loading = false));
     },
     countSignifications(actId) {
       return 666;
@@ -41,6 +51,11 @@ export default {
       // return this.significations
       //           .filter(signification => signification.attributes.act_id === actIdInt)
       //           .length;
+    },
+  },
+  watch: {
+    search: function () {
+      console.log(this.search);
     },
   },
   mounted() {
@@ -58,7 +73,7 @@ export default {
       headers: [
         {
           text: "Référence de l'acte",
-          value: "reference"
+          value: "reference",
         },
         // {
         //   text: "Correspondant",
@@ -70,15 +85,15 @@ export default {
         // },
         {
           text: "Etape",
-          value: "step"
-        }
+          value: "step",
+        },
         // {
         //   text: 'Date de création',
         //   value: 'creation_date'
         // }
       ],
-      acts: []
+      acts: [],
     };
-  }
+  },
 };
 </script>
